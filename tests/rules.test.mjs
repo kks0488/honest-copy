@@ -19,7 +19,7 @@ for (const [lang, sample] of Object.entries(samples)) {
 test('repeated matches replace only the selected occurrence', () => {
   const text = 'cures acne. cures acne.';
   const f = analyze(text).findings[1];
-  assert.equal(applyFinding(text,f),'cures acne. is designed for everyday care.');
+  assert.equal(applyFinding(text,f),'cures acne. Is designed for everyday care.');
   assert.equal(analyze(applyAll(text)).findings.length,0);
 });
 test('Unicode offsets and HTML remain plain input', () => {

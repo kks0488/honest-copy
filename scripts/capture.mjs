@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const browser = await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH,args:['--no-sandbox']});
 const context = await browser.newContext({viewport:{width:1920,height:1080},deviceScaleFactor:1,permissions:['clipboard-read','clipboard-write']});
@@ -52,6 +53,43 @@ try {
   await page.screenshot({path:'media/mobile-review.png',fullPage:true});
   await page.getByRole('button',{name:'Apply all suggestions',exact:true}).click();
   assert.equal(await page.locator('#score-display strong').innerText(),'0');
+  // Real local API contract, without a provider key.
+  if (!process.env.SKIP_API_CHECK) {
+    const mode=await context.request.get(origin+'/api/rewrite');assert.equal(mode.status(),200);
+    assert.equal((await mode.json()).mode,'template');
+    const response=await context.request.post(origin+'/api/rewrite',{data:{text:'cures acne',findingId:'medical-en:0'}});
+    assert.equal((await response.json()).mode,'template');
+  }
+  // Mocked browser transport exercises UI integration; this is not a real live API call.
+  let scenario='live';
+  await page.route('**/api/rewrite',async route=>{
+    if(route.request().method()==='GET')return route.fulfill({json:{mode:'live'}});
+    if(scenario==='stale')await new Promise(resolve=>setTimeout(resolve,350));
+    if(scenario==='error')return route.fulfill({status:503,json:{error:'Unavailable'}});
+    return route.fulfill({json:{mode:'live',replacement:'is intended for everyday care',notice:'Mocked AI wording for browser verification.'}});
+  });
+  await page.setViewportSize({width:1920,height:1080});
+  await page.reload();await sample('en');
+  await page.getByRole('button',{name:'Try AI wording'}).first().click();
+  await page.getByText('Mocked AI wording for browser verification.',{exact:true}).first().waitFor();
+  await page.getByRole('button',{name:/Apply suggestion 1:/}).click();
+  assert.match(await page.locator('#revised-copy').innerText(),/is intended for everyday care/);
+  scenario='error';await sample('en');
+  await page.getByRole('button',{name:'Try AI wording'}).first().click();
+  await page.getByText('AI wording unavailable. Using the local template instead.',{exact:true}).first().waitFor();
+  scenario='stale';await sample('en');
+  await page.getByRole('button',{name:'Try AI wording'}).first().click();
+  await page.locator('#copy-input').fill('A completely new draft.');
+  await page.waitForTimeout(550);
+  assert.equal(await page.locator('.finding').count(),0);
+  assert.equal(await page.locator('#revised-section').isHidden(),true);
+  await page.unroute('**/api/rewrite');
+  const mapPage=await context.newPage();
+  await mapPage.goto('file://'+resolve('devpost/app-map.html'));
+  assert.match(await mapPage.title(),/App Map/);
+  assert.equal(await mapPage.locator('script').count(),0);
+  for(const anchor of ['renderHighlights','renderRevised','changeDraft'])assert.ok((await readFile('src/main.ts','utf8')).includes(anchor));
+  await mapPage.close();
   assert.deepEqual(errors,[]);
-  console.log('PASS: EN/KO check→single rewrite→undo→apply all→copy; empty/benign/oversize/stale-edit/XSS/mobile; no runtime errors.');
+  console.log('PASS: EN/KO check→single rewrite→undo→apply all→copy; empty/benign/oversize/stale-edit/XSS/mobile; API demo + mocked live/failure/stale integration; no runtime errors.');
 } finally {await context.close();await browser.close();}

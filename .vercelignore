@@ -1,0 +1,10 @@
+.git
+.agents
+.claude
+agent
+devpost
+tests
+scripts
+.env*
+!.env.example
+media

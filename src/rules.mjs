@@ -28,7 +28,7 @@ export function analyze(text) {
       const start = m.index;
       candidates.push({ id: `${r.id}:${start}`, ruleId: r.id, start, end: start + m[0].length,
         phrase: m[0], category: r.category, ...categories[r.category], explanation: r.explanation,
-        replacement: /^[A-Z]/.test(m[0]) ? r.replacement[0].toUpperCase() + r.replacement.slice(1) : r.replacement });
+        replacement: (/^[A-Z]/.test(m[0]) || !text.slice(0,start).trim() || /[.!?]\s*$/.test(text.slice(0,start))) ? r.replacement[0].toUpperCase() + r.replacement.slice(1) : r.replacement });
     }
   }
   candidates.sort((a,b) => a.start-b.start || b.weight-a.weight || b.end-a.end);

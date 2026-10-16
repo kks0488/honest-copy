@@ -1,0 +1,114 @@
+# Honest Copy
+
+An explainable second look at product copy: spot risky English and Korean claims, understand why, and review more measured wording.
+
+![Honest Copy reviewing a fictional English listing](media/english-review.png)
+
+**For:** small online sellers in Korea and abroad who write their own listings, often late at night.
+
+**Problem:** phrases such as “cures acne,” “100% guaranteed” and “No.1 in Korea” can overpromise or imply evidence the seller has not supplied. Sellers need help identifying the exact words worth reviewing.
+
+**Solution:** paste copy, see four labeled highlight types, read plain explanations, apply individual or all local suggestions, and compare the before/after rule-risk indicator. Undo and copy the revised draft. English UI; English and Korean pattern sets. No accounts, database or saved drafts.
+
+## Try it / demo
+
+- Live application: **https://honest-copy.vercel.app**.
+- Real-screen demonstration: [75-second 1080p MP4](media/demo.mp4) (about 1.1 MB, recorded on pilot).
+- Screenshots: [English review](media/english-review.png), [revised draft](media/english-revised.png), [Korean review](media/korean-review.png), [mobile](media/mobile-review.png).
+
+The recording shows the actual app in labeled local template mode because no provider key is available. It has no voiceover or third-party media. The Korean fictional sample means: “This serum treats acne. Effect 100% guaranteed. No.1 domestically. A clinically proven daily-care product.” Its measured rewrite describes everyday care and notes that individual experiences can vary.
+
+The [official submission rules](https://learn-ai-basics.devpost.com/rules) require uploading the video publicly to YouTube or Vimeo. The MP4 in this repository is ready for that owner account step; a GitHub video file is not presented as satisfying the required hosted-video link.
+
+## How it works
+
+```mermaid
+flowchart LR
+    A[Paste English or Korean draft] --> B[Local deterministic rules]
+    B --> C[Exact phrase highlights and explanations]
+    C --> D[Review and apply a template]
+    D --> E[Recheck and compare scores]
+    E --> F[Copy revised draft or undo]
+    C -->|Optional explicit AI request| G[Server-only rewrite handler]
+    G -->|Key configured| H[OpenAI-compatible provider]
+    H --> I[Validate suggestion or template fallback]
+    G -->|No key| I
+    I --> D
+```
+
+Rules: [src/rules.mjs](src/rules.mjs). UI: [src/main.ts](src/main.ts). Provider boundary: [server/rewrite.mjs](server/rewrite.mjs), shared by Vite and the Vercel API adapter.
+
+The score is `min(100, sum of matched weights)`: medical 28, guarantees 22, superlatives 18, implied evidence 16. Lower means fewer matched patterns. **Zero does not mean compliant, truthful, safe, or approved.** This is a finite wording heuristic, not legal advice, evidence verification or a platform-policy classifier. Negation and context can produce false positives; unlisted claims can be missed. Review every replacement for grammar and accuracy.
+
+Evidence-related wording remains flagged even if a draft mentions a study, because this app cannot verify it. [FTC health-products guidance](https://www.ftc.gov/business-guidance/resources/health-products-compliance-guidance) is useful background on substantiation. Rules are original heuristics, not a transcription of that guidance or a Korean legal rule set.
+
+## Run and test
+
+Use Node **22.12+**.
+
+```sh
+npm install
+npm run dev
+# Open http://localhost:5173
+npm test
+npm run build
+npm run preview
+# Open http://localhost:4173
+```
+
+Checks use the built-in Node runner; no test framework or API key is required. CI runs tests, TypeScript checks and a production build on every push/PR.
+
+On this project's low-memory Mac/server setup, installs, builds and browser work run on Ubuntu `pilot`. For browser verification/capture, install Playwright on the machine doing that work, start the app, then run `npm run capture`. An existing installation can be reused with `PLAYWRIGHT_MODULE=/absolute/path/to/playwright/index.mjs` and `CHROMIUM_PATH=/absolute/path/to/chrome`. `APP_URL` selects a different app URL. Browser verification includes local API mode and explicitly mocked AI transport; neither is a claim that a real provider call succeeded. `node scripts/record.mjs` records the real 75-second core flow into `VIDEO_DIR` (default `/tmp/learnai-capture`). Encode the resulting WebM to MP4 on the recording machine using ffmpeg. Both scripts reuse the same Playwright environment variables.
+
+## Optional AI wording
+
+Copy `.env.example` to `.env` and set server-only values, then restart Vite:
+
+| Variable | Empty-value behavior |
+| --- | --- |
+| `LLM_API_KEY` | No provider call; real deterministic templates |
+| `LLM_BASE_URL` | `https://api.tokenfactory.nebius.com/v1/` |
+| `LLM_MODEL` | `deepseek-ai/DeepSeek-R1-0528` |
+
+The base and model follow the [official Nebius Token Factory quickstart](https://docs.tokenfactory.nebius.com/quickstart), checked during the build. Other OpenAI-compatible providers can be configured through the same variables. The server calls `POST chat/completions`, reads `choices[0].message.content` containing JSON `{ "replacement": "..." }`, rejects malformed or flagged output, and labels template fallback clearly. The mode switches automatically when the key exists. No real provider request was made during this build; schema-compatible mock fixtures test the contract.
+
+Keys are never put in `VITE_` variables or browser code. AI requests send the draft to the configured provider only after the user clicks **Try AI wording**. The app has no analytics or copy storage. Basic per-instance request throttling and limits are for this PoC; stronger abuse controls are needed before exposing a funded API widely. Provider charges and limits depend on the owner's account; no services were purchased for this project.
+
+## Deploy
+
+```sh
+vercel --prod --yes
+```
+
+Vercel hosts the static Vite build and `api/rewrite.mjs`. Optional secrets belong in the deployment's server environment. Static hosting can serve the complete local-template experience, but cannot provide live AI without a server handler. No key is needed for the public demo.
+
+## How it uses the Devpost Learn Skill Pack
+
+This new project began in an empty folder on October 16, 2026, during the stated hackathon submission period. Git was initialized, then the exact required command was run:
+
+```sh
+npx skills add challengepost/learn-ai-basics --all -y
+```
+
+The six installed skills were read and applied in order, using the owner's supplied IDEA ANSWERS as the interview input. Planning preceded app code in git history:
+
+1. `1-start`: local ignored learner profile.
+2. `2-scope`: [devpost/scope.md](devpost/scope.md).
+3. `3-prd`: [devpost/prd.md](devpost/prd.md).
+4. `4-spec`: [devpost/spec.md](devpost/spec.md).
+5. `5-build`: [devpost/checklist.md](devpost/checklist.md), verified incremental commits, [offline app map](devpost/app-map.html).
+6. `6-ship`: repository/privacy audit, accessible demo and deployment, remaining owner-only submission steps recorded in the spec.
+
+The owner expressly required autonomous work without questions. Approval was delegated through that instruction; agent assumptions are labeled in the docs. Agent tests do not stand in for human hands-on feedback, personal reflection or learner sign-off: those remain explicitly unclaimed in the checklist. No Devpost submission or signup was performed. The current ship skill reserves final submission prose and survey answers for the learner.
+
+## What was built during the hackathon
+
+All application code, original bilingual patterns/templates, UI, tests, server adapter, CI, planning artifacts, app map and demo captures were created for this project. No old application code, scraped listings, third-party media or third-party logos were used. The official required skill pack is retained with its upstream MIT notice in `.agents/skills/LICENSE`; installer-created skill locations and links are preserved.
+
+## What I wanted to learn / planning evidence
+
+The owner's supplied learning goal: “planning before building with an AI agent, keeping decisions in docs so the AI doesn't forget.” The concrete practice demonstrated here is an observable requirement → a named implementation → a test. For example, the PRD's exact-phrase rewrite behavior maps to `applyFinding` and the repeated-phrase/Unicode tests. This is evidence of the workflow used, not an invented account of what the owner personally learned. The owner can add their reflection after trying the app.
+
+## License
+
+Original project code: MIT — Copyright (c) 2026 Kyoungsoo Kim. See [LICENSE](LICENSE). Required upstream curriculum retains its separate attribution.

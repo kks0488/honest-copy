@@ -27,6 +27,11 @@ const el = <T extends HTMLElement = HTMLElement>(id: string) => document.getElem
 const input = el<HTMLTextAreaElement>('copy-input');
 let baseline = '', current = '', checked = false;
 let history: string[] = [];
+let revision = 0;
+let liveMode = false;
+let pendingId: string | null = null;
+const aiResults = new Map<string,{replacement:string;notice:string;mode:string}>();
+function invalidateAI() {revision++;pendingId=null;aiResults.clear();}
 const startState = el('findings').firstElementChild!.cloneNode(true);
 let toastTimer: ReturnType<typeof setTimeout>;
 
@@ -35,6 +40,7 @@ function text(tag: string, value: string, className = '') {
 }
 function notify(message: string) { el('toast').textContent = message; clearTimeout(toastTimer); toastTimer = setTimeout(() => {el('toast').textContent='';}, 4500); }
 function inputChanged() {
+  invalidateAI();
   el('char-count').textContent = `${input.value.length.toLocaleString()} / 5,000`;
   el<HTMLButtonElement>('check').disabled = !input.value.trim() || input.value.length > 5000;
   el('input-error').textContent = input.value.length > 5000 ? 'Keep your draft under 5,000 characters.' : '';
@@ -44,7 +50,7 @@ input.addEventListener('input', inputChanged);
 for (const lang of ['en','ko'] as const) el(`sample-${lang}`).addEventListener('click', () => {input.value = samples[lang]; inputChanged(); input.focus();});
 el('check').addEventListener('click', () => {
   if (!input.value.trim() || input.value.length > 5000) return;
-  baseline = input.value; current = baseline; history = []; checked = true; render(); notify('Copy checked. Review the highlighted phrases.');
+  invalidateAI(); baseline = input.value; current = baseline; history = []; checked = true; render(); notify('Copy checked. Review the highlighted phrases.');
 });
 function renderHighlights(findings: Finding[]) {
   const box = el('annotated'); box.replaceChildren(); let offset = 0;
@@ -85,19 +91,25 @@ function render() {
   for (const [i,f] of findings.entries()) {
     const card = text('article','',`finding ${f.category}`);
     const head = text('div','','finding-top');head.append(text('span',String(i+1).padStart(2,'0'),'finding-number'),text('span',f.label,'category-label'));
-    card.append(head,text('h3',`“${f.phrase}”`),text('p',f.explanation),text('span','TRY A MORE MEASURED PHRASE','suggestion-label'),text('div',f.replacement,'suggestion'));
+    const aiResult = aiResults.get(f.id);
+    card.append(head,text('h3',`“${f.phrase}”`),text('p',f.explanation),text('span','TRY A MORE MEASURED PHRASE','suggestion-label'),text('div',aiResult?.replacement || f.replacement,'suggestion'));
     const actions = text('div','','finding-actions');
     const apply = text('button','Apply suggestion ↗','secondary') as HTMLButtonElement;
     apply.setAttribute('aria-label',`Apply suggestion ${i+1}: ${f.phrase}`);
-    apply.addEventListener('click',()=>changeDraft(applyFinding(current,f)));
-    actions.append(apply); card.append(actions);
+    apply.addEventListener('click',()=>changeDraft(applyFinding(current,f,aiResult?.replacement || f.replacement)));
+    const aiButton = text('button',pendingId===f.id?'Finding words…':'Try AI wording','quiet') as HTMLButtonElement;
+    aiButton.disabled=!liveMode || pendingId!==null;
+    aiButton.title=liveMode?'Send this draft to the configured AI provider for an optional suggestion':'AI is unavailable in this demo. Local suggestions always work.';
+    aiButton.addEventListener('click',()=>requestAI(f));
+    actions.append(apply,aiButton); card.append(actions);
+    if (liveMode || aiResult) card.append(text('p',aiResult?.notice || 'Optional: AI wording sends this draft to the configured provider when you click.','ai-note'));
     list.append(card);
   }
 }
 
 function changeDraft(next: string) {
   if (next === current) return;
-  history.push(current); current = next; render();
+  invalidateAI(); history.push(current); current = next; render();
   notify('Suggestion applied. Review your revised draft.');
 }
 function renderRevised() {
@@ -114,6 +126,25 @@ function renderRevised() {
     catch {notify('Clipboard unavailable. Select and copy the revised draft above.');}
   });
   const undo = text('button','Undo last change','secondary') as HTMLButtonElement;
-  undo.disabled=!history.length; undo.addEventListener('click',()=>{current=history.pop()!;render();notify('Last change undone.');});
+  undo.disabled=!history.length; undo.addEventListener('click',()=>{invalidateAI();current=history.pop()!;render();notify('Last change undone.');});
   actions.append(copy,undo); section.append(heading,revised,compare,actions);
 }
+
+async function requestAI(finding: Finding) {
+  const atRevision=revision;pendingId=finding.id;render();
+  let result:{replacement:string;mode:string;notice:string};
+  try {
+    const response=await fetch('/api/rewrite',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:current,findingId:finding.id}),signal:AbortSignal.timeout(15000)});
+    if(!response.ok) throw new Error('Unavailable');
+    const data=await response.json();
+    if(typeof data.replacement!=='string' || !data.replacement.trim() || data.replacement.length>240 || analyze(data.replacement).findings.length || !['template','live'].includes(data.mode)) throw new Error('Invalid response');
+    result={replacement:data.replacement,mode:data.mode,notice:typeof data.notice==='string'?data.notice:'Review this suggestion before applying.'};
+  } catch {result={replacement:finding.replacement,mode:'template',notice:'AI wording unavailable. Using the local template instead.'};}
+  if(revision!==atRevision) return;
+  pendingId=null;aiResults.set(finding.id,result);render();notify(result.notice);
+}
+fetch('/api/rewrite',{signal:AbortSignal.timeout(5000)}).then(r=>r.ok?r.json():null).then(data=>{
+  liveMode=data?.mode==='live';
+  el('mode-label').textContent=liveMode?'AI wording available · rules first':'Demo mode · local templates';
+  if(checked)render();
+}).catch(()=>{/* Static hosting retains working local templates. */});

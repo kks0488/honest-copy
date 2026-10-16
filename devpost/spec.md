@@ -27,7 +27,7 @@ Implements `prd.md > Look and Feel`: responsive 2-column paper workspace, forest
 ### Workspace
 `src/main.ts` and `src/style.css`: render using DOM text nodes, manage input/baseline/current/history and selected suggestions. No persisted user text. Guard stale async responses by revision token. Implements `prd.md > Paste and Check`, `Rewrite and Compare`, `States and Boundaries`.
 ### Rewrite Service
-`api/rewrite.mjs`, `server/rewrite.mjs`: GET returns configured mode without secrets. POST validates text/phrase/category using a current deterministic finding; rate and length limits. No key → deterministic replacement with explicit template mode. Key → native fetch OpenAI-compatible chat completion, 10-second timeout, JSON content `{replacement:string}`, no tool execution. Recheck returned suggestion, reject flagged wording or invalid/long output; fallback template with visible reason. Vite config adapts the shared handler for local dev and preview. Implements `prd.md > Optional AI Wording`.
+`api/rewrite.mjs`, `server/rewrite.mjs`: GET returns configured mode without secrets. POST validates text/findingId using a current deterministic finding; rate and length limits. No key → deterministic replacement with explicit template mode. Key → native fetch OpenAI-compatible chat completion, 10-second timeout, JSON content `{replacement:string}`, no tool execution. Recheck returned suggestion, reject flagged wording or invalid/long output; fallback template with visible reason. Vite config adapts the shared handler for local dev and preview. Implements `prd.md > Optional AI Wording`.
 
 ## Data Model
 Only in browser memory: `{input, baseline, current, history[], findings[], baselineScore, revision, pending}`. Finding = `{id, ruleId, start, end, phrase, category, label, explanation, replacement, weight}`. Mutation re-analyzes current text; baseline fixed until new Check. No localStorage/cookies/database. Server processes only request payload; no copy logging.
@@ -72,4 +72,13 @@ No persistence or accounts per brief. Small bilingual pattern list instead of le
 All quoted intentions originate in the brief; layout/score/limits and vanilla TS choice are delegated agent assumptions. One useful planning question: how can “safer” be tested without claiming legal safety? Answer: test exact spans, non-invented template output and fewer known pattern hits; explicitly retain coverage limits. Human learning is not inferred from this explanation. Planning is approved under autonomous task authorization, not fabricated learner sign-off.
 
 ## Sharing Results
-Pending verification and publication.
+- Live deployment: https://honest-copy.vercel.app — unauthenticated page and GET/POST API checks return HTTP 200 in actual template mode.
+- Public source target: https://github.com/kks0488/honest-copy — publication verification recorded below when complete.
+- Real demo: `media/demo.mp4`, 75 seconds, H.264, 1920x1080, approximately 1.1 MB. Original screen recording remains on pilot at `/tmp/learnai-capture/honest-copy-raw.webm`. Small screenshots live in `media/`.
+- Agent checks: 27 Node tests; pilot TypeScript/build; English/Korean core flows, undo/copy, error states, responsive width, text injection protection, actual template API and explicitly mocked AI integration. Live provider calls remain untested without a key.
+- Source planning is saved before app code in the first git commit. No learner-profile or credential files are tracked. No money spent or services signed up for.
+
+### 6-ship outcome and owner steps
+The official current ship skill requires learner-authored submission text; it does not generate a Devpost-description artifact. Its exact instruction is: “Submission copy and any optional peer feedback must be human-written, even on request.” The user's provided IDEA ANSWERS remain the source notes in scope/PRD; no invented personal reflection or submission prose was generated. Human-only reviews in the checklist remain unchecked, under the user's explicit instruction to proceed autonomously without questions. This records the deviation rather than pretending the full interactive curriculum occurred.
+
+The public-repository, privacy, real-recording and optional-deployment mechanics of 6-ship are performed under the user's existing authorization. Remaining submission tasks: upload the MP4 publicly to YouTube or Vimeo (required by the live rules), write the short description and personal learning reflection, complete the Devpost fields/exit survey and submit personally. Devpost was not accessed for account actions or submission; no signup occurred. Core use needs no account or key. Optional live AI needs an owner's provider key; broad funded use also needs stronger abuse controls.

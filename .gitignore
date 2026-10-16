@@ -6,5 +6,6 @@ dist/
 /devpost/learner-profile.md
 media/*.webm
 media/*.mp4
+!media/demo.mp4
 playwright-results/
 .DS_Store
