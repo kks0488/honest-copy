@@ -27,7 +27,7 @@ Build mode: fast, per explicit autonomous-task instruction. Approval delegated b
   Learner check: Apply one and all suggestions, compare scores, undo and copy. Human feedback remains pending.
   Commit: `Add safer draft comparison undo and copy`
 
-- [ ] **3. Optional AI wording, verification and sharing**
+- [x] **3. Optional AI wording, verification and sharing**
   Becomes usable: Automatic key-based mode, honest fallbacks, documented publicly shareable application.
   Why now: AI enriches an already working rules-first loop; no key gates the demo.
   PRD ref: `prd.md > Optional AI Wording`, `prd.md > What We're Building`
@@ -62,3 +62,4 @@ Activity mode: Evidence-based recap and offline reference map.
 - Rewrite API takes the checked finding ID rather than trusting a client-supplied phrase/template; draft and suggestion remain matched by server-owned rules. Raw match weights validate AI output even when displayed scores are capped at 100.
 - Local API integration exposed a Vite startup failure despite a passing build: returning the middleware object from configureServer made Vite treat it as a post-hook. Changed the mount function to return nothing; startup/API/browser checks verify the repair.
 - Final production URL browser suite passes; offline app map opens without scripts and its source anchors exist. Recording is 75 seconds at 1920x1080. No paid/live provider request was made.
+- Public repository and MP4 return HTTP 200 without authentication; GitHub detects MIT. Vercel production page/API and the full browser suite pass. All learnai dev/recording processes on pilot are stopped. Gitleaks directory and full-history scans pass before publication.

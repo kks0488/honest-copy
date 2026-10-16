@@ -73,10 +73,10 @@ All quoted intentions originate in the brief; layout/score/limits and vanilla TS
 
 ## Sharing Results
 - Live deployment: https://honest-copy.vercel.app — unauthenticated page and GET/POST API checks return HTTP 200 in actual template mode.
-- Public source target: https://github.com/kks0488/honest-copy — publication verification recorded below when complete.
+- Public source: https://github.com/kks0488/honest-copy — public, nonempty, MIT detected, unauthenticated HTTP 200. Public MP4 also returns HTTP 200.
 - Real demo: `media/demo.mp4`, 75 seconds, H.264, 1920x1080, approximately 1.1 MB. Original screen recording remains on pilot at `/tmp/learnai-capture/honest-copy-raw.webm`. Small screenshots live in `media/`.
 - Agent checks: 27 Node tests; pilot TypeScript/build; English/Korean core flows, undo/copy, error states, responsive width, text injection protection, actual template API and explicitly mocked AI integration. Live provider calls remain untested without a key.
-- Source planning is saved before app code in the first git commit. No learner-profile or credential files are tracked. No money spent or services signed up for.
+- Source planning is saved before app code in the first git commit. No learner-profile or credential files are tracked. No money spent or services signed up for. Gitleaks directory and full-history scans are clean; no learnai dev or recording process remains on pilot.
 
 ### 6-ship outcome and owner steps
 The official current ship skill requires learner-authored submission text; it does not generate a Devpost-description artifact. Its exact instruction is: “Submission copy and any optional peer feedback must be human-written, even on request.” The user's provided IDEA ANSWERS remain the source notes in scope/PRD; no invented personal reflection or submission prose was generated. Human-only reviews in the checklist remain unchecked, under the user's explicit instruction to proceed autonomously without questions. This records the deviation rather than pretending the full interactive curriculum occurred.
