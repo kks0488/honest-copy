@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.vercel/
+.env*
+!.env.example
+/devpost/learner-profile.md
+media/*.webm
+media/*.mp4
+playwright-results/
+.DS_Store
