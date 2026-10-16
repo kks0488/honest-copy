@@ -23,6 +23,9 @@ test('OpenAI-compatible request and schema fixture, configured mode automatic',a
     assert.deepEqual(payload.response_format,{type:'json_object'});
     assert.equal(payload.max_tokens,256);
     assert.equal(JSON.parse(payload.messages[1].content).selectedPhrase,'cures acne in 3 days');
+    const context=JSON.parse(payload.messages[1].content);
+    assert.equal(context.before,'Our everyday face serum ');
+    assert.equal(context.before+context.selectedPhrase+context.after,body.text);
     assert.ok(options.signal);return completion('{"replacement":"supports an everyday care routine"}');
   });
   assert.equal(called,true);assert.equal(result.mode,'live');assert.equal(getMode(configured),'live');
@@ -77,6 +80,11 @@ test('Korean schema fixture preserves Korean response',async()=>{
   const korean={text:samples.ko,findingId:analyze(samples.ko).findings[0].id};
   const r=await rewrite(korean,configured,async()=>completion('{"replacement":"매일 사용하는 관리용 제품입니다"}'));
   assert.equal(r.mode,'live');assert.match(r.replacement,/매일/);
+});
+test('wrong-language answers fall back rather than inserting a translation',async()=>{
+  const korean={text:samples.ko,findingId:analyze(samples.ko).findings[0].id};
+  assert.equal((await rewrite(korean,configured,async()=>completion('{"replacement":"supports daily care"}'))).mode,'template');
+  assert.equal((await rewrite(body,configured,async()=>completion('{"replacement":"일상적인 관리에 사용합니다"}'))).mode,'template');
 });
 async function request(handler,method='POST',payload=body,headers={}) {
   const req=Readable.from([JSON.stringify(payload)]);Object.assign(req,{method,headers:{host:'localhost','content-type':'application/json',...headers},socket:{remoteAddress:'unit-test'}});
