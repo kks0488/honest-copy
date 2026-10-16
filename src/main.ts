@@ -1,5 +1,5 @@
 import './style.css';
-import { analyze, categories, samples } from './rules.mjs';
+import { analyze, applyFinding, applyAll, categories, samples } from './rules.mjs';
 type Finding = ReturnType<typeof analyze>['findings'][number];
 const app = document.querySelector<HTMLDivElement>('#app')!;
 app.innerHTML = `
@@ -26,21 +26,25 @@ app.innerHTML = `
 const el = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 const input = el<HTMLTextAreaElement>('copy-input');
 let baseline = '', current = '', checked = false;
+let history: string[] = [];
+const startState = el('findings').firstElementChild!.cloneNode(true);
+let toastTimer: ReturnType<typeof setTimeout>;
+
 function text(tag: string, value: string, className = '') {
   const node = document.createElement(tag); node.textContent = value; node.className = className; return node;
 }
-function notify(message: string) { el('toast').textContent = message; }
+function notify(message: string) { el('toast').textContent = message; clearTimeout(toastTimer); toastTimer = setTimeout(() => {el('toast').textContent='';}, 4500); }
 function inputChanged() {
   el('char-count').textContent = `${input.value.length.toLocaleString()} / 5,000`;
   el<HTMLButtonElement>('check').disabled = !input.value.trim() || input.value.length > 5000;
   el('input-error').textContent = input.value.length > 5000 ? 'Keep your draft under 5,000 characters.' : '';
-  if (checked) {checked = false; baseline = ''; current = ''; render();}
+  if (checked) {checked = false; baseline = ''; current = ''; history = []; render();}
 }
 input.addEventListener('input', inputChanged);
 for (const lang of ['en','ko'] as const) el(`sample-${lang}`).addEventListener('click', () => {input.value = samples[lang]; inputChanged(); input.focus();});
 el('check').addEventListener('click', () => {
   if (!input.value.trim() || input.value.length > 5000) return;
-  baseline = input.value; current = baseline; checked = true; render(); notify('Copy checked. Review the highlighted phrases.');
+  baseline = input.value; current = baseline; history = []; checked = true; render(); notify('Copy checked. Review the highlighted phrases.');
 });
 function renderHighlights(findings: Finding[]) {
   const box = el('annotated'); box.replaceChildren(); let offset = 0;
@@ -61,9 +65,19 @@ function render() {
   scoreInfo.append(text('h2',!checked?'Room for clearer words':score===0?'A more measured draft':score>=60?'Some claims need care':'A few words to revisit'),text('p',checked?'Known pattern matches · review each one':'Your rule-risk score appears here.'));
   el('score-display').append(text('strong',checked?String(score):'—'),scoreInfo);
   el('score-fill').style.width = `${checked?score:0}%`;
-  if (!checked) return;
+  el('revised-section').hidden = !checked || current === baseline;
+  if (!checked) {el('findings').replaceChildren(startState.cloneNode(true)); return;}
+  renderRevised();
   renderHighlights(findings);
   el('legend').replaceChildren(...Object.entries(categories).map(([key,cat]) => text('span',cat.short,`legend-item ${key}`)));
+  let allActions = document.getElementById('all-actions');
+  allActions?.remove();
+  if (findings.length) {
+    allActions = text('div','','all-actions'); allActions.id='all-actions';
+    const applyAllButton = text('button','Apply all suggestions','secondary') as HTMLButtonElement;
+    applyAllButton.addEventListener('click',()=>changeDraft(applyAll(current)));
+    allActions.append(applyAllButton,text('p','Review the revised draft before publishing.')); el('review-section').append(allActions);
+  }
   const list = el('findings'); list.replaceChildren();
   if (!findings.length) {
     const empty = text('div','','empty-state success'); empty.append(text('span','✓','empty-icon'),text('h3','No listed patterns found.'),text('p','That’s a more measured draft by these rules. Unflagged claims may still need evidence or review.'));list.append(empty);
@@ -72,6 +86,34 @@ function render() {
     const card = text('article','',`finding ${f.category}`);
     const head = text('div','','finding-top');head.append(text('span',String(i+1).padStart(2,'0'),'finding-number'),text('span',f.label,'category-label'));
     card.append(head,text('h3',`“${f.phrase}”`),text('p',f.explanation),text('span','TRY A MORE MEASURED PHRASE','suggestion-label'),text('div',f.replacement,'suggestion'));
+    const actions = text('div','','finding-actions');
+    const apply = text('button','Apply suggestion ↗','secondary') as HTMLButtonElement;
+    apply.setAttribute('aria-label',`Apply suggestion ${i+1}: ${f.phrase}`);
+    apply.addEventListener('click',()=>changeDraft(applyFinding(current,f)));
+    actions.append(apply); card.append(actions);
     list.append(card);
   }
+}
+
+function changeDraft(next: string) {
+  if (next === current) return;
+  history.push(current); current = next; render();
+  notify('Suggestion applied. Review your revised draft.');
+}
+function renderRevised() {
+  const section = el('revised-section'); section.replaceChildren();
+  if (current === baseline) return;
+  const heading = text('div','','section-heading'); heading.append(text('h3','Your revised draft'),text('span','03 / CLEARER WORDS'));
+  const compare = text('div','','compare');
+  compare.append(text('span','Rule-risk score:'),text('span',`${analyze(baseline).score} before →`),text('b',`${analyze(current).score} after`));
+  const revised = text('div',current,'revised-box'); revised.id='revised-copy';
+  const actions = text('div','','revision-actions');
+  const copy = text('button','Copy revised text','primary') as HTMLButtonElement;
+  copy.addEventListener('click',async()=>{
+    try {await navigator.clipboard.writeText(current);notify('Revised text copied. Give it one final read before publishing.');}
+    catch {notify('Clipboard unavailable. Select and copy the revised draft above.');}
+  });
+  const undo = text('button','Undo last change','secondary') as HTMLButtonElement;
+  undo.disabled=!history.length; undo.addEventListener('click',()=>{current=history.pop()!;render();notify('Last change undone.');});
+  actions.append(copy,undo); section.append(heading,revised,compare,actions);
 }

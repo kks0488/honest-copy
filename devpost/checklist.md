@@ -7,7 +7,7 @@ Build mode: fast, per explicit autonomous-task instruction. Approval delegated b
 
 ## Slices
 
-- [ ] **1. Paste copy and understand exact risky phrases**
+- [x] **1. Paste copy and understand exact risky phrases**
   Becomes usable: Running English/Korean checker with inline highlights, explanations and initial score.
   Why now: Delivers the unique kernel first, including scaffold and tests.
   PRD ref: `prd.md > Paste and Check`, `prd.md > Phrase Review`
@@ -56,3 +56,5 @@ Reflection: Not collected.
 Activity mode: Evidence-based recap and offline reference map.
 
 ## Revisions
+
+- Slice 1: nine Node tests, pilot TypeScript/production build and English/Korean Chromium checks pass. Playwright version expected a newer browser; reused the installed Chromium via explicit executable path.
