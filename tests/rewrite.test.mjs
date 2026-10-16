@@ -112,3 +112,23 @@ test('valid AI suggestion can reduce matches while capped score stays 100',async
 test('malformed origin fails safely',async()=>{
   assert.equal((await request(createHandler({env:{}}),'POST',body,{origin:'not-a-url'})).status,403);
 });
+test('ranking and lifetime rewrites reject invented popularity, durability and duplicate copulas',async()=>{
+  for(const [text,replacement] of [
+    ['This kitchen gadget is No.1 best-selling.','a popular kitchen tool'],
+    ['It lasts forever.','is built to last for years of use'],
+    ['This kitchen gadget is No.1 best-selling.','is for everyday cooking'],
+  ]) {
+    const result=await rewrite({text,findingId:analyze(text).findings[0].id},configured,async()=>completion(JSON.stringify({replacement})));
+    assert.equal(result.mode,'template');assert.match(result.notice,/local template/);
+  }
+});
+test('a live replacement cannot repeat a sentence already in the draft',async()=>{
+  const text='일상적인 피부 관리용 세럼입니다. 국내 1위.';
+  const result=await rewrite({text,findingId:analyze(text).findings[0].id},configured,async()=>completion('{"replacement":"일상적인 피부 관리용 세럼입니다"}'));
+  assert.equal(result.mode,'template');
+});
+test('reusing a supported fact within a different sentence is allowed',async()=>{
+  const text='This kitchen gadget is No.1 best-selling. A tool for everyday cooking.';
+  const result=await rewrite({text,findingId:analyze(text).findings[0].id},configured,async()=>completion('{"replacement":"for everyday cooking"}'));
+  assert.equal(result.mode,'live');
+});

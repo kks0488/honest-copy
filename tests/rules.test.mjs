@@ -43,3 +43,13 @@ test('scores cap at 100 and remain deterministic', () => {
   assert.equal(analyze(text).score,100);
   assert.deepEqual(analyze(text),analyze(text));
 });
+test('production listing regressions: complete English and Korean claim spans', () => {
+  for (const [text, expected] of [
+    ['This kitchen gadget is No.1 best-selling. It lasts forever.', [['No.1 best-selling','superlative'],['lasts forever','guarantee']]],
+    ['A best-selling kitchen tool.', [['best-selling','superlative']]],
+    ['3일 만에 여드름 완치. 100% 효과 보장. 국내 1위.', [['3일 만에 여드름 완치','medical'],['100% 효과 보장','guarantee'],['국내 1위','superlative']]],
+  ]) {
+    assert.deepEqual(analyze(text).findings.map(f=>[f.phrase,f.category]),expected);
+    assert.equal(analyze(applyAll(text)).score,0);
+  }
+});
