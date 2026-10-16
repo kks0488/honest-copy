@@ -18,6 +18,10 @@ test('OpenAI-compatible request and schema fixture, configured mode automatic',a
     called=true;assert.equal(String(url),DEFAULT_BASE_URL+'chat/completions');
     assert.equal(options.headers.Authorization,'Bearer test-placeholder');
     const payload=JSON.parse(options.body);assert.equal(payload.messages[1].role,'user');
+    assert.equal(payload.model,'nvidia/Nemotron-3_5-Lightning');
+    assert.deepEqual(payload.chat_template_kwargs,{enable_thinking:false});
+    assert.deepEqual(payload.response_format,{type:'json_object'});
+    assert.equal(payload.max_tokens,256);
     assert.equal(JSON.parse(payload.messages[1].content).selectedPhrase,'cures acne in 3 days');
     assert.ok(options.signal);return completion('{"replacement":"supports an everyday care routine"}');
   });
@@ -26,8 +30,32 @@ test('OpenAI-compatible request and schema fixture, configured mode automatic',a
 test('custom compatible base and model honored',async()=>{
   await rewrite(body,{...configured,LLM_BASE_URL:'https://provider.example/v1',LLM_MODEL:'configured-model'},async(url,opts)=>{
     assert.equal(String(url),'https://provider.example/v1/chat/completions');assert.equal(JSON.parse(opts.body).model,'configured-model');
+    assert.equal(JSON.parse(opts.body).chat_template_kwargs,undefined);
     return completion('{"replacement":"is intended for everyday care"}');
   });
+});
+for (const content of [
+  '<think>{"replacement":"cures cancer"}</think>{"replacement":"supports everyday care"}',
+  '```json\n{"replacement":"supports everyday care"}\n```',
+  'Here is the wording: {"replacement":"supports everyday care"}',
+]) test('final content accepts JSON wrappers without exposing reasoning: '+content.slice(0,12),async()=>{
+  const result=await rewrite(body,configured,async()=>completion(content));
+  assert.equal(result.mode,'live');assert.equal(result.replacement,'supports everyday care');
+});
+test('reasoning-only and truncated replies visibly fall back',async()=>{
+  for(const message of [
+    {message:{content:null,reasoning_content:'{"replacement":"supports everyday care"}'},finish_reason:'stop'},
+    {message:{content:'<think>{"replacement":"supports everyday care"}'},finish_reason:'stop'},
+    {message:{content:'{"replacement":"supports everyday care"}'},finish_reason:'length'},
+  ]) {
+    const result=await rewrite(body,configured,async()=>new Response(JSON.stringify({choices:[message]})));
+    assert.equal(result.mode,'template');assert.match(result.notice,/local template/);
+  }
+});
+test('only numeric provider usage is returned, never reasoning or raw provider metadata',async()=>{
+  const result=await rewrite(body,configured,async()=>new Response(JSON.stringify({choices:[{message:{content:'{"replacement":"supports everyday care"}',reasoning_content:'private reasoning'}}],usage:{prompt_tokens:12,completion_tokens:8,total_tokens:20,detail:'private'}})));
+  assert.deepEqual(result.usage,{prompt_tokens:12,completion_tokens:8,total_tokens:20});
+  assert.ok(!JSON.stringify(result).includes('private'));
 });
 for(const [name,provider] of [
   ['network',async()=>{throw new Error('secret provider detail');}],

@@ -11,6 +11,28 @@ async function sample(lang) {await page.locator(`#sample-${lang}`).click();await
 try {
   await mkdir('media',{recursive:true});
   await page.goto(origin);
+  if (process.env.LIVE_CAPTURE) {
+    await page.getByText('AI wording available · rules first',{exact:true}).waitFor();
+    const usage=[];
+    for (const lang of ['en','ko']) {
+      await sample(lang);
+      const responsePromise=page.waitForResponse(r=>r.url().endsWith('/api/rewrite') && r.request().method()==='POST');
+      await page.getByRole('button',{name:'Try AI wording'}).first().click();
+      const response=await responsePromise;
+      const result=await response.json();
+      assert.equal(response.status(),200);assert.equal(result.mode,'live');
+      await page.getByText('AI wording. Review it for accuracy before applying.',{exact:true}).first().waitFor();
+      const name=lang==='en'?'english':'korean';
+      await page.screenshot({path:`media/${name}-review.png`});
+      await page.getByRole('button',{name:/Apply suggestion 1:/}).click();
+      assert.ok((await page.locator('#revised-copy').innerText()).includes(result.replacement));
+      assert.equal(await page.locator('#score-display strong').innerText(),'56');
+      await page.screenshot({path:`media/${name}-revised.png`});
+      usage.push({language:lang,...result.usage});
+    }
+    assert.deepEqual(errors,[]);
+    console.log(JSON.stringify({verified:'production live AI EN/KO → apply suggestion; 1920x1080 captures; no runtime errors',usage}));
+  } else {
   assert.equal(await page.locator('#check').isDisabled(),true);
   await page.screenshot({path:'media/start.png',fullPage:true});
   for (const lang of ['en','ko']) {
@@ -92,4 +114,5 @@ try {
   await mapPage.close();
   assert.deepEqual(errors,[]);
   console.log('PASS: EN/KO check→single rewrite→undo→apply all→copy; empty/benign/oversize/stale-edit/XSS/mobile; API demo + mocked live/failure/stale integration; no runtime errors.');
+  }
 } finally {await context.close();await browser.close();}

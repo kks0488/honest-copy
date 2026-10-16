@@ -134,7 +134,7 @@ async function requestAI(finding: Finding) {
   const atRevision=revision;pendingId=finding.id;render();
   let result:{replacement:string;mode:string;notice:string};
   try {
-    const response=await fetch('/api/rewrite',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:current,findingId:finding.id}),signal:AbortSignal.timeout(15000)});
+    const response=await fetch('/api/rewrite',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:current,findingId:finding.id}),signal:AbortSignal.timeout(30000)});
     if(!response.ok) throw new Error('Unavailable');
     const data=await response.json();
     if(typeof data.replacement!=='string' || !data.replacement.trim() || data.replacement.length>240 || analyze(data.replacement).findings.length || !['template','live'].includes(data.mode)) throw new Error('Invalid response');
