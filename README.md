@@ -14,7 +14,7 @@ An explainable second look at product copy: spot risky English and Korean claims
 
 - Live application: **https://honest-copy.vercel.app**.
 - Real-screen demonstration: [75-second 1080p MP4](media/demo.mp4) (about 1.1 MB, recorded on pilot).
-- Screenshots: [English review](media/english-review.png), [revised draft](media/english-revised.png), [Korean review](media/korean-review.png), [mobile](media/mobile-review.png).
+- Fresh 1920×1080 live AI screenshots: [English review](media/english-review.png), [revised draft](media/english-revised.png), [Korean review](media/korean-review.png), [Korean revision](media/korean-revised.png). [Mobile](media/mobile-review.png) retains the original local-template capture.
 
 The original recording shows the actual app in labeled local template mode before a provider key was configured. It has no voiceover or third-party media. The Korean fictional sample means: “This serum treats acne. Effect 100% guaranteed. No.1 domestically. A clinically proven daily-care product.” Its measured rewrite describes everyday care and notes that individual experiences can vary.
 
@@ -75,6 +75,8 @@ The base and model follow the [official Nebius Token Factory docs](https://docs.
 ### Live mode
 
 Production uses server-only `LLM_BASE_URL`, `LLM_API_KEY`, and `LLM_MODEL` in Vercel. The public UI exposes availability only; **Try AI wording** makes the optional live request. Run `LIVE_CAPTURE=1 APP_URL=https://honest-copy.vercel.app npm run capture` on pilot to verify real English/Korean suggestions and capture 1920×1080 screenshots. This mode asserts `mode: live`; it never mocks provider responses.
+
+Verified on the production URL on October 16, 2026: English and Korean AI wording both returned `mode: live`, applied successfully, and lowered the rule-risk score from 84 to 56 with no browser runtime errors. The two calls used 375 input + 26 output = **401 tokens** according to Nebius usage responses; no fallback occurred. The four review/revision screenshots above show these real results. Tests cover honest fallback independently; 32 tests and the production build passed on pilot.
 
 Keys are never put in `VITE_` variables or browser code. AI requests send the draft to the configured provider only after the user clicks **Try AI wording**. The app has no analytics or copy storage. Basic per-instance request throttling and limits are for this PoC; stronger abuse controls are needed before exposing a funded API widely. Provider charges and limits depend on the owner's account; no services were purchased for this project.
 
