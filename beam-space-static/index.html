@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Honest Copy Catalog</title>
+<meta name="description" content="A replay of a real whole-catalog product copy review with Beam: contradictions, cited evidence, and whole-field rewrites.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23b7791f'/%3E%3Cpath d='M9 17l4 4 10-11' stroke='white' stroke-width='3.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-inner">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">✓</span>
+      <div>
+        <h1 data-t="title">Honest Copy Catalog</h1>
+        <p class="tagline" data-t="tagline"></p>
+      </div>
+    </div>
+    <div class="switch" role="group" aria-label="Example shop and language">
+      <button type="button" data-lang="en" aria-pressed="true">English shop</button>
+      <button type="button" data-lang="ko" aria-pressed="false">한국어 가게</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="replay" id="replay" aria-live="polite"></section>
+
+  <section class="summary" id="summary" aria-label="Summary"></section>
+
+  <nav class="tabs" role="tablist" aria-label="Views">
+    <button type="button" role="tab" data-tab="report" aria-selected="true" data-t="tab_report">Report</button>
+    <button type="button" role="tab" data-tab="guard" aria-selected="false" data-t="tab_guard">Citation check</button>
+    <button type="button" role="tab" data-tab="input" aria-selected="false" data-t="tab_input">What Beam read</button>
+    <button type="button" role="tab" data-tab="how" aria-selected="false" data-t="tab_how">How it works</button>
+  </nav>
+
+  <section class="panel" id="panel-report" role="tabpanel">
+    <div class="toolbar">
+      <div class="filters" id="filters"></div>
+      <div class="toolbar-row">
+        <input type="search" id="search" autocomplete="off">
+        <div class="downloads">
+          <button type="button" class="btn" id="dl-catalog" data-t="dl_catalog">Corrected catalog CSV</button>
+          <button type="button" class="btn ghost" id="dl-findings" data-t="dl_findings">Findings CSV</button>
+        </div>
+      </div>
+      <p class="count" id="count"></p>
+    </div>
+    <div id="cards"></div>
+    <p class="muted small" id="clean"></p>
+  </section>
+
+  <section class="panel" id="panel-guard" role="tabpanel" hidden></section>
+  <section class="panel" id="panel-input" role="tabpanel" hidden></section>
+  <section class="panel" id="panel-how" role="tabpanel" hidden></section>
+</main>
+
+<footer class="wrap foot">
+  <p data-t="footer"></p>
+</footer>
+
+<noscript><p class="wrap">This page needs JavaScript to show the saved review.</p></noscript>
+<script src="app.js"></script>
+</body>
+</html>

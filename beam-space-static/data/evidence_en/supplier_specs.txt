@@ -1,0 +1,14 @@
+Supplier spec sheet, autumn order (fictional sample data)
+
+Apron and tablecloth fabric (EN-001, EN-002, EN-024): 55% linen, 45% cotton, 210 gsm, woven in Lithuania.
+Napkin fabric (EN-023): 100% linen, stonewashed, woven in Lithuania.
+Waffle towel (EN-003, EN-004): 100% cotton, 380 GSM, woven in Turkey.
+Organic cotton certificate OC-55120 covers style EN-005 only. Scope: finished tees, 100% organic cotton, sewn in Portugal.
+Pocket tee EN-006: conventional cotton, sewn in Vietnam.
+Hoodie EN-007 size M: chest 58 cm, length 70 cm.
+Cast iron skillet 26 cm (EN-016): oven safe to 260°C.
+Ceramic pan 28 cm and 24 cm (EN-017, EN-018): oven safe to 220°C (handle limit). Hand wash only to protect the coating.
+Bamboo utensils EN-020: food-contact migration test FC-4410 passed.
+Chef's knife EN-022: stainless steel blade made and assembled in China.
+Wool throw EN-026: finished size 130 x 180 cm.
+Tote EN-027: 10 oz cotton canvas, not certified organic.
