@@ -71,12 +71,18 @@ def _run(tmp_path, replies_fn, cap=40):
     return catalog, docs, review_catalog(catalog, docs, client), stand_in, budget, ids
 
 
+def _field(sku, text, column="description"):
+    return {"sku": sku, "fields": [{"column": column, "text": text}]}
+
+
 def test_full_run_three_calls_and_guard(tmp_path):
     def replies(ids):
-        rewrites = {"rewrites": [
-            {"id": ids["100% linen"], "replacement": "a 55% linen, 45% cotton blend"},
-            {"id": ids["130 x 170 cm"], "replacement": "130 x 999 cm"},            # invented number -> rejected
-            {"id": ids["cures acne in 7 days"], "replacement": "is made for a calm daily routine"},
+        rewrites = {"products": [
+            _field("EN-001", "Our everyday apron in a 55% linen, 45% cotton blend. Two deep pockets and an adjustable neck strap."),
+            _field("EN-026", "Warm recycled wool throw, 130 x 999 cm."),                      # invented number
+            _field("EN-010", "A lightweight serum for a calm daily routine."),                 # whole sentence rewritten
+            _field("EN-002", "The same soft linen as our Everyday Apron, now with a cross back. Available in our shop."),
+            _field("EN-004", "Three of our Waffle Bath Towels (380 GSM) tied with a gift band. Our #1 gift towel set."),
         ]}
         harmony = "<|channel|>analysis<|message|>thinking {\"x\":1}<|end|><|start|>assistant<|channel|>final<|message|>"
         return [json.dumps(AUDIT), harmony + json.dumps(_verify(ids)) + "<|return|>", "```json\n" + json.dumps(rewrites) + "\n```"]
@@ -88,34 +94,49 @@ def test_full_run_three_calls_and_guard(tmp_path):
     assert req["model"] == "reflection/Beam-1.0-501B-A23B" and req["temperature"] == 0.7 and req["top_p"] == 0.99
     # whole catalog in one request
     assert all(f"{p.sku}/title" in req["messages"][1]["content"] for p in catalog.products)
+    # all products' rewrites go into the single third call, each field sent whole with the sentences to keep
+    rewrite_items = json.loads(stand_in.requests[2]["messages"][1]["content"].split("\n", 1)[1])
+    en002 = next(x for x in rewrite_items if x["sku"] == "EN-002")["fields"][0]
+    assert en002["text"] == catalog.products[1].cells["description"]
+    assert en002["keep_unchanged"] == ["The same soft linen as our Everyday Apron, now with a cross-back."]
 
     by_quote = {c.quote: c for c in review.claims}
     linen = by_quote["100% linen"]
     assert linen.label == "contradicted" and linen.citations[0].quote == "55% linen, 45% cotton"
-    assert linen.rewrite == "a 55% linen, 45% cotton blend" and linen.rewrite_from == "beam"
+    assert linen.rewrite == "Our everyday apron in a 55% linen, 45% cotton blend." and linen.rewrite_from == "beam"
     size = by_quote["130 x 170 cm"]
-    assert size.label == "no_evidence"                    # its only citation was invented
-    assert size.rewrite == ""                             # Beam rewrite rejected, no rule template
-    assert by_quote["Certified organic cotton"].label == "supported"
+    assert size.label == "no_evidence"                                  # its only citation was invented
+    assert size.rewrite_from == "cleanup" and size.rewrite == "Warm recycled wool throw."
+    assert by_quote["Certified organic cotton"].label == "supported" and by_quote["Certified organic cotton"].rewrite == ""
     assert by_quote["cures acne in 7 days"].rewrite_from == "beam"
-    assert by_quote["Never fades"].label == "not_checked" and by_quote["Never fades"].rewrite_from == "rule template"
+    assert by_quote["Best seller #1"].rewrite_from == "cleanup" and by_quote["Best seller #1"].rewrite == ""
+    assert by_quote["best-selling"].rewrite == "Our towel set."
+    assert by_quote["Never fades"].label == "not_checked" and by_quote["Never fades"].rewrite_from == "cleanup"
     assert "Made of bamboo fibre" not in by_quote
     reasons = " ".join(g.reason for g in review.guard)
     assert "quote not found" in reasons and "label lowered" in reasons and "adds the number 999" in reasons
+    assert "sentence without a flagged claim was changed" in reasons and "fragment ('gift')" in reasons
+    assert "no rewrite returned" in reasons                               # EN-003 was left out by the model
     assert review.quotes_checked == 3 and review.quotes_accepted == 2
 
     out = list(csv.DictReader(io.StringIO(corrected_csv(catalog, review).lstrip("﻿"))))
-    assert out[0]["description"].startswith("Our everyday apron in a 55% linen, 45% cotton blend.")
-    assert "needs your check" in out[25]["review_note"]          # EN-026 keeps its text, flagged
-    assert out[25]["description"] == catalog.products[25].cells["description"]
+    assert out[0]["description"] == "Our everyday apron in a 55% linen, 45% cotton blend. Two deep pockets and an adjustable neck strap."
+    assert out[0]["description (before)"] == catalog.products[0].cells["description"]
+    assert out[0]["changes"].startswith("description: Our everyday apron in [-100%-]")
+    assert "55% linen, 45% cotton blend.+}" in out[0]["changes"] and "  " not in out[0]["changes"]
+    assert out[1]["description"] == "The same soft linen as our Everyday Apron, now with a cross-back."
+    assert out[25]["description"] == "Warm recycled wool throw." and "flagged words removed" in out[25]["review_note"]
+    assert out[4]["changes"] == "" and out[4]["description (before)"] == ""   # EN-005: only a supported claim
+    assert list(out[0].keys())[:len(catalog.headers)] == catalog.headers
     html = report_html(review, catalog, "en") + guard_html(review, "en")
     assert "Contradicted" in html and "second look" in html and "<script" not in html
-    assert findings_csv(review, "ko").lstrip("\ufeff").startswith("상품코드")
+    assert "<del class='hc-del'>" in html and "<ins class='hc-ins'>" in html
+    assert findings_csv(review, "ko").lstrip("﻿").startswith("상품코드")
 
 
 def test_review_round_trips_through_json(tmp_path):
     def replies(ids):
-        return [json.dumps(AUDIT), json.dumps(_verify(ids)), json.dumps({"rewrites": []})]
+        return [json.dumps(AUDIT), json.dumps(_verify(ids)), json.dumps({"products": []})]
     *_, review, _, _, _ = _run(tmp_path, replies)
     again = Review.from_dict(json.loads(json.dumps(review.to_dict(), ensure_ascii=False)))
     assert again.to_dict() == review.to_dict()
@@ -123,18 +144,19 @@ def test_review_round_trips_through_json(tmp_path):
 
 def test_failed_step_falls_back_and_says_so(tmp_path):
     def replies(ids):
-        return [RuntimeError("upstream 503 for token " + FAKE_TOKEN), "not json at all", json.dumps({"rewrites": []})]
+        return [RuntimeError("upstream 503 for token " + FAKE_TOKEN), "not json at all", json.dumps({"products": []})]
     catalog, docs, review, *_ = _run(tmp_path, replies)
     assert [s.ok for s in review.steps] == [False, False, True]
     assert FAKE_TOKEN not in json.dumps(review.to_dict())
     assert "partial" in review.messages
     assert all(c.label == "not_checked" for c in review.claims)
-    assert all(c.rewrite for c in review.claims if c.rule_replacement)
+    assert all(c.rewrite_from in ("cleanup", "") for c in review.claims)
+    assert review.field_rewrites
 
 
 def test_cap_reached_mid_run_stops_calling(tmp_path):
     def replies(ids):
-        return [json.dumps(AUDIT), json.dumps(_verify(ids)), json.dumps({"rewrites": []})]
+        return [json.dumps(AUDIT), json.dumps(_verify(ids)), json.dumps({"products": []})]
     catalog, docs, review, stand_in, budget, _ = _run(tmp_path, replies, cap=1)
     assert len(stand_in.requests) == 1 and budget.used() == 1
     assert [s.ok for s in review.steps] == [True, False, False]
@@ -144,7 +166,8 @@ def test_no_token_and_cap_and_size_fall_back_to_local(tmp_path, monkeypatch):
     catalog, docs = load_example("ko")
     r = review_catalog(catalog, docs, BeamClient(budget=DailyBudget(tmp_path / "a.json"), token=""))
     assert r.mode == "local" and r.messages == ["no_token"] and r.claims
-    assert all(c.label == "not_checked" and c.rewrite for c in r.claims)
+    assert all(c.label == "not_checked" and c.rewrite_from in ("cleanup", "") for c in r.claims)
+    assert {f.sku for f in r.field_rewrites} == {c.sku for c in r.claims}
     r = review_catalog(catalog, docs, BeamClient(budget=DailyBudget(tmp_path / "b.json", cap=0), token="x"))
     assert r.messages == ["cap_reached"]
     monkeypatch.setattr(pipeline, "MAX_INPUT_CHARS", 100)

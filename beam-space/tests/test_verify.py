@@ -3,7 +3,7 @@
 from honest_catalog.examples import load_example
 from honest_catalog.catalog import all_sources
 from honest_catalog.pipeline import (Citation, Claim, GuardEntry, apply_verification, check_quote, local_claims,
-                                     merge_audit_issues, validate_rewrite, _order_and_number)
+                                     merge_audit_issues, _order_and_number)
 
 SOURCES = {
     "EN-001/description": "Our everyday apron in 100% linen. Two deep pockets.",
@@ -119,18 +119,3 @@ def test_audit_issues_must_quote_seller_copy_exactly():
     assert any("does not exist" in r for r in reasons)
     _order_and_number(claims, catalog)
     assert [c.id for c in claims] == [f"C{i:03d}" for i in range(1, len(claims) + 1)]
-
-
-def test_rewrite_guards():
-    cell = SOURCES["EN-001/description"]
-    claim = _claim()
-    claim.citations = [Citation("EN-001/material", "55% linen, 45% cotton", True)]
-    assert validate_rewrite(claim, "a 55% linen, 45% cotton blend", cell) == (True, "")
-    assert not validate_rewrite(claim, "a 60% linen blend", cell)[0]          # invented number
-    assert not validate_rewrite(claim, "린넨 혼방", cell)[0]                  # language switch
-    assert not validate_rewrite(claim, "clinically proven linen", cell)[0]  # still risky
-    assert not validate_rewrite(claim, "", cell)[0]
-    assert not validate_rewrite(claim, "x" * 200, cell)[0]
-    ko = Claim(id="C002", sku="K", column="d", source="s", quote="국내 1위", start=0, end=5, origin=["rules"])
-    assert validate_rewrite(ko, "매일 쓰기 좋은", "국내 1위 앞치마")[0]
-    assert not validate_rewrite(ko, "for everyday use", "국내 1위 앞치마")[0]

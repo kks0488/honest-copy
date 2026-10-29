@@ -67,6 +67,7 @@ class Catalog:
     spec_cols: list[str]           # everything else (material, size chart, certifications ...)
     products: list[Product]
     name: str = "catalog"
+    title_col: str = ""            # the copy column that holds short product names, if any
 
     def sources(self) -> dict[str, str]:
         out = {}
@@ -174,7 +175,7 @@ def parse_catalog_bytes(raw: bytes, filename: str) -> Catalog:
         products.append(Product(row=n, sku=sku, cells=cells))
     spec_cols = [h for h in headers if h not in copy_cols and h != sku_col]
     return Catalog(headers=headers, sku_col=sku_col or "", copy_cols=copy_cols, spec_cols=spec_cols,
-                   products=products, name=Path(filename).name)
+                   products=products, name=Path(filename).name, title_col=title_col or "")
 
 
 def parse_catalog_file(path: str | os.PathLike) -> Catalog:
@@ -236,13 +237,20 @@ def render_corpus(catalog: Catalog, docs: list[EvidenceDoc]) -> str:
     return "\n".join(parts)
 
 
-def corrected_catalog_csv(catalog: Catalog, new_cells: dict[str, dict[str, str]], notes: dict[str, str]) -> str:
-    """Original columns with rewritten copy, plus a review note column. UTF-8 with BOM for spreadsheet apps."""
+def corrected_catalog_csv(catalog: Catalog, new_cells: dict[str, dict[str, str]], notes: dict[str, str],
+                          diffs: dict[str, str] | None = None) -> str:
+    """Original columns with rewritten copy, then a review note, a word diff and the original copy.
+
+    The original columns stay first and in order so the file can go back into a shop's bulk upload.
+    UTF-8 with BOM so spreadsheet apps read Korean correctly.
+    """
+    diffs = diffs or {}
     buf = io.StringIO()
     w = csv.writer(buf)
-    w.writerow(catalog.headers + ["review_note"])
+    w.writerow(catalog.headers + ["review_note", "changes"] + [f"{h} (before)" for h in catalog.copy_cols])
     for p in catalog.products:
         cells = dict(p.cells)
         cells.update(new_cells.get(p.sku, {}))
-        w.writerow([cells.get(h, "") for h in catalog.headers] + [notes.get(p.sku, "")])
-    return "﻿" + buf.getvalue()
+        before = [p.cells.get(h, "") if h in new_cells.get(p.sku, {}) else "" for h in catalog.copy_cols]
+        w.writerow([cells.get(h, "") for h in catalog.headers] + [notes.get(p.sku, ""), diffs.get(p.sku, "")] + before)
+    return "\ufeff" + buf.getvalue()

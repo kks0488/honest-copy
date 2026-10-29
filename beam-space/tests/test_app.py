@@ -23,7 +23,9 @@ def test_example_without_token_shows_local_rules_and_cache_notice(app):
     assert "EN-010" in report and "second look" in report
     assert len(table) > 10
     rows = list(csv.reader(io.open(corrected, encoding="utf-8-sig")))
-    assert rows[0][-1] == "review_note" and len(rows) == 31
+    assert rows[0][-4:] == ["review_note", "changes", "title (before)", "description (before)"] and len(rows) == 31
+    en010 = rows[10]
+    assert en010[0] == "EN-010" and en010[-1] and en010[2] != en010[-1]   # rewritten, original kept alongside
 
 
 def test_upload_without_token_says_beam_is_not_connected(app):

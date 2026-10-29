@@ -36,6 +36,9 @@ EXAMPLES = {
 }
 
 NOT_GENERATED = "not generated yet"
+# Bump when the saved result's shape changes, so an older cache is not shown.
+# 2: whole-field rewrites (field_rewrites) replaced phrase-level rewrites.
+CACHE_FORMAT = 2
 
 
 def load_example(key: str) -> tuple[Catalog, list[EvidenceDoc]]:
@@ -48,6 +51,7 @@ def placeholder(key: str) -> dict:
     ex = EXAMPLES[key]
     return {
         "status": NOT_GENERATED,
+        "format": CACHE_FORMAT,
         "example": key,
         "catalog_file": str(ex["catalog"].relative_to(ROOT)),
         "evidence_files": [str(p.relative_to(ROOT)) for p in ex["evidence"]],
@@ -68,6 +72,8 @@ def load_cached(key: str) -> tuple[Review | None, str]:
         return None, NOT_GENERATED
     if data.get("status") != "generated" or not data.get("result"):
         return None, data.get("status") or NOT_GENERATED
+    if data.get("format") != CACHE_FORMAT:
+        return None, "stale"
     catalog, docs = load_example(key)
     if data.get("input_sha256") != catalog_fingerprint(catalog, docs):
         return None, "stale"

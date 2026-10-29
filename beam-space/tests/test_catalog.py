@@ -128,9 +128,12 @@ def test_corpus_lists_every_source_once():
 
 def test_corrected_csv_keeps_columns_and_adds_note():
     catalog, _ = load_example("en")
-    out = corrected_catalog_csv(catalog, {"EN-001": {"description": "New text."}}, {"EN-001": "note"})
-    rows = list(csv.reader(io.StringIO(out.lstrip("﻿"))))
-    assert rows[0] == catalog.headers + ["review_note"]
-    assert rows[1][2] == "New text." and rows[1][-1] == "note"
-    assert rows[2][2] == catalog.products[1].cells["description"]
+    out = corrected_catalog_csv(catalog, {"EN-001": {"description": "New text."}}, {"EN-001": "note"},
+                                {"EN-001": "description: [-old-] {+new+}"})
+    rows = list(csv.reader(io.StringIO(out.lstrip("\ufeff"))))
+    assert rows[0] == catalog.headers + ["review_note", "changes", "title (before)", "description (before)"]
+    n = len(catalog.headers)
+    assert rows[1][2] == "New text." and rows[1][n:] == ["note", "description: [-old-] {+new+}", "",
+                                                         catalog.products[0].cells["description"]]
+    assert rows[2][2] == catalog.products[1].cells["description"] and rows[2][n:] == ["", "", "", ""]
     assert EXAMPLES["en"]["catalog"].exists()

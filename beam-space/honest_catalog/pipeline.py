@@ -17,6 +17,7 @@ from datetime import datetime, timezone
 from . import beam as beam_mod
 from .beam import BeamCallError, BeamClient, BeamUnavailable, parse_json_answer
 from .catalog import Catalog, EvidenceDoc, all_sources, corrected_catalog_csv, render_corpus
+from .rewrite import FieldPlan, FieldRewrite, GapResult, build_field, make_plan
 from .rules import CATEGORIES, analyze_listing
 
 MAX_INPUT_CHARS = int(os.environ.get("BEAM_MAX_INPUT_CHARS", "400000"))
@@ -25,7 +26,6 @@ MIN_QUOTE_CHARS = 3
 LABELS = ("supported", "contradicted", "no_evidence", "not_checked")
 ISSUE_TYPES = ("contradiction", "spec_conflict", "ranking", "unsupported")
 _HANGUL = re.compile(r"[가-힣ᄀ-ᇿ㄰-㆏]")
-_NUMBER = re.compile(r"\d+(?:[.,]\d+)?")
 
 
 def has_hangul(text: str) -> bool:
@@ -95,6 +95,7 @@ class Review:
     generated_at: str = ""
     calls_made: int = 0
     raw_answers: dict = field(default_factory=dict)     # final answers only, never reasoning
+    field_rewrites: list[FieldRewrite] = field(default_factory=list)
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -114,6 +115,8 @@ class Review:
             quotes_checked=data.get("quotes_checked", 0), quotes_accepted=data.get("quotes_accepted", 0),
             model=data.get("model", beam_mod.MODEL_ID), generated_at=data.get("generated_at", ""),
             calls_made=data.get("calls_made", 0), raw_answers=data.get("raw_answers", {}),
+            field_rewrites=[FieldRewrite(**{**f, "gaps": [GapResult(**g) for g in f.get("gaps", [])]})
+                            for f in data.get("field_rewrites", [])],
         )
 
 
@@ -280,60 +283,79 @@ def apply_verification(data: dict, claims: list[Claim], sources: dict[str, str],
     return checked, accepted
 
 
-def validate_rewrite(claim: Claim, replacement, cell_text: str) -> tuple[bool, str]:
-    if not isinstance(replacement, str) or not replacement.strip():
-        return False, "empty rewrite"
-    replacement = replacement.strip()
-    if len(replacement) > max(3 * len(claim.quote), 80):
-        return False, "rewrite much longer than the original phrase"
-    if (has_hangul(claim.quote) and not has_hangul(replacement)) or (not has_hangul(cell_text) and has_hangul(replacement)):
-        return False, "rewrite changed the language"
-    facts = cell_text + " " + " ".join(c.quote for c in claim.citations)
-    for num in _NUMBER.findall(replacement):
-        if num not in facts:
-            return False, f"rewrite adds the number {num}, which is not in the seller's data"
-    new_text = cell_text[:claim.start] + replacement + cell_text[claim.end:]
-    for f in analyze_listing(new_text)["findings"]:
-        if _overlaps(f.start, f.end, claim.start, claim.start + len(replacement)):
-            return False, f"rewrite still contains a risky phrase ({f.phrase})"
-    return True, ""
-
-
 def needs_rewrite(c: Claim) -> bool:
     return c.label != "supported"
 
 
-def _rewrite_payload(claims: list[Claim], sources: dict[str, str]) -> str:
-    items = []
+def field_plans(catalog: Catalog, claims: list[Claim]) -> list[FieldPlan]:
+    """One plan per copy field (title or description) that has claims needing a rewrite."""
+    by_source: dict[str, list[Claim]] = {}
     for c in claims:
-        text = sources[c.source]
-        items.append({
-            "id": c.id, "language": "ko" if has_hangul(text) else "en",
-            "before": text[max(0, c.start - 240):c.start], "phrase": c.quote, "after": text[c.end:c.end + 240],
-            "problem": c.label_note or c.beam_reason or c.rule_reason, "label": c.label,
-            "facts": [x.quote for x in c.citations],
+        if needs_rewrite(c):
+            by_source.setdefault(c.source, []).append(c)
+    plans = []
+    for prod in catalog.products:
+        for col in catalog.copy_cols:
+            todo = by_source.get(prod.source_id(col))
+            if todo:
+                plans.append(make_plan(prod, col, col == catalog.title_col, todo, catalog.spec_cols))
+    return plans
+
+
+def _rewrite_payload(plans: list[FieldPlan], catalog: Catalog) -> str:
+    """All affected products in one request: each field whole, its flagged claims, and the sentences to keep."""
+    products: dict[str, dict] = {}
+    rows = {p.sku: p for p in catalog.products}
+    for plan in plans:
+        prod = rows[plan.sku]
+        entry = products.setdefault(plan.sku, {
+            "sku": plan.sku,
+            "language": "ko" if has_hangul(" ".join(prod.cells.get(c, "") for c in catalog.copy_cols)) else "en",
+            "seller_data": {h: prod.cells[h] for h in catalog.spec_cols if prod.cells.get(h)},
+            "fields": [],
         })
-    return json.dumps(items, ensure_ascii=False, indent=0)
+        entry["fields"].append({
+            "column": plan.column,
+            "kind": "title" if plan.is_title else "description",
+            "text": plan.text,
+            "flagged": [{"id": c.id, "claim": c.quote, "label": c.label,
+                         "problem": c.label_note or c.beam_reason or c.rule_reason,
+                         "checked_facts": [x.quote for x in c.citations]} for g in plan.gaps for c in g.claims],
+            "keep_unchanged": plan.kept_sentences(),
+        })
+    return json.dumps(list(products.values()), ensure_ascii=False, indent=0)
 
 
-def apply_rewrites(data: dict | None, claims: list[Claim], sources: dict[str, str], guard: list[GuardEntry]) -> None:
-    proposals = {}
-    if data:
-        rows = data.get("rewrites", [])
-        for r in rows if isinstance(rows, list) else []:
-            if isinstance(r, dict) and isinstance(r.get("id"), str):
-                proposals.setdefault(r["id"], r.get("replacement"))
-    for c in claims:
-        if not needs_rewrite(c):
+def _proposals(data: dict | None) -> dict[tuple[str, str], str]:
+    out: dict[tuple[str, str], str] = {}
+    rows = data.get("products", []) if isinstance(data, dict) else []
+    for prod in rows if isinstance(rows, list) else []:
+        if not isinstance(prod, dict) or not isinstance(prod.get("sku"), str):
             continue
-        if c.id in proposals:
-            ok, why = validate_rewrite(c, proposals[c.id], sources[c.source])
-            if ok:
-                c.rewrite, c.rewrite_from = proposals[c.id].strip(), "beam"
-                continue
-            guard.append(GuardEntry("rewrite", c.id, str(proposals[c.id])[:200], why))
-        if c.rule_replacement:
-            c.rewrite, c.rewrite_from = c.rule_replacement, "rule template"
+        for f in prod.get("fields", []) if isinstance(prod.get("fields"), list) else []:
+            if isinstance(f, dict) and isinstance(f.get("column"), str) and isinstance(f.get("text"), str):
+                out.setdefault((prod["sku"], f["column"]), f["text"])
+    return out
+
+
+def apply_field_rewrites(data: dict | None, plans: list[FieldPlan], claims: list[Claim],
+                         guard: list[GuardEntry]) -> list[FieldRewrite]:
+    """Check Beam's whole-field rewrites gap by gap; fall back to clean removal where a check fails."""
+    proposals = _proposals(data)
+    by_id = {c.id: c for c in claims}
+    results = []
+    for plan in plans:
+        proposal = proposals.get((plan.sku, plan.column)) if data is not None else None
+        if data is not None and proposal is None:
+            guard.append(GuardEntry("rewrite", plan.source, "", "no rewrite returned for this field"))
+        fr = build_field(plan, proposal if proposal is not None else ("" if data is not None else None),
+                         lambda item, text, why: guard.append(GuardEntry("rewrite", item, str(text)[:300], why)))
+        for g in fr.gaps:
+            for cid in g.claim_ids:
+                by_id[cid].rewrite = g.after
+                by_id[cid].rewrite_from = {"beam": "beam", "cleanup": "cleanup", "kept": ""}[g.source]
+        results.append(fr)
+    return results
 
 
 # --------------------------------------------------------------- driver
@@ -363,7 +385,8 @@ def review_catalog(catalog: Catalog, docs: list[EvidenceDoc], client: BeamClient
         live, why = False, "too_large"
     if not live:
         review.messages.append(why)
-        apply_rewrites(None, _order_and_number(claims, catalog), sources, review.guard)
+        claims = _order_and_number(claims, catalog)
+        review.field_rewrites = apply_field_rewrites(None, field_plans(catalog, claims), claims, review.guard)
         review.claims = claims
         return review
 
@@ -396,19 +419,19 @@ def review_catalog(catalog: Catalog, docs: list[EvidenceDoc], client: BeamClient
         except (BeamCallError, BeamUnavailable) as exc:
             review.steps.append(StepStatus("verify", False, str(exc)))
 
-    # 3. rewrites
-    todo = [c for c in claims if needs_rewrite(c)]
+    # 3. rewrites: one whole-field rewrite per affected product, all products in this one call
+    plans = field_plans(catalog, claims)
     rewrite_data = None
-    if todo:
+    if plans:
         tick(0.8, "Beam suggests rewrites")
         try:
-            reply = client.chat(beam_mod.REWRITE_SYSTEM, "Items to rewrite:\n" + _rewrite_payload(todo, sources))
+            reply = client.chat(beam_mod.REWRITE_SYSTEM, "Products to rewrite:\n" + _rewrite_payload(plans, catalog))
             review.raw_answers["rewrite"] = reply.text
             rewrite_data = parse_json_answer(reply.text)
-            review.steps.append(StepStatus("rewrite", True, f"{len(todo)} lines sent"))
+            review.steps.append(StepStatus("rewrite", True, f"{len(plans)} fields in {len({p.sku for p in plans})} products sent"))
         except (BeamCallError, BeamUnavailable) as exc:
             review.steps.append(StepStatus("rewrite", False, str(exc)))
-    apply_rewrites(rewrite_data, claims, sources, review.guard)
+    review.field_rewrites = apply_field_rewrites(rewrite_data, plans, claims, review.guard)
     review.claims = claims
     review.calls_made = client.calls_made
     if any(not s.ok for s in review.steps):
@@ -417,36 +440,53 @@ def review_catalog(catalog: Catalog, docs: list[EvidenceDoc], client: BeamClient
     return review
 
 
-def corrected_cells(catalog: Catalog, review: Review) -> tuple[dict[str, dict[str, str]], dict[str, str]]:
-    """Apply accepted rewrites to the catalog. Returns (new cells per sku, review note per sku)."""
-    by_source: dict[str, list[Claim]] = {}
-    for c in review.claims:
-        by_source.setdefault(c.source, []).append(c)
+def diff_words(before: str, after: str) -> list[tuple[str, str]]:
+    """Word-level diff as (op, text) pairs, op in "same", "del", "ins"."""
+    import difflib
+    a, b = re.findall(r"\S+|\s+", before), re.findall(r"\S+|\s+", after)
+    ops = []
+    for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(a=a, b=b, autojunk=False).get_opcodes():
+        if tag == "equal":
+            ops.append(("same", "".join(a[i1:i2])))
+            continue
+        if i2 > i1:
+            ops.append(("del", "".join(a[i1:i2])))
+        if j2 > j1:
+            ops.append(("ins", "".join(b[j1:j2])))
+    return ops
+
+
+def diff_text(before: str, after: str) -> str:
+    """Plain-text diff for the CSV: [-removed-] {+added+}."""
+    out = "".join(t if op == "same" else (f" [-{t.strip()}-] " if op == "del" else f" {{+{t.strip()}+}} ")
+                  for op, t in diff_words(before, after) if t.strip() or op == "same")
+    return re.sub(r" {2,}", " ", out).strip()
+
+
+def corrected_cells(catalog: Catalog, review: Review) -> tuple[dict[str, dict[str, str]], dict[str, str], dict[str, str]]:
+    """New cell text per sku, a review note per sku, and a readable diff per sku."""
+    labels = {c.id: c.label.replace("_", " ") for c in review.claims}
+    rows = {p.sku: p for p in catalog.products}
     new_cells: dict[str, dict[str, str]] = {}
     notes: dict[str, list[str]] = {}
-    for p in catalog.products:
-        for col in catalog.copy_cols:
-            sid = p.source_id(col)
-            text = p.cells.get(col, "")
-            last_start = len(text) + 1
-            changed = False
-            for c in sorted(by_source.get(sid, []), key=lambda x: x.start, reverse=True):
-                label = c.label.replace("_", " ")
-                if c.rewrite and c.end <= last_start and text[c.start:c.end] == c.quote:
-                    text = text[:c.start] + c.rewrite + text[c.end:]
-                    last_start = c.start
-                    changed = True
-                    notes.setdefault(p.sku, []).append(f"{c.id} {label}: \"{c.quote}\" -> \"{c.rewrite}\"")
-                elif c.label != "supported":
-                    notes.setdefault(p.sku, []).append(f"{c.id} {label}: \"{c.quote}\" needs your check")
-            if changed:
-                new_cells.setdefault(p.sku, {})[col] = text
-    return new_cells, {k: " | ".join(reversed(v)) for k, v in notes.items()}
+    diffs: dict[str, list[str]] = {}
+    for fr in review.field_rewrites:
+        prod = rows.get(fr.sku)
+        if prod is None or prod.cells.get(fr.column, "") != fr.before:
+            continue  # the catalog changed since this review; never write into a different text
+        for g in fr.gaps:
+            flags = ", ".join(f"{cid} {labels.get(cid, '')}" for cid in g.claim_ids)
+            how = {"beam": "rewritten", "cleanup": "flagged words removed", "kept": "needs your edit"}[g.source]
+            notes.setdefault(fr.sku, []).append(f"{fr.column}: {flags} ({how})")
+        if fr.after != fr.before:
+            new_cells.setdefault(fr.sku, {})[fr.column] = fr.after
+            diffs.setdefault(fr.sku, []).append(f"{fr.column}: {diff_text(fr.before, fr.after)}")
+    return new_cells, {k: " | ".join(v) for k, v in notes.items()}, {k: " | ".join(v) for k, v in diffs.items()}
 
 
 def corrected_csv(catalog: Catalog, review: Review) -> str:
-    cells, notes = corrected_cells(catalog, review)
-    return corrected_catalog_csv(catalog, cells, notes)
+    cells, notes, diffs = corrected_cells(catalog, review)
+    return corrected_catalog_csv(catalog, cells, notes, diffs)
 
 
 def category_label(cat: str) -> str:

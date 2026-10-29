@@ -8,7 +8,7 @@ from html import escape
 
 from .catalog import Catalog
 from .i18n import t
-from .pipeline import Claim, Review
+from .pipeline import Claim, Review, diff_words
 
 
 def _reason(c: Claim, lang: str) -> str:
@@ -30,11 +30,40 @@ def _evidence(c: Claim, lang: str) -> str:
 
 
 def _rewrite(c: Claim, lang: str) -> str:
+    """What the sentence holding this claim became."""
     if c.label == "supported":
         return t(lang, "keep")
-    if not c.rewrite:
+    if c.rewrite_from not in ("beam", "cleanup"):
         return t(lang, "needs_edit")
-    return f"{c.rewrite} ({t(lang, 'rewrite_from')[c.rewrite_from]})"
+    text = c.rewrite or t(lang, "sentence_removed")
+    return f"{text} ({t(lang, 'rewrite_from')[c.rewrite_from]})"
+
+
+def diff_html(before: str, after: str) -> str:
+    parts = []
+    for op, text in diff_words(before, after):
+        if op == "same":
+            parts.append(escape(text))
+        elif op == "del":
+            parts.append(f"<del class='hc-del'>{escape(text)}</del>")
+        else:
+            parts.append(f"<ins class='hc-ins'>{escape(text)}</ins>")
+    return "".join(parts)
+
+
+def _field_blocks(review: Review, sku: str, lang: str) -> str:
+    blocks = []
+    for fr in review.field_rewrites:
+        if fr.sku != sku:
+            continue
+        if fr.after == fr.before:
+            body = f"<div class='hc-after'>{escape(fr.before)}</div><div class='hc-small'>{escape(t(lang, 'field_kept'))}</div>"
+        else:
+            body = (f"<div class='hc-diff'>{diff_html(fr.before, fr.after)}</div>"
+                    f"<div class='hc-small'>{escape(t(lang, 'before'))}: {escape(fr.before)}</div>"
+                    f"<div class='hc-after'><b>{escape(t(lang, 'after'))}:</b> {escape(fr.after)}</div>")
+        blocks.append(f"<div class='hc-field'><div class='hc-small'><b>{escape(fr.column)}</b></div>{body}</div>")
+    return "".join(blocks)
 
 
 def _found_by(c: Claim, lang: str) -> str:
@@ -112,6 +141,7 @@ def report_html(review: Review, catalog: Catalog, lang: str) -> str:
         out.append(
             f"<details class='hc-card' open><summary><b>{escape(p.sku)}</b> {escape(p.cells.get(title_col, ''))}"
             f" <span class='hc-count'>{len(claims)}</span></summary>"
+            f"{_field_blocks(review, p.sku, lang)}"
             f"<div class='hc-scroll'><table class='hc-table'><thead><tr>{cols}</tr></thead><tbody>{''.join(rows)}</tbody></table></div></details>")
     if clean:
         out.append(f"<p class='hc-muted'>{escape(t(lang, 'clean_products', skus=', '.join(clean)))}</p>")
@@ -138,6 +168,11 @@ CSS = """
 .hc-not_checked{background:rgba(128,128,128,.2)}
 .hc-muted{opacity:.75}
 .hc-guard p{margin:4px 0 8px}
+.hc-field{margin:6px 0 8px;padding:6px 8px;border-radius:6px;background:rgba(128,128,128,.08)}
+.hc-diff{margin:2px 0 4px}
+.hc-del{background:rgba(210,60,60,.18);text-decoration:line-through}
+.hc-ins{background:rgba(40,160,90,.2);text-decoration:none}
+.hc-after{margin-top:2px}
 @media (prefers-color-scheme: dark){.hc-supported{color:#7fd8a4}.hc-contradicted{color:#ff9b9b}.hc-no_evidence{color:#f0c060}}
 .hc-scroll{overflow-x:auto}
 @media (max-width:640px){.hc-table{min-width:560px}}
