@@ -1,0 +1,14 @@
+{
+ "status": "not generated yet",
+ "example": "en",
+ "catalog_file": "examples/catalog_en.csv",
+ "evidence_files": [
+  "examples/evidence_en/supplier_specs.txt",
+  "examples/evidence_en/test_reports.txt"
+ ],
+ "input_sha256": "10db684c26394c4608b37098f99f981c3edf42b4e8bb715dbb3407e84bab0c1a",
+ "model": null,
+ "generated_at": null,
+ "result": null,
+ "note": "Produced by scripts/make_cache.py with a real HF_TOKEN. Not generated yet."
+}

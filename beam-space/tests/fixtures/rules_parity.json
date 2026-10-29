@@ -1,0 +1,846 @@
+[
+ {
+  "text": "Our everyday face serum cures acne in 3 days.\n100% guaranteed results. No.1 in Korea.\nClinically proven care for your daily routine.",
+  "score": 84,
+  "revised": "Our everyday face serum is designed for everyday care.\nResults may vary. For everyday use.\nThoughtfully developed care for your daily routine.",
+  "findings": [
+   {
+    "rule_id": "medical-en",
+    "category": "medical",
+    "phrase": "cures acne in 3 days",
+    "replacement": "is designed for everyday care",
+    "start": 24,
+    "end": 44
+   },
+   {
+    "rule_id": "guarantee-en",
+    "category": "guarantee",
+    "phrase": "100% guaranteed results",
+    "replacement": "Results may vary",
+    "start": 46,
+    "end": 69
+   },
+   {
+    "rule_id": "superlative-en",
+    "category": "superlative",
+    "phrase": "No.1 in Korea",
+    "replacement": "For everyday use",
+    "start": 71,
+    "end": 84
+   },
+   {
+    "rule_id": "evidence-en",
+    "category": "evidence",
+    "phrase": "Clinically proven",
+    "replacement": "Thoughtfully developed",
+    "start": 86,
+    "end": 103
+   }
+  ]
+ },
+ {
+  "text": "이 세럼은 여드름을 치료합니다.\n효과 100% 보장. 국내 1위.\n임상으로 입증된 데일리 케어 제품입니다.",
+  "score": 84,
+  "revised": "이 세럼은 일상적인 관리에 사용합니다.\n개인에 따라 차이가 있을 수 있습니다. 일상적인 사용을 위한 제품.\n일상적인 사용을 고려한 데일리 케어 제품입니다.",
+  "findings": [
+   {
+    "rule_id": "medical-ko",
+    "category": "medical",
+    "phrase": "여드름을 치료합니다",
+    "replacement": "일상적인 관리에 사용합니다",
+    "start": 6,
+    "end": 16
+   },
+   {
+    "rule_id": "guarantee-ko",
+    "category": "guarantee",
+    "phrase": "효과 100% 보장",
+    "replacement": "개인에 따라 차이가 있을 수 있습니다",
+    "start": 18,
+    "end": 28
+   },
+   {
+    "rule_id": "superlative-ko",
+    "category": "superlative",
+    "phrase": "국내 1위",
+    "replacement": "일상적인 사용을 위한 제품",
+    "start": 30,
+    "end": 35
+   },
+   {
+    "rule_id": "evidence-ko",
+    "category": "evidence",
+    "phrase": "임상으로 입증된",
+    "replacement": "일상적인 사용을 고려한",
+    "start": 37,
+    "end": 45
+   }
+  ]
+ },
+ {
+  "text": "cures acne. cures acne.",
+  "score": 56,
+  "revised": "Is designed for everyday care. Is designed for everyday care.",
+  "findings": [
+   {
+    "rule_id": "medical-en",
+    "category": "medical",
+    "phrase": "cures acne",
+    "replacement": "Is designed for everyday care",
+    "start": 0,
+    "end": 10
+   },
+   {
+    "rule_id": "medical-en",
+    "category": "medical",
+    "phrase": "cures acne",
+    "replacement": "Is designed for everyday care",
+    "start": 12,
+    "end": 22
+   }
+  ]
+ },
+ {
+  "text": "🧴 <script>alert(1)</script> 국내 1위",
+  "score": 18,
+  "revised": "🧴 <script>alert(1)</script> 일상적인 사용을 위한 제품",
+  "findings": [
+   {
+    "rule_id": "superlative-ko",
+    "category": "superlative",
+    "phrase": "국내 1위",
+    "replacement": "일상적인 사용을 위한 제품",
+    "start": 28,
+    "end": 33
+   }
+  ]
+ },
+ {
+  "text": "A soft cotton towel. Made for everyday use.",
+  "score": 0,
+  "revised": "A soft cotton towel. Made for everyday use.",
+  "findings": []
+ },
+ {
+  "text": "My best friend assures acne care is personal.",
+  "score": 0,
+  "revised": "My best friend assures acne care is personal.",
+  "findings": []
+ },
+ {
+  "text": "",
+  "score": 0,
+  "revised": "",
+  "findings": []
+ },
+ {
+  "text": "This kitchen gadget is No.1 best-selling. It lasts forever.",
+  "score": 40,
+  "revised": "This kitchen gadget is For everyday use. It is intended for everyday use.",
+  "findings": [
+   {
+    "rule_id": "superlative-en",
+    "category": "superlative",
+    "phrase": "No.1 best-selling",
+    "replacement": "For everyday use",
+    "start": 23,
+    "end": 40
+   },
+   {
+    "rule_id": "guarantee-duration-en",
+    "category": "guarantee",
+    "phrase": "lasts forever",
+    "replacement": "is intended for everyday use",
+    "start": 45,
+    "end": 58
+   }
+  ]
+ },
+ {
+  "text": "A best-selling kitchen tool.",
+  "score": 18,
+  "revised": "A for everyday use kitchen tool.",
+  "findings": [
+   {
+    "rule_id": "superlative-en",
+    "category": "superlative",
+    "phrase": "best-selling",
+    "replacement": "for everyday use",
+    "start": 2,
+    "end": 14
+   }
+  ]
+ },
+ {
+  "text": "3일 만에 여드름 완치. 100% 효과 보장. 국내 1위.",
+  "score": 68,
+  "revised": "일상적인 관리에 사용합니다. 개인에 따라 차이가 있을 수 있습니다. 일상적인 사용을 위한 제품.",
+  "findings": [
+   {
+    "rule_id": "medical-ko",
+    "category": "medical",
+    "phrase": "3일 만에 여드름 완치",
+    "replacement": "일상적인 관리에 사용합니다",
+    "start": 0,
+    "end": 12
+   },
+   {
+    "rule_id": "guarantee-ko",
+    "category": "guarantee",
+    "phrase": "100% 효과 보장",
+    "replacement": "개인에 따라 차이가 있을 수 있습니다",
+    "start": 14,
+    "end": 24
+   },
+   {
+    "rule_id": "superlative-ko",
+    "category": "superlative",
+    "phrase": "국내 1위",
+    "replacement": "일상적인 사용을 위한 제품",
+    "start": 26,
+    "end": 31
+   }
+  ]
+ },
+ {
+  "text": "Best seller #1 in our shop.",
+  "score": 0,
+  "revised": "Best seller #1 in our shop.",
+  "findings": []
+ },
+ {
+  "text": "Our #1 apron. Rated #1.",
+  "score": 0,
+  "revised": "Our #1 apron. Rated #1.",
+  "findings": []
+ },
+ {
+  "text": "Number one in the world for comfort.",
+  "score": 18,
+  "revised": "For everyday use for comfort.",
+  "findings": [
+   {
+    "rule_id": "superlative-en",
+    "category": "superlative",
+    "phrase": "Number one in the world",
+    "replacement": "For everyday use",
+    "start": 0,
+    "end": 23
+   }
+  ]
+ },
+ {
+  "text": "The world's best mug, best ever.",
+  "score": 36,
+  "revised": "For everyday use mug, for everyday use.",
+  "findings": [
+   {
+    "rule_id": "superlative-en",
+    "category": "superlative",
+    "phrase": "The world's best",
+    "replacement": "For everyday use",
+    "start": 0,
+    "end": 16
+   },
+   {
+    "rule_id": "superlative-en",
+    "category": "superlative",
+    "phrase": "best ever",
+    "replacement": "for everyday use",
+    "start": 22,
+    "end": 31
+   }
+  ]
+ },
+ {
+  "text": "World’s best linen.",
+  "score": 18,
+  "revised": "For everyday use linen.",
+  "findings": [
+   {
+    "rule_id": "superlative-en",
+    "category": "superlative",
+    "phrase": "World’s best",
+    "replacement": "For everyday use",
+    "start": 0,
+    "end": 12
+   }
+  ]
+ },
+ {
+  "text": "Treats eczema and heals arthritis.",
+  "score": 56,
+  "revised": "Is designed for everyday care and is designed for everyday care.",
+  "findings": [
+   {
+    "rule_id": "medical-en",
+    "category": "medical",
+    "phrase": "Treats eczema",
+    "replacement": "Is designed for everyday care",
+    "start": 0,
+    "end": 13
+   },
+   {
+    "rule_id": "medical-en",
+    "category": "medical",
+    "phrase": "heals arthritis",
+    "replacement": "is designed for everyday care",
+    "start": 18,
+    "end": 33
+   }
+  ]
+ },
+ {
+  "text": "It cured acne for me.",
+  "score": 0,
+  "revised": "It cured acne for me.",
+  "findings": []
+ },
+ {
+  "text": "Zero side effects, risk-free and 100% safe.",
+  "score": 66,
+  "revised": "Results may vary, results may vary and results may vary.",
+  "findings": [
+   {
+    "rule_id": "guarantee-en",
+    "category": "guarantee",
+    "phrase": "Zero side effects",
+    "replacement": "Results may vary",
+    "start": 0,
+    "end": 17
+   },
+   {
+    "rule_id": "guarantee-en",
+    "category": "guarantee",
+    "phrase": "risk-free",
+    "replacement": "results may vary",
+    "start": 19,
+    "end": 28
+   },
+   {
+    "rule_id": "guarantee-en",
+    "category": "guarantee",
+    "phrase": "100% safe",
+    "replacement": "results may vary",
+    "start": 33,
+    "end": 42
+   }
+  ]
+ },
+ {
+  "text": "Risk free trial. Always works.",
+  "score": 44,
+  "revised": "Results may vary trial. Results may vary.",
+  "findings": [
+   {
+    "rule_id": "guarantee-en",
+    "category": "guarantee",
+    "phrase": "Risk free",
+    "replacement": "Results may vary",
+    "start": 0,
+    "end": 9
+   },
+   {
+    "rule_id": "guarantee-en",
+    "category": "guarantee",
+    "phrase": "Always works",
+    "replacement": "Results may vary",
+    "start": 17,
+    "end": 29
+   }
+  ]
+ },
+ {
+  "text": "100 % effective formula",
+  "score": 22,
+  "revised": "Results may vary formula",
+  "findings": [
+   {
+    "rule_id": "guarantee-en",
+    "category": "guarantee",
+    "phrase": "100 % effective",
+    "replacement": "Results may vary",
+    "start": 0,
+    "end": 15
+   }
+  ]
+ },
+ {
+  "text": "Dermatologist-approved and doctor recommended.",
+  "score": 32,
+  "revised": "Thoughtfully developed and thoughtfully developed.",
+  "findings": [
+   {
+    "rule_id": "evidence-en",
+    "category": "evidence",
+    "phrase": "Dermatologist-approved",
+    "replacement": "Thoughtfully developed",
+    "start": 0,
+    "end": 22
+   },
+   {
+    "rule_id": "evidence-en",
+    "category": "evidence",
+    "phrase": "doctor recommended",
+    "replacement": "thoughtfully developed",
+    "start": 27,
+    "end": 45
+   }
+  ]
+ },
+ {
+  "text": "Research backed, scientifically proven.",
+  "score": 32,
+  "revised": "Thoughtfully developed, thoughtfully developed.",
+  "findings": [
+   {
+    "rule_id": "evidence-en",
+    "category": "evidence",
+    "phrase": "Research backed",
+    "replacement": "Thoughtfully developed",
+    "start": 0,
+    "end": 15
+   },
+   {
+    "rule_id": "evidence-en",
+    "category": "evidence",
+    "phrase": "scientifically proven",
+    "replacement": "thoughtfully developed",
+    "start": 17,
+    "end": 38
+   }
+  ]
+ },
+ {
+  "text": "This pan lasts forever and the lid last forever.",
+  "score": 44,
+  "revised": "This pan is intended for everyday use and the lid is intended for everyday use.",
+  "findings": [
+   {
+    "rule_id": "guarantee-duration-en",
+    "category": "guarantee",
+    "phrase": "lasts forever",
+    "replacement": "is intended for everyday use",
+    "start": 9,
+    "end": 22
+   },
+   {
+    "rule_id": "guarantee-duration-en",
+    "category": "guarantee",
+    "phrase": "last forever",
+    "replacement": "is intended for everyday use",
+    "start": 35,
+    "end": 47
+   }
+  ]
+ },
+ {
+  "text": "부작용 제로. 무조건 효과. 100% 안전합니다.",
+  "score": 66,
+  "revised": "개인에 따라 차이가 있을 수 있습니다. 개인에 따라 차이가 있을 수 있습니다. 개인에 따라 차이가 있을 수 있습니다.",
+  "findings": [
+   {
+    "rule_id": "guarantee-ko",
+    "category": "guarantee",
+    "phrase": "부작용 제로",
+    "replacement": "개인에 따라 차이가 있을 수 있습니다",
+    "start": 0,
+    "end": 6
+   },
+   {
+    "rule_id": "guarantee-ko",
+    "category": "guarantee",
+    "phrase": "무조건 효과",
+    "replacement": "개인에 따라 차이가 있을 수 있습니다",
+    "start": 8,
+    "end": 14
+   },
+   {
+    "rule_id": "guarantee-ko",
+    "category": "guarantee",
+    "phrase": "100% 안전합니다",
+    "replacement": "개인에 따라 차이가 있을 수 있습니다",
+    "start": 16,
+    "end": 26
+   }
+  ]
+ },
+ {
+  "text": "세계 최고의 원단, 업계 최초 기술, 넘버원 브랜드.",
+  "score": 54,
+  "revised": "일상적인 사용을 위한 제품의 원단, 일상적인 사용을 위한 제품 기술, 일상적인 사용을 위한 제품 브랜드.",
+  "findings": [
+   {
+    "rule_id": "superlative-ko",
+    "category": "superlative",
+    "phrase": "세계 최고",
+    "replacement": "일상적인 사용을 위한 제품",
+    "start": 0,
+    "end": 5
+   },
+   {
+    "rule_id": "superlative-ko",
+    "category": "superlative",
+    "phrase": "업계 최초",
+    "replacement": "일상적인 사용을 위한 제품",
+    "start": 11,
+    "end": 16
+   },
+   {
+    "rule_id": "superlative-ko",
+    "category": "superlative",
+    "phrase": "넘버원",
+    "replacement": "일상적인 사용을 위한 제품",
+    "start": 21,
+    "end": 24
+   }
+  ]
+ },
+ {
+  "text": "대한민국 1위 앞치마",
+  "score": 18,
+  "revised": "일상적인 사용을 위한 제품 앞치마",
+  "findings": [
+   {
+    "rule_id": "superlative-ko",
+    "category": "superlative",
+    "phrase": "대한민국 1위",
+    "replacement": "일상적인 사용을 위한 제품",
+    "start": 0,
+    "end": 7
+   }
+  ]
+ },
+ {
+  "text": "의사 추천 크림, 피부과 인증 완료, 과학적으로 입증된 성분.",
+  "score": 48,
+  "revised": "일상적인 사용을 고려한 크림, 일상적인 사용을 고려한 완료, 일상적인 사용을 고려한 성분.",
+  "findings": [
+   {
+    "rule_id": "evidence-ko",
+    "category": "evidence",
+    "phrase": "의사 추천",
+    "replacement": "일상적인 사용을 고려한",
+    "start": 0,
+    "end": 5
+   },
+   {
+    "rule_id": "evidence-ko",
+    "category": "evidence",
+    "phrase": "피부과 인증",
+    "replacement": "일상적인 사용을 고려한",
+    "start": 10,
+    "end": 16
+   },
+   {
+    "rule_id": "evidence-ko",
+    "category": "evidence",
+    "phrase": "과학적으로 입증된",
+    "replacement": "일상적인 사용을 고려한",
+    "start": 21,
+    "end": 30
+   }
+  ]
+ },
+ {
+  "text": "임상시험으로 검증된 보습",
+  "score": 16,
+  "revised": "일상적인 사용을 고려한 보습",
+  "findings": [
+   {
+    "rule_id": "evidence-ko",
+    "category": "evidence",
+    "phrase": "임상시험으로 검증된",
+    "replacement": "일상적인 사용을 고려한",
+    "start": 0,
+    "end": 10
+   }
+  ]
+ },
+ {
+  "text": "아토피를 치료해 드려요",
+  "score": 28,
+  "revised": "일상적인 관리에 사용합니다 드려요",
+  "findings": [
+   {
+    "rule_id": "medical-ko",
+    "category": "medical",
+    "phrase": "아토피를 치료해",
+    "replacement": "일상적인 관리에 사용합니다",
+    "start": 0,
+    "end": 8
+   }
+  ]
+ },
+ {
+  "text": "7일 만에 당뇨 치료",
+  "score": 28,
+  "revised": "일상적인 관리에 사용합니다",
+  "findings": [
+   {
+    "rule_id": "medical-ko",
+    "category": "medical",
+    "phrase": "7일 만에 당뇨 치료",
+    "replacement": "일상적인 관리에 사용합니다",
+    "start": 0,
+    "end": 11
+   }
+  ]
+ },
+ {
+  "text": "부작용 없는 순한 비누",
+  "score": 22,
+  "revised": "개인에 따라 차이가 있을 수 있습니다 순한 비누",
+  "findings": [
+   {
+    "rule_id": "guarantee-ko",
+    "category": "guarantee",
+    "phrase": "부작용 없는",
+    "replacement": "개인에 따라 차이가 있을 수 있습니다",
+    "start": 0,
+    "end": 6
+   }
+  ]
+ },
+ {
+  "text": "curesacne isn't a word",
+  "score": 0,
+  "revised": "curesacne isn't a word",
+  "findings": []
+ },
+ {
+  "text": "No 1 choice",
+  "score": 18,
+  "revised": "For everyday use choice",
+  "findings": [
+   {
+    "rule_id": "superlative-en",
+    "category": "superlative",
+    "phrase": "No 1",
+    "replacement": "For everyday use",
+    "start": 0,
+    "end": 4
+   }
+  ]
+ },
+ {
+  "text": "no.1 best selling grinder",
+  "score": 18,
+  "revised": "For everyday use grinder",
+  "findings": [
+   {
+    "rule_id": "superlative-en",
+    "category": "superlative",
+    "phrase": "no.1 best selling",
+    "replacement": "For everyday use",
+    "start": 0,
+    "end": 17
+   }
+  ]
+ },
+ {
+  "text": "Best-selling and best selling.",
+  "score": 36,
+  "revised": "For everyday use and for everyday use.",
+  "findings": [
+   {
+    "rule_id": "superlative-en",
+    "category": "superlative",
+    "phrase": "Best-selling",
+    "replacement": "For everyday use",
+    "start": 0,
+    "end": 12
+   },
+   {
+    "rule_id": "superlative-en",
+    "category": "superlative",
+    "phrase": "best selling",
+    "replacement": "for everyday use",
+    "start": 17,
+    "end": 29
+   }
+  ]
+ },
+ {
+  "text": "Heals cancer in 10 days!",
+  "score": 28,
+  "revised": "Is designed for everyday care!",
+  "findings": [
+   {
+    "rule_id": "medical-en",
+    "category": "medical",
+    "phrase": "Heals cancer in 10 days",
+    "replacement": "Is designed for everyday care",
+    "start": 0,
+    "end": 23
+   }
+  ]
+ },
+ {
+  "text": "Clinically Proven. clinically   proven.",
+  "score": 32,
+  "revised": "Thoughtfully developed. Thoughtfully developed.",
+  "findings": [
+   {
+    "rule_id": "evidence-en",
+    "category": "evidence",
+    "phrase": "Clinically Proven",
+    "replacement": "Thoughtfully developed",
+    "start": 0,
+    "end": 17
+   },
+   {
+    "rule_id": "evidence-en",
+    "category": "evidence",
+    "phrase": "clinically   proven",
+    "replacement": "Thoughtfully developed",
+    "start": 19,
+    "end": 38
+   }
+  ]
+ },
+ {
+  "text": "Ｎo.1 fullwidth test",
+  "score": 0,
+  "revised": "Ｎo.1 fullwidth test",
+  "findings": []
+ },
+ {
+  "text": "Cures acne in 3 days",
+  "score": 28,
+  "revised": "Is designed for everyday care",
+  "findings": [
+   {
+    "rule_id": "medical-en",
+    "category": "medical",
+    "phrase": "Cures acne in 3 days",
+    "replacement": "Is designed for everyday care",
+    "start": 0,
+    "end": 20
+   }
+  ]
+ },
+ {
+  "text": "after a sentence. guaranteed results here",
+  "score": 22,
+  "revised": "after a sentence. Results may vary here",
+  "findings": [
+   {
+    "rule_id": "guarantee-en",
+    "category": "guarantee",
+    "phrase": "guaranteed results",
+    "replacement": "Results may vary",
+    "start": 18,
+    "end": 36
+   }
+  ]
+ },
+ {
+  "text": "Item is risk-free",
+  "score": 22,
+  "revised": "Item is results may vary",
+  "findings": [
+   {
+    "rule_id": "guarantee-en",
+    "category": "guarantee",
+    "phrase": "risk-free",
+    "replacement": "results may vary",
+    "start": 8,
+    "end": 17
+   }
+  ]
+ },
+ {
+  "text": "Cures acne in ٣ days",
+  "score": 28,
+  "revised": "Is designed for everyday care in ٣ days",
+  "findings": [
+   {
+    "rule_id": "medical-en",
+    "category": "medical",
+    "phrase": "Cures acne",
+    "replacement": "Is designed for everyday care",
+    "start": 0,
+    "end": 10
+   }
+  ]
+ },
+ {
+  "text": "No.1 best-selling",
+  "score": 18,
+  "revised": "For everyday use",
+  "findings": [
+   {
+    "rule_id": "superlative-en",
+    "category": "superlative",
+    "phrase": "No.1 best-selling",
+    "replacement": "For everyday use",
+    "start": 0,
+    "end": 17
+   }
+  ]
+ },
+ {
+  "text": "cures acne",
+  "score": 28,
+  "revised": "Is designed for everyday care",
+  "findings": [
+   {
+    "rule_id": "medical-en",
+    "category": "medical",
+    "phrase": "cures acne",
+    "replacement": "Is designed for everyday care",
+    "start": 0,
+    "end": 10
+   }
+  ]
+ },
+ {
+  "text": "curesacne",
+  "score": 0,
+  "revised": "curesacne",
+  "findings": []
+ },
+ {
+  "text": "Treats acneé",
+  "score": 28,
+  "revised": "Is designed for everyday careé",
+  "findings": [
+   {
+    "rule_id": "medical-en",
+    "category": "medical",
+    "phrase": "Treats acne",
+    "replacement": "Is designed for everyday care",
+    "start": 0,
+    "end": 11
+   }
+  ]
+ },
+ {
+  "text": "#1best-selling",
+  "score": 0,
+  "revised": "#1best-selling",
+  "findings": []
+ },
+ {
+  "text": "x#1 seller",
+  "score": 18,
+  "revised": "xfor everyday use seller",
+  "findings": [
+   {
+    "rule_id": "superlative-en",
+    "category": "superlative",
+    "phrase": "#1",
+    "replacement": "for everyday use",
+    "start": 1,
+    "end": 3
+   }
+  ]
+ },
+ {
+  "text": "ｃｕｒｅｓ acne",
+  "score": 0,
+  "revised": "ｃｕｒｅｓ acne",
+  "findings": []
+ }
+]

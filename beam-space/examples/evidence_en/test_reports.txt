@@ -1,0 +1,7 @@
+Test report summaries (fictional sample data)
+
+Report CR-17 (Barrier Cream EN-011): consumer use test, 20 participants, 2 weeks, self-reported comfort. Not a clinical trial. Redness was not measured.
+Report SP-30-0912 (Mineral Sun Fluid EN-012): SPF result 31.2, labelled SPF 30.
+Mineral Sun Stick EN-013: different base formula from the Sun Fluid. No SPF or water resistance test on file yet.
+Serum EN-010: no clinical or dermatological test on file.
+Sales note: no third-party sales ranking has been collected for any product.

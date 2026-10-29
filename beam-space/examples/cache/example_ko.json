@@ -1,0 +1,14 @@
+{
+ "status": "not generated yet",
+ "example": "ko",
+ "catalog_file": "examples/catalog_ko.csv",
+ "evidence_files": [
+  "examples/evidence_ko/supplier_specs_ko.txt",
+  "examples/evidence_ko/test_reports_ko.txt"
+ ],
+ "input_sha256": "65621e7879a8b87d02097a1b82d23f48c772a109900aaf38e0e5028dd629a5f8",
+ "model": null,
+ "generated_at": null,
+ "result": null,
+ "note": "Produced by scripts/make_cache.py with a real HF_TOKEN. Not generated yet."
+}
