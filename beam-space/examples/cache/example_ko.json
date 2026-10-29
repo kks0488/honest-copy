@@ -1,5 +1,5 @@
 {
- "status": "not generated yet",
+ "status": "generated",
  "format": 2,
  "example": "ko",
  "catalog_file": "examples/catalog_ko.csv",
@@ -8,8 +8,1721 @@
   "examples/evidence_ko/test_reports_ko.txt"
  ],
  "input_sha256": "65621e7879a8b87d02097a1b82d23f48c772a109900aaf38e0e5028dd629a5f8",
- "model": null,
- "generated_at": null,
- "result": null,
- "note": "Produced by scripts/make_cache.py with a real HF_TOKEN. Not generated yet."
+ "model": "reflection/Beam-1.0-501B-A23B",
+ "generated_at": "2026-10-29T16:01:42+00:00",
+ "result": {
+  "mode": "live",
+  "claims": [
+   {
+    "id": "C001",
+    "sku": "KO-001",
+    "column": "상세설명",
+    "source": "KO-001/상세설명",
+    "quote": "린넨 100%",
+    "start": 0,
+    "end": 7,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "상세설명의 린넨 100% 주장이 소재 정보의 린넨 55%, 면 45%와 충돌합니다.",
+    "related": [
+     "KO-001/소재"
+    ],
+    "label": "contradicted",
+    "label_note": "상세설명과 소재 정보가 충돌합니다.",
+    "citations": [
+     {
+      "source": "KO-001/소재",
+      "quote": "린넨 55%, 면 45%",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "린넨 55%, 면 45%로 만든 데일리 앞치마입니다.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C002",
+    "sku": "KO-002",
+    "column": "상세설명",
+    "source": "KO-002/상세설명",
+    "quote": "판매 1위",
+    "start": 24,
+    "end": 29,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "superlative",
+    "rule_id": "shop-ranking-ko",
+    "rule_reason": "A first-place or best-in-category claim needs a defined comparison and current evidence. Describe a feature you can support.",
+    "rule_reason_ko": "1위나 최고라는 주장에는 비교 기준과 최신 근거가 필요합니다. 근거로 뒷받침할 수 있는 특징을 설명하세요.",
+    "rule_replacement": "일상적인 사용을 위한 제품",
+    "beam_types": [
+     "ranking"
+    ],
+    "beam_reason": "판매 1위 주장은 외부 판매 순위 자료가 없어 뒷받침되지 않습니다.",
+    "related": [
+     "test_reports_ko.txt#L7"
+    ],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C003",
+    "sku": "KO-003",
+    "column": "상세설명",
+    "source": "KO-003/상세설명",
+    "quote": "500g/㎡",
+    "start": 0,
+    "end": 6,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "상세설명의 500g/㎡ 주장이 소재 정보의 380g/㎡와 충돌합니다.",
+    "related": [
+     "KO-003/소재"
+    ],
+    "label": "contradicted",
+    "label_note": "상세설명과 소재 정보가 충돌합니다.",
+    "citations": [
+     {
+      "source": "KO-003/소재",
+      "quote": "면 100%, 380g/㎡",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "380g/㎡ 두툼한 와플 조직이라 빨리 말라요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C004",
+    "sku": "KO-004",
+    "column": "상세설명",
+    "source": "KO-004/상세설명",
+    "quote": "국내 1위",
+    "start": 21,
+    "end": 26,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "superlative",
+    "rule_id": "superlative-ko",
+    "rule_reason": "A first-place or best-in-category claim needs a defined comparison and current evidence. Describe a feature you can support.",
+    "rule_reason_ko": "1위나 최고라는 주장에는 비교 기준과 최신 근거가 필요합니다. 근거로 뒷받침할 수 있는 특징을 설명하세요.",
+    "rule_replacement": "일상적인 사용을 위한 제품",
+    "beam_types": [
+     "ranking"
+    ],
+    "beam_reason": "국내 1위 주장은 외부 판매 순위 자료가 없어 뒷받침되지 않습니다.",
+    "related": [
+     "test_reports_ko.txt#L7"
+    ],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C005",
+    "sku": "KO-005",
+    "column": "상세설명",
+    "source": "KO-005/상세설명",
+    "quote": "미리 세탁해서 형태가 잘 유지돼요",
+    "start": 25,
+    "end": 43,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "미리 세탁해 형태가 유지된다는 내구성 주장은 소재·관리 정보에 근거가 없습니다.",
+    "related": [],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C006",
+    "sku": "KO-006",
+    "column": "상세설명",
+    "source": "KO-006/상세설명",
+    "quote": "오가닉 코튼 티셔츠와 같은 원단",
+    "start": 0,
+    "end": 17,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "contradiction"
+    ],
+    "beam_reason": "오가닉 코튼 티셔츠와 같은 원단이라는 주장이 소재 정보 및 공급처 사양과 다릅니다.",
+    "related": [
+     "KO-005/소재",
+     "KO-006/소재",
+     "supplier_specs_ko.txt#L6",
+     "supplier_specs_ko.txt#L7"
+    ],
+    "label": "contradicted",
+    "label_note": "상세설명과 소재 및 공급처 사양이 다릅니다.",
+    "citations": [
+     {
+      "source": "KO-006/소재",
+      "quote": "면 100%",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "supplier_specs_ko.txt#L7",
+      "quote": "포켓 티셔츠 KO-006: 일반 면, 베트남 봉제.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "면 100% 티셔츠이고 베트남에서 만들었어요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C007",
+    "sku": "KO-006",
+    "column": "상세설명",
+    "source": "KO-006/상세설명",
+    "quote": "포르투갈에서 만들었어요",
+    "start": 20,
+    "end": 32,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "포르투갈 제조 주장이 원산지 정보 및 공급처 사양의 베트남 봉제와 다릅니다.",
+    "related": [
+     "KO-006/원산지",
+     "supplier_specs_ko.txt#L7"
+    ],
+    "label": "contradicted",
+    "label_note": "상세설명과 원산지 및 공급처 사양이 다릅니다.",
+    "citations": [
+     {
+      "source": "KO-006/원산지",
+      "quote": "베트남",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "supplier_specs_ko.txt#L7",
+      "quote": "베트남 봉제.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "면 100% 티셔츠이고 베트남에서 만들었어요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C008",
+    "sku": "KO-007",
+    "column": "상세설명",
+    "source": "KO-007/상세설명",
+    "quote": "M 사이즈 가슴단면 54cm",
+    "start": 12,
+    "end": 27,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "상세설명의 M 사이즈 가슴단면 54cm가 사이즈 정보의 58cm와 다릅니다.",
+    "related": [
+     "KO-007/사이즈",
+     "supplier_specs_ko.txt#L8"
+    ],
+    "label": "contradicted",
+    "label_note": "상세설명과 사이즈 정보가 다릅니다.",
+    "citations": [
+     {
+      "source": "KO-007/사이즈",
+      "quote": "M 가슴단면 58cm, L 가슴단면 61cm",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "supplier_specs_ko.txt#L8",
+      "quote": "후드티 KO-007 M 사이즈: 가슴단면 58cm, 총장 70cm.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "M 사이즈 가슴단면 58cm.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C009",
+    "sku": "KO-008",
+    "column": "상세설명",
+    "source": "KO-008/상세설명",
+    "quote": "평생 사용",
+    "start": 16,
+    "end": 21,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "guarantee",
+    "rule_id": "lifetime-ko",
+    "rule_reason": "An unlimited lifetime promise cannot account for wear or different conditions of use. Remove the absolute durability promise or state a supported service life.",
+    "rule_reason_ko": "끝없는 수명 약속은 마모나 사용 환경 차이를 반영하지 못합니다. 절대적인 내구성 약속을 빼거나 근거 있는 사용 기간을 적으세요.",
+    "rule_replacement": "오래 쓰도록 만든",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "평생 사용 가능하다는 내구성 주장은 소재·관리 정보에 근거가 없습니다.",
+    "related": [],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "부드러운 메리노 울로 만든 비니.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C010",
+    "sku": "KO-009",
+    "column": "상세설명",
+    "source": "KO-009/상세설명",
+    "quote": "7일 만에 여드름 완치",
+    "start": 0,
+    "end": 12,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "medical",
+    "rule_id": "medical-ko",
+    "rule_reason": "This phrase promises treatment of a health condition, sometimes within a fixed time. Describe everyday use rather than claiming a medical effect.",
+    "rule_reason_ko": "질환을 치료한다고, 때로는 기간까지 정해 약속하는 표현입니다. 의학적 효과 대신 일상적인 사용으로 설명하세요.",
+    "rule_replacement": "일상적인 관리에 사용합니다",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "7일 만에 여드름 완치 주장은 임상 또는 피부과 시험 자료가 없습니다.",
+    "related": [
+     "test_reports_ko.txt#L6"
+    ],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "순한 세럼이에요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C011",
+    "sku": "KO-009",
+    "column": "상세설명",
+    "source": "KO-009/상세설명",
+    "quote": "부작용 없는",
+    "start": 14,
+    "end": 20,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "guarantee",
+    "rule_id": "guarantee-ko",
+    "rule_reason": "A universal guarantee may overpromise. Make room for differences between people and situations.",
+    "rule_reason_ko": "모두에게 같은 결과를 보장하면 과장이 될 수 있습니다. 사람과 상황에 따른 차이를 인정하세요.",
+    "rule_replacement": "개인에 따라 차이가 있을 수 있습니다",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "부작용 없다는 안전성 주장은 시험 자료가 없습니다.",
+    "related": [
+     "test_reports_ko.txt#L6"
+    ],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "순한 세럼이에요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C012",
+    "sku": "KO-010",
+    "column": "상세설명",
+    "source": "KO-010/상세설명",
+    "quote": "임상으로 입증된",
+    "start": 0,
+    "end": 8,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "evidence",
+    "rule_id": "evidence-ko",
+    "rule_reason": "This phrase implies research or expert support. Verify the specific evidence or use wording without an implied endorsement.",
+    "rule_reason_ko": "연구나 전문가의 뒷받침을 암시하는 표현입니다. 구체적인 근거를 확인하거나 추천을 암시하지 않는 표현을 쓰세요.",
+    "rule_replacement": "일상적인 사용을 고려한",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "임상으로 입증되었다는 주장이 보고서 CR-21의 소비자 사용감 평가와 다릅니다.",
+    "related": [
+     "KO-010/인증",
+     "test_reports_ko.txt#L3"
+    ],
+    "label": "contradicted",
+    "label_note": "상세설명과 시험 보고서 내용이 다릅니다.",
+    "citations": [
+     {
+      "source": "KO-010/인증",
+      "quote": "소비자 사용감 평가 보고서 CR-21",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "test_reports_ko.txt#L3",
+      "quote": "임상시험 아님.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "소비자 사용감 평가 보고서 CR-21로 확인한 진정 크림.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C013",
+    "sku": "KO-010",
+    "column": "상세설명",
+    "source": "KO-010/상세설명",
+    "quote": "2주 만에 붉은기가 줄어요",
+    "start": 16,
+    "end": 30,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "2주 만에 붉은기가 줄어든다는 주장은 보고서 CR-21에서 측정하지 않은 내용입니다.",
+    "related": [
+     "test_reports_ko.txt#L3"
+    ],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "소비자 사용감 평가 보고서 CR-21로 확인한 진정 크림.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C014",
+    "sku": "KO-012",
+    "column": "상세설명",
+    "source": "KO-012/상세설명",
+    "quote": "선플루이드와 같은 제형",
+    "start": 0,
+    "end": 12,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "선플루이드와 같은 제형이라는 주장이 보고서의 다른 베이스 제형 설명과 다릅니다.",
+    "related": [
+     "KO-011/상세설명",
+     "test_reports_ko.txt#L5"
+    ],
+    "label": "contradicted",
+    "label_note": "상세설명과 시험 보고서 내용이 다릅니다.",
+    "citations": [
+     {
+      "source": "test_reports_ko.txt#L5",
+      "quote": "선플루이드와 다른 베이스 제형.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "선플루이드와 다른 베이스 제형으로 만든 스틱이에요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C015",
+    "sku": "KO-012",
+    "column": "상세설명",
+    "source": "KO-012/상세설명",
+    "quote": "SPF50",
+    "start": 26,
+    "end": 31,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "SPF50 주장은 자외선차단지수 시험 자료가 없습니다.",
+    "related": [
+     "test_reports_ko.txt#L5"
+    ],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "선플루이드와 다른 베이스 제형으로 만든 스틱이에요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C016",
+    "sku": "KO-012",
+    "column": "상세설명",
+    "source": "KO-012/상세설명",
+    "quote": "워터프루프 80분",
+    "start": 33,
+    "end": 42,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "워터프루프 80분 주장은 내수성 시험 자료가 없습니다.",
+    "related": [
+     "test_reports_ko.txt#L5"
+    ],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "선플루이드와 다른 베이스 제형으로 만든 스틱이에요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C017",
+    "sku": "KO-013",
+    "column": "상세설명",
+    "source": "KO-013/상세설명",
+    "quote": "피부과 추천",
+    "start": 0,
+    "end": 6,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "evidence",
+    "rule_id": "evidence-ko",
+    "rule_reason": "This phrase implies research or expert support. Verify the specific evidence or use wording without an implied endorsement.",
+    "rule_reason_ko": "연구나 전문가의 뒷받침을 암시하는 표현입니다. 구체적인 근거를 확인하거나 추천을 암시하지 않는 표현을 쓰세요.",
+    "rule_replacement": "일상적인 사용을 고려한",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "피부과 추천 주장은 인증 또는 시험 정보가 없습니다.",
+    "related": [],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "하루 종일 촉촉한 핸드크림이에요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C018",
+    "sku": "KO-014",
+    "column": "상세설명",
+    "source": "KO-014/상세설명",
+    "quote": "식물성 오일로만 만든",
+    "start": 0,
+    "end": 11,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "식물성 오일로만 만들었다는 주장이 성분 정보의 밀랍과 다릅니다.",
+    "related": [
+     "KO-014/소재"
+    ],
+    "label": "contradicted",
+    "label_note": "상세설명과 소재 정보가 다릅니다.",
+    "citations": [
+     {
+      "source": "KO-014/소재",
+      "quote": "성분: 피마자유, 밀랍, 해바라기씨유",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "피마자유, 밀랍, 해바라기씨유로 만든 립밤이에요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C019",
+    "sku": "KO-014",
+    "column": "상세설명",
+    "source": "KO-014/상세설명",
+    "quote": "100% 안전합니다",
+    "start": 16,
+    "end": 26,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "guarantee",
+    "rule_id": "guarantee-ko",
+    "rule_reason": "A universal guarantee may overpromise. Make room for differences between people and situations.",
+    "rule_reason_ko": "모두에게 같은 결과를 보장하면 과장이 될 수 있습니다. 사람과 상황에 따른 차이를 인정하세요.",
+    "rule_replacement": "개인에 따라 차이가 있을 수 있습니다",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "100% 안전하다는 주장은 안전성 시험 정보가 없습니다.",
+    "related": [],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "피마자유, 밀랍, 해바라기씨유로 만든 립밤이에요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C020",
+    "sku": "KO-016",
+    "column": "상세설명",
+    "source": "KO-016/상세설명",
+    "quote": "오븐 260도까지 사용 가능",
+    "start": 0,
+    "end": 15,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "오븐 260도 사용 가능 주장이 공급처 사양의 220도와 다릅니다.",
+    "related": [
+     "supplier_specs_ko.txt#L10"
+    ],
+    "label": "contradicted",
+    "label_note": "상세설명과 공급처 사양이 다릅니다.",
+    "citations": [
+     {
+      "source": "supplier_specs_ko.txt#L10",
+      "quote": "손잡이 기준 오븐 220도까지.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "손잡이 기준 오븐 220도까지 사용 가능하고 손세척만 권장해요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C021",
+    "sku": "KO-016",
+    "column": "상세설명",
+    "source": "KO-016/상세설명",
+    "quote": "식기세척기도 OK",
+    "start": 18,
+    "end": 27,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "식기세척기 사용 가능 주장이 관리방법 및 공급처 사양의 손세척 권장과 다릅니다.",
+    "related": [
+     "KO-016/관리방법",
+     "supplier_specs_ko.txt#L10"
+    ],
+    "label": "contradicted",
+    "label_note": "상세설명과 관리방법 및 공급처 사양이 다릅니다.",
+    "citations": [
+     {
+      "source": "KO-016/관리방법",
+      "quote": "손세척 권장",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "supplier_specs_ko.txt#L10",
+      "quote": "손세척만 권장.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "손잡이 기준 오븐 220도까지 사용 가능하고 손세척만 권장해요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C022",
+    "sku": "KO-018",
+    "column": "상세설명",
+    "source": "KO-018/상세설명",
+    "quote": "천연 항균",
+    "start": 0,
+    "end": 5,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "천연 항균 주장은 성분·인증 정보로 뒷받침되지 않습니다.",
+    "related": [],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "올리브나무로 만든 도마예요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C023",
+    "sku": "KO-018",
+    "column": "상세설명",
+    "source": "KO-018/상세설명",
+    "quote": "세계 최고",
+    "start": 16,
+    "end": 21,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "superlative",
+    "rule_id": "superlative-ko",
+    "rule_reason": "A first-place or best-in-category claim needs a defined comparison and current evidence. Describe a feature you can support.",
+    "rule_reason_ko": "1위나 최고라는 주장에는 비교 기준과 최신 근거가 필요합니다. 근거로 뒷받침할 수 있는 특징을 설명하세요.",
+    "rule_replacement": "일상적인 사용을 위한 제품",
+    "beam_types": [
+     "ranking"
+    ],
+    "beam_reason": "세계 최고의 도마라는 순위 주장은 근거 자료가 없습니다.",
+    "related": [],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "올리브나무로 만든 도마예요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C024",
+    "sku": "KO-020",
+    "column": "상세설명",
+    "source": "KO-020/상세설명",
+    "quote": "업계 최초",
+    "start": 19,
+    "end": 24,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "superlative",
+    "rule_id": "superlative-ko",
+    "rule_reason": "A first-place or best-in-category claim needs a defined comparison and current evidence. Describe a feature you can support.",
+    "rule_reason_ko": "1위나 최고라는 주장에는 비교 기준과 최신 근거가 필요합니다. 근거로 뒷받침할 수 있는 특징을 설명하세요.",
+    "rule_replacement": "일상적인 사용을 위한 제품",
+    "beam_types": [
+     "ranking"
+    ],
+    "beam_reason": "업계 최초 진공 밀폐 기술 주장은 근거 자료가 없습니다.",
+    "related": [],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C025",
+    "sku": "KO-021",
+    "column": "상세설명",
+    "source": "KO-021/상세설명",
+    "quote": "독일산 스틸 칼날",
+    "start": 0,
+    "end": 9,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "독일산 스틸 칼날 주장이 원산지 정보 및 공급처 사양의 중국 제조와 다릅니다.",
+    "related": [
+     "KO-021/원산지",
+     "supplier_specs_ko.txt#L12"
+    ],
+    "label": "contradicted",
+    "label_note": "상세설명과 원산지 및 공급처 사양이 다릅니다.",
+    "citations": [
+     {
+      "source": "KO-021/원산지",
+      "quote": "중국",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "supplier_specs_ko.txt#L12",
+      "quote": "칼날 제조와 조립 모두 중국.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "스테인리스 스틸 칼날, 중국에서 만든 주방칼이에요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C026",
+    "sku": "KO-021",
+    "column": "상세설명",
+    "source": "KO-021/상세설명",
+    "quote": "넘버원",
+    "start": 11,
+    "end": 14,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "superlative",
+    "rule_id": "superlative-ko",
+    "rule_reason": "A first-place or best-in-category claim needs a defined comparison and current evidence. Describe a feature you can support.",
+    "rule_reason_ko": "1위나 최고라는 주장에는 비교 기준과 최신 근거가 필요합니다. 근거로 뒷받침할 수 있는 특징을 설명하세요.",
+    "rule_replacement": "일상적인 사용을 위한 제품",
+    "beam_types": [
+     "ranking"
+    ],
+    "beam_reason": "넘버원 주방칼 주장은 외부 판매 순위 자료가 없어 뒷받침되지 않습니다.",
+    "related": [
+     "test_reports_ko.txt#L7"
+    ],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "스테인리스 스틸 칼날, 중국에서 만든 주방칼이에요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C027",
+    "sku": "KO-023",
+    "column": "상세설명",
+    "source": "KO-023/상세설명",
+    "quote": "냅킨과 같은 린넨 100% 원단",
+    "start": 0,
+    "end": 17,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "contradiction"
+    ],
+    "beam_reason": "냅킨과 같은 린넨 100% 원단이라는 주장이 소재 정보와 다릅니다.",
+    "related": [
+     "KO-022/소재",
+     "KO-023/소재",
+     "supplier_specs_ko.txt#L3",
+     "supplier_specs_ko.txt#L4"
+    ],
+    "label": "contradicted",
+    "label_note": "상세설명과 소재 및 공급처 사양이 다릅니다.",
+    "citations": [
+     {
+      "source": "KO-023/소재",
+      "quote": "린넨 55%, 면 45%",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "supplier_specs_ko.txt#L3",
+      "quote": "린넨 55%, 면 45%, 210g/㎡, 리투아니아 제직.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "린넨 55%, 면 45% 원단입니다.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C028",
+    "sku": "KO-024",
+    "column": "상세설명",
+    "source": "KO-024/상세설명",
+    "quote": "아토피를 치료해",
+    "start": 11,
+    "end": 19,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "medical",
+    "rule_id": "medical-ko",
+    "rule_reason": "This phrase promises treatment of a health condition, sometimes within a fixed time. Describe everyday use rather than claiming a medical effect.",
+    "rule_reason_ko": "질환을 치료한다고, 때로는 기간까지 정해 약속하는 표현입니다. 의학적 효과 대신 일상적인 사용으로 설명하세요.",
+    "rule_replacement": "일상적인 관리에 사용합니다",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "아토피를 치료해 준다는 건강 효과 주장은 시험 정보가 없습니다.",
+    "related": [],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "부드러운 면 소재예요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C029",
+    "sku": "KO-025",
+    "column": "상세설명",
+    "source": "KO-025/상세설명",
+    "quote": "130x170cm",
+    "start": 14,
+    "end": 23,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "상세설명의 130x170cm가 사이즈 정보의 130x180cm와 다릅니다.",
+    "related": [
+     "KO-025/사이즈",
+     "supplier_specs_ko.txt#L13"
+    ],
+    "label": "contradicted",
+    "label_note": "상세설명과 사이즈 정보가 다릅니다.",
+    "citations": [
+     {
+      "source": "KO-025/사이즈",
+      "quote": "130x180cm",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "supplier_specs_ko.txt#L13",
+      "quote": "완성 사이즈 130x180cm.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "따뜻한 재생 울 블랭킷, 130x180cm.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C030",
+    "sku": "KO-026",
+    "column": "상세설명",
+    "source": "KO-026/상세설명",
+    "quote": "12온스",
+    "start": 0,
+    "end": 4,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "12온스 주장이 소재 정보의 10온스와 다릅니다.",
+    "related": [
+     "KO-026/소재",
+     "supplier_specs_ko.txt#L14"
+    ],
+    "label": "contradicted",
+    "label_note": "상세설명과 소재 및 공급처 사양이 다릅니다.",
+    "citations": [
+     {
+      "source": "KO-026/소재",
+      "quote": "면 캔버스 100%, 10온스",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "supplier_specs_ko.txt#L14",
+      "quote": "10온스 면 캔버스, 오가닉 인증 없음.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "10온스 면 캔버스라 튼튼해요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C031",
+    "sku": "KO-026",
+    "column": "상세설명",
+    "source": "KO-026/상세설명",
+    "quote": "오가닉",
+    "start": 5,
+    "end": 8,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "오가닉 캔버스 주장이 소재 정보 및 공급처 사양의 오가닉 인증 없음과 다릅니다.",
+    "related": [
+     "KO-026/소재",
+     "supplier_specs_ko.txt#L14"
+    ],
+    "label": "contradicted",
+    "label_note": "상세설명과 소재 및 공급처 사양이 다릅니다.",
+    "citations": [
+     {
+      "source": "KO-026/소재",
+      "quote": "면 캔버스 100%, 10온스",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "supplier_specs_ko.txt#L14",
+      "quote": "오가닉 인증 없음.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "10온스 면 캔버스라 튼튼해요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C032",
+    "sku": "KO-028",
+    "column": "상세설명",
+    "source": "KO-028/상세설명",
+    "quote": "피부 고민까지 해결해 줘요",
+    "start": 19,
+    "end": 33,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "피부 고민을 해결해 준다는 건강 효과 주장은 시험 정보가 없습니다.",
+    "related": [],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "멀버리 실크 100%로 만들었어요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C033",
+    "sku": "KO-029",
+    "column": "상세설명",
+    "source": "KO-029/상세설명",
+    "quote": "의사 추천",
+    "start": 0,
+    "end": 5,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "evidence",
+    "rule_id": "evidence-ko",
+    "rule_reason": "This phrase implies research or expert support. Verify the specific evidence or use wording without an implied endorsement.",
+    "rule_reason_ko": "연구나 전문가의 뒷받침을 암시하는 표현입니다. 구체적인 근거를 확인하거나 추천을 암시하지 않는 표현을 쓰세요.",
+    "rule_replacement": "일상적인 사용을 고려한",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "의사 추천 주장은 인증 또는 시험 정보가 없습니다.",
+    "related": [],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "친환경 랩이에요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C034",
+    "sku": "KO-029",
+    "column": "상세설명",
+    "source": "KO-029/상세설명",
+    "quote": "1년 동안 쓸 수 있어요",
+    "start": 13,
+    "end": 26,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "1년 동안 쓸 수 있다는 내구성 주장은 근거 자료가 없습니다.",
+    "related": [],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "친환경 랩이에요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C035",
+    "sku": "KO-030",
+    "column": "상세설명",
+    "source": "KO-030/상세설명",
+    "quote": "무조건 효과",
+    "start": 5,
+    "end": 11,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "guarantee",
+    "rule_id": "guarantee-ko",
+    "rule_reason": "A universal guarantee may overpromise. Make room for differences between people and situations.",
+    "rule_reason_ko": "모두에게 같은 결과를 보장하면 과장이 될 수 있습니다. 사람과 상황에 따른 차이를 인정하세요.",
+    "rule_replacement": "개인에 따라 차이가 있을 수 있습니다",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "기름때에 무조건 효과이고 효과 100% 보장한다는 주장은 시험 정보가 없습니다.",
+    "related": [],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "면 100% 행주예요.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C036",
+    "sku": "KO-030",
+    "column": "상세설명",
+    "source": "KO-030/상세설명",
+    "quote": "효과 100% 보장",
+    "start": 13,
+    "end": 23,
+    "origin": [
+     "rules"
+    ],
+    "category": "guarantee",
+    "rule_id": "guarantee-ko",
+    "rule_reason": "A universal guarantee may overpromise. Make room for differences between people and situations.",
+    "rule_reason_ko": "모두에게 같은 결과를 보장하면 과장이 될 수 있습니다. 사람과 상황에 따른 차이를 인정하세요.",
+    "rule_replacement": "개인에 따라 차이가 있을 수 있습니다",
+    "beam_types": [],
+    "beam_reason": "",
+    "related": [],
+    "label": "no_evidence",
+    "label_note": "근거 자료가 없습니다.",
+    "citations": [],
+    "rewrite": "면 100% 행주예요.",
+    "rewrite_from": "beam"
+   }
+  ],
+  "guard": [],
+  "steps": [
+   {
+    "step": "audit",
+    "ok": true,
+    "detail": "35 issues kept, 0 rejected"
+   },
+   {
+    "step": "verify",
+    "ok": true,
+    "detail": "25 of 25 quotes matched the input exactly"
+   },
+   {
+    "step": "rewrite",
+    "ok": true,
+    "detail": "24 fields in 24 products sent"
+   }
+  ],
+  "messages": [],
+  "quotes_checked": 25,
+  "quotes_accepted": 25,
+  "model": "reflection/Beam-1.0-501B-A23B",
+  "generated_at": "2026-10-29T16:00:38+00:00",
+  "calls_made": 3,
+  "raw_answers": {
+   "audit": "{\"issues\":[\n{\"source\":\"KO-001/상세설명\",\"quote\":\"린넨 100%\",\"type\":\"spec_conflict\",\"related\":[\"KO-001/소재\"],\"reason\":\"상세설명의 린넨 100% 주장이 소재 정보의 린넨 55%, 면 45%와 충돌합니다.\"},\n{\"source\":\"KO-002/상세설명\",\"quote\":\"판매 1위\",\"type\":\"ranking\",\"related\":[\"test_reports_ko.txt#L7\"],\"reason\":\"판매 1위 주장은 외부 판매 순위 자료가 없어 뒷받침되지 않습니다.\"},\n{\"source\":\"KO-003/상세설명\",\"quote\":\"500g/㎡\",\"type\":\"spec_conflict\",\"related\":[\"KO-003/소재\"],\"reason\":\"상세설명의 500g/㎡ 주장이 소재 정보의 380g/㎡와 충돌합니다.\"},\n{\"source\":\"KO-004/상세설명\",\"quote\":\"국내 1위\",\"type\":\"ranking\",\"related\":[\"test_reports_ko.txt#L7\"],\"reason\":\"국내 1위 주장은 외부 판매 순위 자료가 없어 뒷받침되지 않습니다.\"},\n{\"source\":\"KO-005/상세설명\",\"quote\":\"미리 세탁해서 형태가 잘 유지돼요\",\"type\":\"unsupported\",\"related\":[],\"reason\":\"미리 세탁해 형태가 유지된다는 내구성 주장은 소재·관리 정보에 근거가 없습니다.\"},\n{\"source\":\"KO-006/상세설명\",\"quote\":\"오가닉 코튼 티셔츠와 같은 원단\",\"type\":\"contradiction\",\"related\":[\"KO-005/소재\",\"KO-006/소재\",\"supplier_specs_ko.txt#L6\",\"supplier_specs_ko.txt#L7\"],\"reason\":\"오가닉 코튼 티셔츠와 같은 원단이라는 주장이 소재 정보 및 공급처 사양과 다릅니다.\"},\n{\"source\":\"KO-006/상세설명\",\"quote\":\"포르투갈에서 만들었어요\",\"type\":\"spec_conflict\",\"related\":[\"KO-006/원산지\",\"supplier_specs_ko.txt#L7\"],\"reason\":\"포르투갈 제조 주장이 원산지 정보 및 공급처 사양의 베트남 봉제와 다릅니다.\"},\n{\"source\":\"KO-007/상세설명\",\"quote\":\"M 사이즈 가슴단면 54cm\",\"type\":\"spec_conflict\",\"related\":[\"KO-007/사이즈\",\"supplier_specs_ko.txt#L8\"],\"reason\":\"상세설명의 M 사이즈 가슴단면 54cm가 사이즈 정보의 58cm와 다릅니다.\"},\n{\"source\":\"KO-008/상세설명\",\"quote\":\"평생 사용 가능한\",\"type\":\"unsupported\",\"related\":[],\"reason\":\"평생 사용 가능하다는 내구성 주장은 소재·관리 정보에 근거가 없습니다.\"},\n{\"source\":\"KO-009/상세설명\",\"quote\":\"7일 만에 여드름 완치!\",\"type\":\"unsupported\",\"related\":[\"test_reports_ko.txt#L6\"],\"reason\":\"7일 만에 여드름 완치 주장은 임상 또는 피부과 시험 자료가 없습니다.\"},\n{\"source\":\"KO-009/상세설명\",\"quote\":\"부작용 없는\",\"type\":\"unsupported\",\"related\":[\"test_reports_ko.txt#L6\"],\"reason\":\"부작용 없다는 안전성 주장은 시험 자료가 없습니다.\"},\n{\"source\":\"KO-010/상세설명\",\"quote\":\"임상으로 입증된\",\"type\":\"spec_conflict\",\"related\":[\"KO-010/인증\",\"test_reports_ko.txt#L3\"],\"reason\":\"임상으로 입증되었다는 주장이 보고서 CR-21의 소비자 사용감 평가와 다릅니다.\"},\n{\"source\":\"KO-010/상세설명\",\"quote\":\"2주 만에 붉은기가 줄어요\",\"type\":\"spec_conflict\",\"related\":[\"test_reports_ko.txt#L3\"],\"reason\":\"2주 만에 붉은기가 줄어든다는 주장은 보고서 CR-21에서 측정하지 않은 내용입니다.\"},\n{\"source\":\"KO-012/상세설명\",\"quote\":\"선플루이드와 같은 제형\",\"type\":\"spec_conflict\",\"related\":[\"KO-011/상세설명\",\"test_reports_ko.txt#L5\"],\"reason\":\"선플루이드와 같은 제형이라는 주장이 보고서의 다른 베이스 제형 설명과 다릅니다.\"},\n{\"source\":\"KO-012/상세설명\",\"quote\":\"SPF50\",\"type\":\"spec_conflict\",\"related\":[\"test_reports_ko.txt#L5\"],\"reason\":\"SPF50 주장은 자외선차단지수 시험 자료가 없습니다.\"},\n{\"source\":\"KO-012/상세설명\",\"quote\":\"워터프루프 80분\",\"type\":\"spec_conflict\",\"related\":[\"test_reports_ko.txt#L5\"],\"reason\":\"워터프루프 80분 주장은 내수성 시험 자료가 없습니다.\"},\n{\"source\":\"KO-013/상세설명\",\"quote\":\"피부과 추천\",\"type\":\"unsupported\",\"related\":[],\"reason\":\"피부과 추천 주장은 인증 또는 시험 정보가 없습니다.\"},\n{\"source\":\"KO-014/상세설명\",\"quote\":\"식물성 오일로만 만든\",\"type\":\"spec_conflict\",\"related\":[\"KO-014/소재\"],\"reason\":\"식물성 오일로만 만들었다는 주장이 성분 정보의 밀랍과 다릅니다.\"},\n{\"source\":\"KO-014/상세설명\",\"quote\":\"100% 안전합니다\",\"type\":\"unsupported\",\"related\":[],\"reason\":\"100% 안전하다는 주장은 안전성 시험 정보가 없습니다.\"},\n{\"source\":\"KO-016/상세설명\",\"quote\":\"오븐 260도까지 사용 가능\",\"type\":\"spec_conflict\",\"related\":[\"supplier_specs_ko.txt#L10\"],\"reason\":\"오븐 260도 사용 가능 주장이 공급처 사양의 220도와 다릅니다.\"},\n{\"source\":\"KO-016/상세설명\",\"quote\":\"식기세척기도 OK\",\"type\":\"spec_conflict\",\"related\":[\"KO-016/관리방법\",\"supplier_specs_ko.txt#L10\"],\"reason\":\"식기세척기 사용 가능 주장이 관리방법 및 공급처 사양의 손세척 권장과 다릅니다.\"},\n{\"source\":\"KO-018/상세설명\",\"quote\":\"천연 항균\",\"type\":\"unsupported\",\"related\":[],\"reason\":\"천연 항균 주장은 성분·인증 정보로 뒷받침되지 않습니다.\"},\n{\"source\":\"KO-018/상세설명\",\"quote\":\"세계 최고의\",\"type\":\"ranking\",\"related\":[],\"reason\":\"세계 최고의 도마라는 순위 주장은 근거 자료가 없습니다.\"},\n{\"source\":\"KO-020/상세설명\",\"quote\":\"업계 최초\",\"type\":\"ranking\",\"related\":[],\"reason\":\"업계 최초 진공 밀폐 기술 주장은 근거 자료가 없습니다.\"},\n{\"source\":\"KO-021/상세설명\",\"quote\":\"독일산 스틸 칼날\",\"type\":\"spec_conflict\",\"related\":[\"KO-021/원산지\",\"supplier_specs_ko.txt#L12\"],\"reason\":\"독일산 스틸 칼날 주장이 원산지 정보 및 공급처 사양의 중국 제조와 다릅니다.\"},\n{\"source\":\"KO-021/상세설명\",\"quote\":\"넘버원\",\"type\":\"ranking\",\"related\":[\"test_reports_ko.txt#L7\"],\"reason\":\"넘버원 주방칼 주장은 외부 판매 순위 자료가 없어 뒷받침되지 않습니다.\"},\n{\"source\":\"KO-023/상세설명\",\"quote\":\"냅킨과 같은 린넨 100% 원단\",\"type\":\"contradiction\",\"related\":[\"KO-022/소재\",\"KO-023/소재\",\"supplier_specs_ko.txt#L3\",\"supplier_specs_ko.txt#L4\"],\"reason\":\"냅킨과 같은 린넨 100% 원단이라는 주장이 소재 정보와 다릅니다.\"},\n{\"source\":\"KO-024/상세설명\",\"quote\":\"아토피를 치료해 드려요\",\"type\":\"unsupported\",\"related\":[],\"reason\":\"아토피를 치료해 준다는 건강 효과 주장은 시험 정보가 없습니다.\"},\n{\"source\":\"KO-025/상세설명\",\"quote\":\"130x170cm\",\"type\":\"spec_conflict\",\"related\":[\"KO-025/사이즈\",\"supplier_specs_ko.txt#L13\"],\"reason\":\"상세설명의 130x170cm가 사이즈 정보의 130x180cm와 다릅니다.\"},\n{\"source\":\"KO-026/상세설명\",\"quote\":\"12온스\",\"type\":\"spec_conflict\",\"related\":[\"KO-026/소재\",\"supplier_specs_ko.txt#L14\"],\"reason\":\"12온스 주장이 소재 정보의 10온스와 다릅니다.\"},\n{\"source\":\"KO-026/상세설명\",\"quote\":\"오가닉\",\"type\":\"spec_conflict\",\"related\":[\"KO-026/소재\",\"supplier_specs_ko.txt#L14\"],\"reason\":\"오가닉 캔버스 주장이 소재 정보 및 공급처 사양의 오가닉 인증 없음과 다릅니다.\"},\n{\"source\":\"KO-028/상세설명\",\"quote\":\"피부 고민까지 해결해 줘요\",\"type\":\"unsupported\",\"related\":[],\"reason\":\"피부 고민을 해결해 준다는 건강 효과 주장은 시험 정보가 없습니다.\"},\n{\"source\":\"KO-029/상세설명\",\"quote\":\"의사 추천\",\"type\":\"unsupported\",\"related\":[],\"reason\":\"의사 추천 주장은 인증 또는 시험 정보가 없습니다.\"},\n{\"source\":\"KO-029/상세설명\",\"quote\":\"1년 동안 쓸 수 있어요\",\"type\":\"unsupported\",\"related\":[],\"reason\":\"1년 동안 쓸 수 있다는 내구성 주장은 근거 자료가 없습니다.\"},\n{\"source\":\"KO-030/상세설명\",\"quote\":\"기름때도 무조건 효과! 효과 100% 보장\",\"type\":\"unsupported\",\"related\":[],\"reason\":\"기름때에 무조건 효과이고 효과 100% 보장한다는 주장은 시험 정보가 없습니다.\"}\n]}",
+   "verify": "{\"results\":[\n{\"id\":\"C001\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"KO-001/소재\",\"quote\":\"린넨 55%, 면 45%\"}],\"note\":\"상세설명과 소재 정보가 충돌합니다.\"},\n{\"id\":\"C002\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C003\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"KO-003/소재\",\"quote\":\"면 100%, 380g/㎡\"}],\"note\":\"상세설명과 소재 정보가 충돌합니다.\"},\n{\"id\":\"C004\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C005\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C006\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"KO-006/소재\",\"quote\":\"면 100%\"},{\"source\":\"supplier_specs_ko.txt#L7\",\"quote\":\"포켓 티셔츠 KO-006: 일반 면, 베트남 봉제.\"}],\"note\":\"상세설명과 소재 및 공급처 사양이 다릅니다.\"},\n{\"id\":\"C007\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"KO-006/원산지\",\"quote\":\"베트남\"},{\"source\":\"supplier_specs_ko.txt#L7\",\"quote\":\"베트남 봉제.\"}],\"note\":\"상세설명과 원산지 및 공급처 사양이 다릅니다.\"},\n{\"id\":\"C008\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"KO-007/사이즈\",\"quote\":\"M 가슴단면 58cm, L 가슴단면 61cm\"},{\"source\":\"supplier_specs_ko.txt#L8\",\"quote\":\"후드티 KO-007 M 사이즈: 가슴단면 58cm, 총장 70cm.\"}],\"note\":\"상세설명과 사이즈 정보가 다릅니다.\"},\n{\"id\":\"C009\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C010\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C011\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C012\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"KO-010/인증\",\"quote\":\"소비자 사용감 평가 보고서 CR-21\"},{\"source\":\"test_reports_ko.txt#L3\",\"quote\":\"임상시험 아님.\"}],\"note\":\"상세설명과 시험 보고서 내용이 다릅니다.\"},\n{\"id\":\"C013\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C014\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"test_reports_ko.txt#L5\",\"quote\":\"선플루이드와 다른 베이스 제형.\"}],\"note\":\"상세설명과 시험 보고서 내용이 다릅니다.\"},\n{\"id\":\"C015\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C016\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C017\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C018\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"KO-014/소재\",\"quote\":\"성분: 피마자유, 밀랍, 해바라기씨유\"}],\"note\":\"상세설명과 소재 정보가 다릅니다.\"},\n{\"id\":\"C019\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C020\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"supplier_specs_ko.txt#L10\",\"quote\":\"손잡이 기준 오븐 220도까지.\"}],\"note\":\"상세설명과 공급처 사양이 다릅니다.\"},\n{\"id\":\"C021\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"KO-016/관리방법\",\"quote\":\"손세척 권장\"},{\"source\":\"supplier_specs_ko.txt#L10\",\"quote\":\"손세척만 권장.\"}],\"note\":\"상세설명과 관리방법 및 공급처 사양이 다릅니다.\"},\n{\"id\":\"C022\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C023\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C024\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C025\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"KO-021/원산지\",\"quote\":\"중국\"},{\"source\":\"supplier_specs_ko.txt#L12\",\"quote\":\"칼날 제조와 조립 모두 중국.\"}],\"note\":\"상세설명과 원산지 및 공급처 사양이 다릅니다.\"},\n{\"id\":\"C026\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C027\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"KO-023/소재\",\"quote\":\"린넨 55%, 면 45%\"},{\"source\":\"supplier_specs_ko.txt#L3\",\"quote\":\"린넨 55%, 면 45%, 210g/㎡, 리투아니아 제직.\"}],\"note\":\"상세설명과 소재 및 공급처 사양이 다릅니다.\"},\n{\"id\":\"C028\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C029\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"KO-025/사이즈\",\"quote\":\"130x180cm\"},{\"source\":\"supplier_specs_ko.txt#L13\",\"quote\":\"완성 사이즈 130x180cm.\"}],\"note\":\"상세설명과 사이즈 정보가 다릅니다.\"},\n{\"id\":\"C030\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"KO-026/소재\",\"quote\":\"면 캔버스 100%, 10온스\"},{\"source\":\"supplier_specs_ko.txt#L14\",\"quote\":\"10온스 면 캔버스, 오가닉 인증 없음.\"}],\"note\":\"상세설명과 소재 및 공급처 사양이 다릅니다.\"},\n{\"id\":\"C031\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"KO-026/소재\",\"quote\":\"면 캔버스 100%, 10온스\"},{\"source\":\"supplier_specs_ko.txt#L14\",\"quote\":\"오가닉 인증 없음.\"}],\"note\":\"상세설명과 소재 및 공급처 사양이 다릅니다.\"},\n{\"id\":\"C032\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C033\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C034\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C035\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"},\n{\"id\":\"C036\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"근거 자료가 없습니다.\"}\n]}",
+   "rewrite": "{\"products\":[{\"sku\":\"KO-001\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"린넨 55%, 면 45%로 만든 데일리 앞치마입니다. 주머니가 넉넉해요.\"}]},{\"sku\":\"KO-002\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"데일리 앞치마와 같은 원단으로 만들었어요.\"}]},{\"sku\":\"KO-003\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"380g/㎡ 두툼한 와플 조직이라 빨리 말라요.\"}]},{\"sku\":\"KO-004\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"와플 바스타월 3장을 선물 포장으로.\"}]},{\"sku\":\"KO-005\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"인증받은 오가닉 코튼 100% 티셔츠입니다.\"}]},{\"sku\":\"KO-006\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"면 100% 티셔츠이고 베트남에서 만들었어요.\"}]},{\"sku\":\"KO-007\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"정사이즈로 나왔어요. M 사이즈 가슴단면 58cm.\"}]},{\"sku\":\"KO-008\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"부드러운 메리노 울로 만든 비니.\"}]},{\"sku\":\"KO-009\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"순한 세럼이에요.\"}]},{\"sku\":\"KO-010\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"소비자 사용감 평가 보고서 CR-21로 확인한 진정 크림.\"}]},{\"sku\":\"KO-012\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"선플루이드와 다른 베이스 제형으로 만든 스틱이에요.\"}]},{\"sku\":\"KO-013\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"하루 종일 촉촉한 핸드크림이에요.\"}]},{\"sku\":\"KO-014\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"피마자유, 밀랍, 해바라기씨유로 만든 립밤이에요.\"}]},{\"sku\":\"KO-016\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"손잡이 기준 오븐 220도까지 사용 가능하고 손세척만 권장해요.\"}]},{\"sku\":\"KO-018\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"올리브나무로 만든 도마예요.\"}]},{\"sku\":\"KO-020\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"내열 붕규산 유리에 대나무 뚜껑.\"}]},{\"sku\":\"KO-021\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"스테인리스 스틸 칼날, 중국에서 만든 주방칼이에요.\"}]},{\"sku\":\"KO-023\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"린넨 55%, 면 45% 원단입니다.\"}]},{\"sku\":\"KO-024\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"부드러운 면 소재예요.\"}]},{\"sku\":\"KO-025\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"따뜻한 재생 울 블랭킷, 130x180cm.\"}]},{\"sku\":\"KO-026\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"10온스 면 캔버스라 튼튼해요.\"}]},{\"sku\":\"KO-028\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"멀버리 실크 100%로 만들었어요.\"}]},{\"sku\":\"KO-029\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"친환경 랩이에요.\"}]},{\"sku\":\"KO-030\",\"fields\":[{\"column\":\"상세설명\",\"text\":\"면 100% 행주예요.\"}]}]}"
+  },
+  "field_rewrites": [
+   {
+    "sku": "KO-001",
+    "column": "상세설명",
+    "source": "KO-001/상세설명",
+    "before": "린넨 100%로 만든 데일리 앞치마입니다. 주머니가 넉넉해요.",
+    "after": "린넨 55%, 면 45%로 만든 데일리 앞치마입니다. 주머니가 넉넉해요.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C001"
+      ],
+      "before": "린넨 100%로 만든 데일리 앞치마입니다.",
+      "after": "린넨 55%, 면 45%로 만든 데일리 앞치마입니다.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-002",
+    "column": "상세설명",
+    "source": "KO-002/상세설명",
+    "before": "데일리 앞치마와 같은 원단으로 만들었어요. 판매 1위 앞치마!",
+    "after": "데일리 앞치마와 같은 원단으로 만들었어요.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C002"
+      ],
+      "before": "판매 1위 앞치마!",
+      "after": "",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-003",
+    "column": "상세설명",
+    "source": "KO-003/상세설명",
+    "before": "500g/㎡ 두툼한 와플 조직이라 빨리 말라요.",
+    "after": "380g/㎡ 두툼한 와플 조직이라 빨리 말라요.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C003"
+      ],
+      "before": "500g/㎡ 두툼한 와플 조직이라 빨리 말라요.",
+      "after": "380g/㎡ 두툼한 와플 조직이라 빨리 말라요.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-004",
+    "column": "상세설명",
+    "source": "KO-004/상세설명",
+    "before": "와플 바스타월 3장을 선물 포장으로. 국내 1위 타월 세트.",
+    "after": "와플 바스타월 3장을 선물 포장으로.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C004"
+      ],
+      "before": "국내 1위 타월 세트.",
+      "after": "",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-005",
+    "column": "상세설명",
+    "source": "KO-005/상세설명",
+    "before": "인증받은 오가닉 코튼 100% 티셔츠입니다. 미리 세탁해서 형태가 잘 유지돼요.",
+    "after": "인증받은 오가닉 코튼 100% 티셔츠입니다.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C005"
+      ],
+      "before": "미리 세탁해서 형태가 잘 유지돼요.",
+      "after": "",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-006",
+    "column": "상세설명",
+    "source": "KO-006/상세설명",
+    "before": "오가닉 코튼 티셔츠와 같은 원단이고 포르투갈에서 만들었어요.",
+    "after": "면 100% 티셔츠이고 베트남에서 만들었어요.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C006",
+       "C007"
+      ],
+      "before": "오가닉 코튼 티셔츠와 같은 원단이고 포르투갈에서 만들었어요.",
+      "after": "면 100% 티셔츠이고 베트남에서 만들었어요.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-007",
+    "column": "상세설명",
+    "source": "KO-007/상세설명",
+    "before": "정사이즈로 나왔어요. M 사이즈 가슴단면 54cm.",
+    "after": "정사이즈로 나왔어요. M 사이즈 가슴단면 58cm.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C008"
+      ],
+      "before": "M 사이즈 가슴단면 54cm.",
+      "after": "M 사이즈 가슴단면 58cm.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-008",
+    "column": "상세설명",
+    "source": "KO-008/상세설명",
+    "before": "부드러운 메리노 울로 만들어 평생 사용 가능한 비니.",
+    "after": "부드러운 메리노 울로 만든 비니.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C009"
+      ],
+      "before": "부드러운 메리노 울로 만들어 평생 사용 가능한 비니.",
+      "after": "부드러운 메리노 울로 만든 비니.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-009",
+    "column": "상세설명",
+    "source": "KO-009/상세설명",
+    "before": "7일 만에 여드름 완치! 부작용 없는 순한 세럼이에요.",
+    "after": "순한 세럼이에요.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C010",
+       "C011"
+      ],
+      "before": "7일 만에 여드름 완치! 부작용 없는 순한 세럼이에요.",
+      "after": "순한 세럼이에요.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-010",
+    "column": "상세설명",
+    "source": "KO-010/상세설명",
+    "before": "임상으로 입증된 진정 크림. 2주 만에 붉은기가 줄어요.",
+    "after": "소비자 사용감 평가 보고서 CR-21로 확인한 진정 크림.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C012",
+       "C013"
+      ],
+      "before": "임상으로 입증된 진정 크림. 2주 만에 붉은기가 줄어요.",
+      "after": "소비자 사용감 평가 보고서 CR-21로 확인한 진정 크림.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-012",
+    "column": "상세설명",
+    "source": "KO-012/상세설명",
+    "before": "선플루이드와 같은 제형을 스틱으로 만들었어요. SPF50, 워터프루프 80분.",
+    "after": "선플루이드와 다른 베이스 제형으로 만든 스틱이에요.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C014",
+       "C015",
+       "C016"
+      ],
+      "before": "선플루이드와 같은 제형을 스틱으로 만들었어요. SPF50, 워터프루프 80분.",
+      "after": "선플루이드와 다른 베이스 제형으로 만든 스틱이에요.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-013",
+    "column": "상세설명",
+    "source": "KO-013/상세설명",
+    "before": "피부과 추천 핸드크림, 하루 종일 촉촉해요.",
+    "after": "하루 종일 촉촉한 핸드크림이에요.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C017"
+      ],
+      "before": "피부과 추천 핸드크림, 하루 종일 촉촉해요.",
+      "after": "하루 종일 촉촉한 핸드크림이에요.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-014",
+    "column": "상세설명",
+    "source": "KO-014/상세설명",
+    "before": "식물성 오일로만 만든 립밤, 100% 안전합니다.",
+    "after": "피마자유, 밀랍, 해바라기씨유로 만든 립밤이에요.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C018",
+       "C019"
+      ],
+      "before": "식물성 오일로만 만든 립밤, 100% 안전합니다.",
+      "after": "피마자유, 밀랍, 해바라기씨유로 만든 립밤이에요.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-016",
+    "column": "상세설명",
+    "source": "KO-016/상세설명",
+    "before": "오븐 260도까지 사용 가능하고 식기세척기도 OK.",
+    "after": "손잡이 기준 오븐 220도까지 사용 가능하고 손세척만 권장해요.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C020",
+       "C021"
+      ],
+      "before": "오븐 260도까지 사용 가능하고 식기세척기도 OK.",
+      "after": "손잡이 기준 오븐 220도까지 사용 가능하고 손세척만 권장해요.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-018",
+    "column": "상세설명",
+    "source": "KO-018/상세설명",
+    "before": "천연 항균 올리브나무로 만든 세계 최고의 도마.",
+    "after": "올리브나무로 만든 도마예요.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C022",
+       "C023"
+      ],
+      "before": "천연 항균 올리브나무로 만든 세계 최고의 도마.",
+      "after": "올리브나무로 만든 도마예요.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-020",
+    "column": "상세설명",
+    "source": "KO-020/상세설명",
+    "before": "내열 붕규산 유리에 대나무 뚜껑. 업계 최초 진공 밀폐 기술.",
+    "after": "내열 붕규산 유리에 대나무 뚜껑.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C024"
+      ],
+      "before": "업계 최초 진공 밀폐 기술.",
+      "after": "",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-021",
+    "column": "상세설명",
+    "source": "KO-021/상세설명",
+    "before": "독일산 스틸 칼날, 넘버원 주방칼.",
+    "after": "스테인리스 스틸 칼날, 중국에서 만든 주방칼이에요.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C025",
+       "C026"
+      ],
+      "before": "독일산 스틸 칼날, 넘버원 주방칼.",
+      "after": "스테인리스 스틸 칼날, 중국에서 만든 주방칼이에요.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-023",
+    "column": "상세설명",
+    "source": "KO-023/상세설명",
+    "before": "냅킨과 같은 린넨 100% 원단입니다.",
+    "after": "린넨 55%, 면 45% 원단입니다.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C027"
+      ],
+      "before": "냅킨과 같은 린넨 100% 원단입니다.",
+      "after": "린넨 55%, 면 45% 원단입니다.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-024",
+    "column": "상세설명",
+    "source": "KO-024/상세설명",
+    "before": "부드러운 면 소재, 아토피를 치료해 드려요.",
+    "after": "부드러운 면 소재예요.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C028"
+      ],
+      "before": "부드러운 면 소재, 아토피를 치료해 드려요.",
+      "after": "부드러운 면 소재예요.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-025",
+    "column": "상세설명",
+    "source": "KO-025/상세설명",
+    "before": "따뜻한 재생 울 블랭킷, 130x170cm.",
+    "after": "따뜻한 재생 울 블랭킷, 130x180cm.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C029"
+      ],
+      "before": "따뜻한 재생 울 블랭킷, 130x170cm.",
+      "after": "따뜻한 재생 울 블랭킷, 130x180cm.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-026",
+    "column": "상세설명",
+    "source": "KO-026/상세설명",
+    "before": "12온스 오가닉 캔버스라 튼튼해요.",
+    "after": "10온스 면 캔버스라 튼튼해요.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C030",
+       "C031"
+      ],
+      "before": "12온스 오가닉 캔버스라 튼튼해요.",
+      "after": "10온스 면 캔버스라 튼튼해요.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-028",
+    "column": "상세설명",
+    "source": "KO-028/상세설명",
+    "before": "멀버리 실크 100%, 자는 동안 피부 고민까지 해결해 줘요.",
+    "after": "멀버리 실크 100%로 만들었어요.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C032"
+      ],
+      "before": "멀버리 실크 100%, 자는 동안 피부 고민까지 해결해 줘요.",
+      "after": "멀버리 실크 100%로 만들었어요.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-029",
+    "column": "상세설명",
+    "source": "KO-029/상세설명",
+    "before": "의사 추천 친환경 랩, 1년 동안 쓸 수 있어요.",
+    "after": "친환경 랩이에요.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C033",
+       "C034"
+      ],
+      "before": "의사 추천 친환경 랩, 1년 동안 쓸 수 있어요.",
+      "after": "친환경 랩이에요.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "KO-030",
+    "column": "상세설명",
+    "source": "KO-030/상세설명",
+    "before": "기름때도 무조건 효과! 효과 100% 보장하는 행주예요.",
+    "after": "면 100% 행주예요.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C035",
+       "C036"
+      ],
+      "before": "기름때도 무조건 효과! 효과 100% 보장하는 행주예요.",
+      "after": "면 100% 행주예요.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   }
+  ]
+ },
+ "note": "Produced by scripts/make_cache.py from a live Beam run."
 }

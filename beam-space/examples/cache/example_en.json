@@ -1,5 +1,5 @@
 {
- "status": "not generated yet",
+ "status": "generated",
  "format": 2,
  "example": "en",
  "catalog_file": "examples/catalog_en.csv",
@@ -8,8 +8,1888 @@
   "examples/evidence_en/test_reports.txt"
  ],
  "input_sha256": "10db684c26394c4608b37098f99f981c3edf42b4e8bb715dbb3407e84bab0c1a",
- "model": null,
- "generated_at": null,
- "result": null,
- "note": "Produced by scripts/make_cache.py with a real HF_TOKEN. Not generated yet."
+ "model": "reflection/Beam-1.0-501B-A23B",
+ "generated_at": "2026-10-29T16:00:38+00:00",
+ "result": {
+  "mode": "live",
+  "claims": [
+   {
+    "id": "C001",
+    "sku": "EN-001",
+    "column": "description",
+    "source": "EN-001/description",
+    "quote": "100% linen",
+    "start": 22,
+    "end": 32,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "The description says 100% linen, but the material column says 55% linen, 45% cotton.",
+    "related": [
+     "EN-001/material"
+    ],
+    "label": "contradicted",
+    "label_note": "The material column lists a linen-cotton blend, not 100% linen.",
+    "citations": [
+     {
+      "source": "EN-001/material",
+      "quote": "55% linen, 45% cotton",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "Our everyday apron in 55% linen and 45% cotton.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C002",
+    "sku": "EN-002",
+    "column": "description",
+    "source": "EN-002/description",
+    "quote": "Best seller #1",
+    "start": 66,
+    "end": 80,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "superlative",
+    "rule_id": "shop-ranking-en",
+    "rule_reason": "A ranking or best-selling claim needs a clear source, category and date. Without those, describe a concrete feature rather than claiming first place.",
+    "rule_reason_ko": "순위나 판매 1위 주장에는 출처, 비교 범위, 날짜가 필요합니다. 없다면 1위 대신 구체적인 특징을 설명하세요.",
+    "rule_replacement": "For everyday use",
+    "beam_types": [
+     "ranking"
+    ],
+    "beam_reason": "No third-party sales ranking has been collected for any product.",
+    "related": [
+     "test_reports.txt#L7"
+    ],
+    "label": "no_evidence",
+    "label_note": "No evidence in the input confirms a best-seller ranking.",
+    "citations": [],
+    "rewrite": "",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C003",
+    "sku": "EN-003",
+    "column": "description",
+    "source": "EN-003/description",
+    "quote": "500 GSM",
+    "start": 6,
+    "end": 13,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "The description says 500 GSM, but the material column and the towel set description say 380 GSM.",
+    "related": [
+     "EN-003/material",
+     "EN-004/description"
+    ],
+    "label": "contradicted",
+    "label_note": "The towel is 380 GSM, not 500 GSM.",
+    "citations": [
+     {
+      "source": "EN-003/material",
+      "quote": "100% cotton, 380 GSM",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "EN-004/description",
+      "quote": "Three of our Waffle Bath Towels (380 GSM)",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "Heavy 380 GSM waffle weave that dries fast. Colors may fade with washing. Tumble dry low.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C004",
+    "sku": "EN-003",
+    "column": "description",
+    "source": "EN-003/description",
+    "quote": "Never fades",
+    "start": 44,
+    "end": 55,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "guarantee",
+    "rule_id": "never-wears-en",
+    "rule_reason": "An absolute durability promise cannot account for wear or different conditions of use. Describe care instructions or a supported service life instead.",
+    "rule_reason_ko": "절대 변하지 않는다는 약속은 마모나 사용 환경 차이를 반영하지 못합니다. 관리 방법이나 근거 있는 사용 기간을 적으세요.",
+    "rule_replacement": "Is made for everyday use",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No spec column or evidence line supports a fade-proof durability claim.",
+    "related": [
+     "EN-003/material"
+    ],
+    "label": "no_evidence",
+    "label_note": "No evidence supports a fade-proof durability claim.",
+    "citations": [],
+    "rewrite": "Heavy 380 GSM waffle weave that dries fast. Colors may fade with washing. Tumble dry low.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C005",
+    "sku": "EN-004",
+    "column": "description",
+    "source": "EN-004/description",
+    "quote": "best-selling",
+    "start": 72,
+    "end": 84,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "superlative",
+    "rule_id": "superlative-en",
+    "rule_reason": "A ranking or best-selling claim needs a clear source, category and date. Without those, describe a concrete feature rather than claiming first place.",
+    "rule_reason_ko": "순위나 판매 1위 주장에는 출처, 비교 범위, 날짜가 필요합니다. 없다면 1위 대신 구체적인 특징을 설명하세요.",
+    "rule_replacement": "for everyday use",
+    "beam_types": [
+     "ranking"
+    ],
+    "beam_reason": "No third-party sales ranking has been collected for any product.",
+    "related": [
+     "test_reports.txt#L7"
+    ],
+    "label": "no_evidence",
+    "label_note": "No evidence in the input confirms a best-selling ranking.",
+    "citations": [],
+    "rewrite": "",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C006",
+    "sku": "EN-005",
+    "column": "description",
+    "source": "EN-005/description",
+    "quote": "keeps its shape",
+    "start": 47,
+    "end": 62,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No spec column or evidence line supports a shape-retention durability claim.",
+    "related": [
+     "supplier_specs.txt#L6"
+    ],
+    "label": "no_evidence",
+    "label_note": "No evidence supports a shape-retention claim.",
+    "citations": [],
+    "rewrite": "Certified organic cotton tee, pre-washed. Machine wash 30°C.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C007",
+    "sku": "EN-006",
+    "column": "description",
+    "source": "EN-006/description",
+    "quote": "Same organic cotton as our Crew Tee",
+    "start": 0,
+    "end": 35,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "contradiction"
+    ],
+    "beam_reason": "It claims the same organic cotton as the Crew Tee, but this tee's material is conventional cotton.",
+    "related": [
+     "EN-005/description",
+     "EN-005/certifications",
+     "EN-006/material"
+    ],
+    "label": "contradicted",
+    "label_note": "This tee is conventional cotton, not the same organic cotton as the Crew Tee.",
+    "citations": [
+     {
+      "source": "EN-006/material",
+      "quote": "100% cotton",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "supplier_specs.txt#L7",
+      "quote": "conventional cotton, sewn in Vietnam.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "Conventional cotton tee with a chest pocket, sewn in Vietnam.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C008",
+    "sku": "EN-006",
+    "column": "description",
+    "source": "EN-006/description",
+    "quote": "Made in Portugal",
+    "start": 58,
+    "end": 74,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "The description says Made in Portugal, but the origin column and supplier spec say Vietnam.",
+    "related": [
+     "EN-006/origin",
+     "supplier_specs.txt#L7"
+    ],
+    "label": "contradicted",
+    "label_note": "The origin is Vietnam, not Portugal.",
+    "citations": [
+     {
+      "source": "EN-006/origin",
+      "quote": "Vietnam",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "supplier_specs.txt#L7",
+      "quote": "sewn in Vietnam.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "Conventional cotton tee with a chest pocket, sewn in Vietnam.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C009",
+    "sku": "EN-007",
+    "column": "description",
+    "source": "EN-007/description",
+    "quote": "Size M has a 54 cm chest",
+    "start": 27,
+    "end": 51,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "The description says 54 cm, but the size chart and supplier spec say 58 cm.",
+    "related": [
+     "EN-007/size_chart",
+     "supplier_specs.txt#L8"
+    ],
+    "label": "contradicted",
+    "label_note": "Size M has a 58 cm chest, not 54 cm.",
+    "citations": [
+     {
+      "source": "EN-007/size_chart",
+      "quote": "M chest 58 cm, L chest 61 cm",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "supplier_specs.txt#L8",
+      "quote": "chest 58 cm, length 70 cm.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "Size M has a 58 cm chest.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C010",
+    "sku": "EN-008",
+    "column": "description",
+    "source": "EN-008/description",
+    "quote": "never shrinks",
+    "start": 22,
+    "end": 35,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "guarantee",
+    "rule_id": "never-wears-en",
+    "rule_reason": "An absolute durability promise cannot account for wear or different conditions of use. Describe care instructions or a supported service life instead.",
+    "rule_reason_ko": "절대 변하지 않는다는 약속은 마모나 사용 환경 차이를 반영하지 못합니다. 관리 방법이나 근거 있는 사용 기간을 적으세요.",
+    "rule_replacement": "is made for everyday use",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No spec column or evidence line supports a shrink-proof claim.",
+    "related": [
+     "EN-008/care"
+    ],
+    "label": "no_evidence",
+    "label_note": "No evidence supports a shrink-proof claim.",
+    "citations": [],
+    "rewrite": "Fine merino wool. Hand wash cold and dry flat.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C011",
+    "sku": "EN-008",
+    "column": "description",
+    "source": "EN-008/description",
+    "quote": "Soft enough for sensitive skin",
+    "start": 37,
+    "end": 67,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No spec column or evidence line supports a sensitive-skin suitability claim.",
+    "related": [
+     "EN-008/material"
+    ],
+    "label": "no_evidence",
+    "label_note": "No evidence supports a sensitive-skin suitability claim.",
+    "citations": [],
+    "rewrite": "Fine merino wool. Hand wash cold and dry flat.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C012",
+    "sku": "EN-009",
+    "column": "description",
+    "source": "EN-009/description",
+    "quote": "Dermatologist-approved",
+    "start": 41,
+    "end": 63,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "evidence",
+    "rule_id": "evidence-en",
+    "rule_reason": "This wording suggests expert or research support. Check the actual evidence and its scope, or remove the implied endorsement. This tool does not verify studies.",
+    "rule_reason_ko": "전문가나 연구의 뒷받침을 암시하는 표현입니다. 실제 근거와 범위를 확인하거나 암시된 추천을 빼세요.",
+    "rule_replacement": "Thoughtfully developed",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No dermatological test or certification is listed for this product.",
+    "related": [
+     "EN-009/material"
+    ],
+    "label": "no_evidence",
+    "label_note": "No dermatological test or certification is listed.",
+    "citations": [],
+    "rewrite": "",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C013",
+    "sku": "EN-010",
+    "column": "description",
+    "source": "EN-010/description",
+    "quote": "cures acne in 7 days",
+    "start": 25,
+    "end": 45,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "medical",
+    "rule_id": "medical-en",
+    "rule_reason": "This wording promises to treat a health condition. Describe the product’s everyday use instead; treatment claims need appropriate authorization and support.",
+    "rule_reason_ko": "질환을 치료한다고 약속하는 표현입니다. 일상적인 사용법으로 설명하세요. 치료 효능 표현에는 별도의 허가와 근거가 필요합니다.",
+    "rule_replacement": "is designed for everyday care",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No clinical or dermatological test supports an acne-cure claim.",
+    "related": [
+     "EN-010/material",
+     "test_reports.txt#L6"
+    ],
+    "label": "no_evidence",
+    "label_note": "No clinical or dermatological test supports an acne-cure claim.",
+    "citations": [],
+    "rewrite": "A lightweight serum with niacinamide 5%, panthenol, and glycerin.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C014",
+    "sku": "EN-010",
+    "column": "description",
+    "source": "EN-010/description",
+    "quote": "100% safe",
+    "start": 53,
+    "end": 62,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "guarantee",
+    "rule_id": "guarantee-en",
+    "rule_reason": "An absolute promise leaves no room for different experiences. Set a realistic expectation instead.",
+    "rule_reason_ko": "절대적인 약속은 사람마다 다른 경험을 고려하지 못합니다. 현실적인 기대치로 바꾸세요.",
+    "rule_replacement": "results may vary",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No clinical or dermatological test supports a universal skin-safety claim.",
+    "related": [
+     "EN-010/material",
+     "test_reports.txt#L6"
+    ],
+    "label": "no_evidence",
+    "label_note": "No clinical or dermatological test supports a universal skin-safety claim.",
+    "citations": [],
+    "rewrite": "A lightweight serum with niacinamide 5%, panthenol, and glycerin.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C015",
+    "sku": "EN-011",
+    "column": "description",
+    "source": "EN-011/description",
+    "quote": "Clinically proven",
+    "start": 0,
+    "end": 17,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "evidence",
+    "rule_id": "evidence-en",
+    "rule_reason": "This wording suggests expert or research support. Check the actual evidence and its scope, or remove the implied endorsement. This tool does not verify studies.",
+    "rule_reason_ko": "전문가나 연구의 뒷받침을 암시하는 표현입니다. 실제 근거와 범위를 확인하거나 암시된 추천을 빼세요.",
+    "rule_replacement": "Thoughtfully developed",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "The cited report is a consumer use test, not a clinical trial, and redness was not measured.",
+    "related": [
+     "EN-011/certifications",
+     "test_reports.txt#L3"
+    ],
+    "label": "contradicted",
+    "label_note": "The report is a consumer use test, not a clinical trial measuring redness.",
+    "citations": [
+     {
+      "source": "EN-011/certifications",
+      "quote": "Consumer use test, report CR-17",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "test_reports.txt#L3",
+      "quote": "Not a clinical trial. Redness was not measured.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "A consumer use test was conducted (report CR-17). Redness was not measured.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C016",
+    "sku": "EN-013",
+    "column": "description",
+    "source": "EN-013/description",
+    "quote": "Same formula as our Sun Fluid",
+    "start": 0,
+    "end": 29,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "The evidence document says the stick has a different base formula from the Sun Fluid.",
+    "related": [
+     "test_reports.txt#L5"
+    ],
+    "label": "contradicted",
+    "label_note": "The stick has a different base formula from the Sun Fluid.",
+    "citations": [
+     {
+      "source": "test_reports.txt#L5",
+      "quote": "different base formula from the Sun Fluid.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "This stick contains zinc oxide 15%.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C017",
+    "sku": "EN-013",
+    "column": "description",
+    "source": "EN-013/description",
+    "quote": "SPF 50 and water resistant for 80 minutes",
+    "start": 43,
+    "end": 84,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No SPF or water-resistance test is on file for the sun stick.",
+    "related": [
+     "EN-013/material",
+     "test_reports.txt#L5"
+    ],
+    "label": "no_evidence",
+    "label_note": "No SPF or water-resistance test is on file for the sun stick.",
+    "citations": [],
+    "rewrite": "This stick contains zinc oxide 15%.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C018",
+    "sku": "EN-014",
+    "column": "description",
+    "source": "EN-014/description",
+    "quote": "best ever",
+    "start": 4,
+    "end": 13,
+    "origin": [
+     "rules"
+    ],
+    "category": "superlative",
+    "rule_id": "superlative-en",
+    "rule_reason": "A ranking or best-selling claim needs a clear source, category and date. Without those, describe a concrete feature rather than claiming first place.",
+    "rule_reason_ko": "순위나 판매 1위 주장에는 출처, 비교 범위, 날짜가 필요합니다. 없다면 1위 대신 구체적인 특징을 설명하세요.",
+    "rule_replacement": "for everyday use",
+    "beam_types": [],
+    "beam_reason": "",
+    "related": [],
+    "label": "no_evidence",
+    "label_note": "No ranking or test supports a best-ever claim.",
+    "citations": [],
+    "rewrite": "A hand cream with shea butter and glycerin.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C019",
+    "sku": "EN-014",
+    "column": "description",
+    "source": "EN-014/description",
+    "quote": "gentle enough to use all day",
+    "start": 26,
+    "end": 54,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No spec column or evidence line supports an all-day skin-safety claim.",
+    "related": [
+     "EN-014/material"
+    ],
+    "label": "no_evidence",
+    "label_note": "No evidence supports an all-day skin-safety claim.",
+    "citations": [],
+    "rewrite": "A hand cream with shea butter and glycerin.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C020",
+    "sku": "EN-015",
+    "column": "description",
+    "source": "EN-015/description",
+    "quote": "Zero side effects",
+    "start": 0,
+    "end": 17,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "guarantee",
+    "rule_id": "guarantee-en",
+    "rule_reason": "An absolute promise leaves no room for different experiences. Set a realistic expectation instead.",
+    "rule_reason_ko": "절대적인 약속은 사람마다 다른 경험을 고려하지 못합니다. 현실적인 기대치로 바꾸세요.",
+    "rule_replacement": "Results may vary",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No safety test supports a zero-side-effects claim.",
+    "related": [
+     "EN-015/material"
+    ],
+    "label": "no_evidence",
+    "label_note": "No safety test supports a zero-side-effects claim.",
+    "citations": [],
+    "rewrite": "Made with castor oil, beeswax, and sunflower oil.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C021",
+    "sku": "EN-015",
+    "column": "description",
+    "source": "EN-015/description",
+    "quote": "plant oils only",
+    "start": 29,
+    "end": 44,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "The material column includes beeswax, which is not a plant oil.",
+    "related": [
+     "EN-015/material"
+    ],
+    "label": "contradicted",
+    "label_note": "The ingredients include beeswax, which is not a plant oil.",
+    "citations": [
+     {
+      "source": "EN-015/material",
+      "quote": "Ingredients: castor oil, beeswax, sunflower oil",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "Made with castor oil, beeswax, and sunflower oil.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C022",
+    "sku": "EN-016",
+    "column": "description",
+    "source": "EN-016/description",
+    "quote": "lasts forever",
+    "start": 28,
+    "end": 41,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "guarantee",
+    "rule_id": "guarantee-duration-en",
+    "rule_reason": "An unlimited lifetime promise cannot account for wear or different conditions of use. Remove the absolute durability promise or state a supported service life.",
+    "rule_reason_ko": "끝없는 수명 약속은 마모나 사용 환경 차이를 반영하지 못합니다. 절대적인 내구성 약속을 빼거나 근거 있는 사용 기간을 적으세요.",
+    "rule_replacement": "is intended for everyday use",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No durability evidence supports a lasts-forever claim.",
+    "related": [
+     "EN-016/material"
+    ],
+    "label": "no_evidence",
+    "label_note": "No durability evidence supports a lasts-forever claim.",
+    "citations": [],
+    "rewrite": "Pre-seasoned cast iron. Hand wash, dry, and wipe with oil.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C023",
+    "sku": "EN-017",
+    "column": "description",
+    "source": "EN-017/description",
+    "quote": "PFOA-free",
+    "start": 0,
+    "end": 9,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No spec column or evidence line supports a PFOA-free claim.",
+    "related": [
+     "EN-017/material"
+    ],
+    "label": "no_evidence",
+    "label_note": "No evidence supports a PFOA-free claim.",
+    "citations": [],
+    "rewrite": "Aluminium body with ceramic coating. Oven safe to 220°C (handle limit). Hand wash only.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C024",
+    "sku": "EN-017",
+    "column": "description",
+    "source": "EN-017/description",
+    "quote": "oven safe to 260°C",
+    "start": 27,
+    "end": 45,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "The evidence document says both ceramic pans are oven safe only to 220°C.",
+    "related": [
+     "supplier_specs.txt#L10",
+     "EN-018/description"
+    ],
+    "label": "contradicted",
+    "label_note": "Both ceramic pans are oven safe only to 220°C.",
+    "citations": [
+     {
+      "source": "supplier_specs.txt#L10",
+      "quote": "oven safe to 220°C (handle limit).",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "Aluminium body with ceramic coating. Oven safe to 220°C (handle limit). Hand wash only.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C025",
+    "sku": "EN-017",
+    "column": "description",
+    "source": "EN-017/description",
+    "quote": "dishwasher safe",
+    "start": 50,
+    "end": 65,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "The description says dishwasher safe, but the care column says hand wash only.",
+    "related": [
+     "EN-017/care"
+    ],
+    "label": "no_evidence",
+    "label_note": "Beam's citation did not match the input, so the label was lowered to no evidence.",
+    "citations": [],
+    "rewrite": "Aluminium body with ceramic coating. Oven safe to 220°C (handle limit). Hand wash only.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C026",
+    "sku": "EN-018",
+    "column": "description",
+    "source": "EN-018/description",
+    "quote": "The same pan as our 28 cm in a smaller size",
+    "start": 0,
+    "end": 43,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "contradiction"
+    ],
+    "beam_reason": "The 28 cm pan is described as oven safe to 260°C, while this pan is described as oven safe to 220°C.",
+    "related": [
+     "EN-017/description",
+     "supplier_specs.txt#L10"
+    ],
+    "label": "contradicted",
+    "label_note": "The oven-safe temperatures given for the two pans conflict.",
+    "citations": [
+     {
+      "source": "EN-017/description",
+      "quote": "oven safe to 260°C",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "supplier_specs.txt#L10",
+      "quote": "oven safe to 220°C (handle limit).",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "A 24 cm ceramic-coated pan.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C027",
+    "sku": "EN-019",
+    "column": "description",
+    "source": "EN-019/description",
+    "quote": "Naturally antibacterial",
+    "start": 0,
+    "end": 23,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No antibacterial test or certification is listed for this product.",
+    "related": [
+     "EN-019/material"
+    ],
+    "label": "no_evidence",
+    "label_note": "No antibacterial test or certification is listed.",
+    "citations": [],
+    "rewrite": "Olive wood board for raw meat.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C028",
+    "sku": "EN-019",
+    "column": "description",
+    "source": "EN-019/description",
+    "quote": "the world's best",
+    "start": 36,
+    "end": 52,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "superlative",
+    "rule_id": "superlative-en",
+    "rule_reason": "A ranking or best-selling claim needs a clear source, category and date. Without those, describe a concrete feature rather than claiming first place.",
+    "rule_reason_ko": "순위나 판매 1위 주장에는 출처, 비교 범위, 날짜가 필요합니다. 없다면 1위 대신 구체적인 특징을 설명하세요.",
+    "rule_replacement": "for everyday use",
+    "beam_types": [
+     "ranking"
+    ],
+    "beam_reason": "No comparative ranking or test supports a world's-best claim.",
+    "related": [],
+    "label": "no_evidence",
+    "label_note": "No comparative ranking or test supports a world's-best claim.",
+    "citations": [],
+    "rewrite": "Olive wood board for raw meat.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C029",
+    "sku": "EN-021",
+    "column": "description",
+    "source": "EN-021/description",
+    "quote": "Risk-free",
+    "start": 51,
+    "end": 60,
+    "origin": [
+     "rules"
+    ],
+    "category": "guarantee",
+    "rule_id": "guarantee-en",
+    "rule_reason": "An absolute promise leaves no room for different experiences. Set a realistic expectation instead.",
+    "rule_reason_ko": "절대적인 약속은 사람마다 다른 경험을 고려하지 못합니다. 현실적인 기대치로 바꾸세요.",
+    "rule_replacement": "Results may vary",
+    "beam_types": [],
+    "beam_reason": "",
+    "related": [],
+    "label": "no_evidence",
+    "label_note": "No evidence supports a risk-free promise.",
+    "citations": [],
+    "rewrite": "",
+    "rewrite_from": "cleanup"
+   },
+   {
+    "id": "C030",
+    "sku": "EN-022",
+    "column": "description",
+    "source": "EN-022/description",
+    "quote": "German steel blade",
+    "start": 0,
+    "end": 18,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "The origin column and supplier spec say the stainless steel blade is made and assembled in China.",
+    "related": [
+     "EN-022/origin",
+     "EN-022/material",
+     "supplier_specs.txt#L12"
+    ],
+    "label": "contradicted",
+    "label_note": "The blade is made and assembled in China, not Germany.",
+    "citations": [
+     {
+      "source": "EN-022/origin",
+      "quote": "China",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "supplier_specs.txt#L12",
+      "quote": "stainless steel blade made and assembled in China.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "Stainless steel blade made and assembled in China.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C031",
+    "sku": "EN-022",
+    "column": "description",
+    "source": "EN-022/description",
+    "quote": "No.1",
+    "start": 24,
+    "end": 28,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "superlative",
+    "rule_id": "superlative-en",
+    "rule_reason": "A ranking or best-selling claim needs a clear source, category and date. Without those, describe a concrete feature rather than claiming first place.",
+    "rule_reason_ko": "순위나 판매 1위 주장에는 출처, 비교 범위, 날짜가 필요합니다. 없다면 1위 대신 구체적인 특징을 설명하세요.",
+    "rule_replacement": "For everyday use",
+    "beam_types": [
+     "ranking"
+    ],
+    "beam_reason": "No third-party sales ranking has been collected for any product.",
+    "related": [
+     "test_reports.txt#L7"
+    ],
+    "label": "no_evidence",
+    "label_note": "No third-party sales ranking has been collected.",
+    "citations": [],
+    "rewrite": "Stainless steel blade made and assembled in China.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C032",
+    "sku": "EN-024",
+    "column": "description",
+    "source": "EN-024/description",
+    "quote": "Made from the same 100% linen",
+    "start": 21,
+    "end": 50,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "contradiction"
+    ],
+    "beam_reason": "It claims the same 100% linen as the napkins, but the tablecloth material is 55% linen, 45% cotton.",
+    "related": [
+     "EN-023/description",
+     "EN-023/material",
+     "EN-024/material"
+    ],
+    "label": "contradicted",
+    "label_note": "The tablecloth is a linen-cotton blend, not the same 100% linen as the napkins.",
+    "citations": [
+     {
+      "source": "EN-024/material",
+      "quote": "55% linen, 45% cotton",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "EN-023/material",
+      "quote": "100% linen",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "Made from 55% linen and 45% cotton.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C033",
+    "sku": "EN-025",
+    "column": "description",
+    "source": "EN-025/description",
+    "quote": "100% safe",
+    "start": 21,
+    "end": 30,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "guarantee",
+    "rule_id": "guarantee-en",
+    "rule_reason": "An absolute promise leaves no room for different experiences. Set a realistic expectation instead.",
+    "rule_reason_ko": "절대적인 약속은 사람마다 다른 경험을 고려하지 못합니다. 현실적인 기대치로 바꾸세요.",
+    "rule_replacement": "results may vary",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No safety test or certification supports a 100%-safe claim for babies and toddlers.",
+    "related": [
+     "EN-025/material"
+    ],
+    "label": "no_evidence",
+    "label_note": "No safety test or certification supports a 100%-safe claim.",
+    "citations": [],
+    "rewrite": "Soft cotton pajamas.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C034",
+    "sku": "EN-026",
+    "column": "description",
+    "source": "EN-026/description",
+    "quote": "130 x 170 cm",
+    "start": 26,
+    "end": 38,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "The size chart and supplier spec say the finished throw is 130 x 180 cm.",
+    "related": [
+     "EN-026/size_chart",
+     "supplier_specs.txt#L13"
+    ],
+    "label": "contradicted",
+    "label_note": "The finished throw is 130 x 180 cm, not 130 x 170 cm.",
+    "citations": [
+     {
+      "source": "EN-026/size_chart",
+      "quote": "130 x 180 cm",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "supplier_specs.txt#L13",
+      "quote": "finished size 130 x 180 cm.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "Warm recycled wool throw, 130 x 180 cm.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C035",
+    "sku": "EN-027",
+    "column": "description",
+    "source": "EN-027/description",
+    "quote": "12 oz",
+    "start": 6,
+    "end": 11,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "The material column and supplier spec say the canvas is 10 oz.",
+    "related": [
+     "EN-027/material",
+     "supplier_specs.txt#L14"
+    ],
+    "label": "contradicted",
+    "label_note": "The canvas is 10 oz, not 12 oz.",
+    "citations": [
+     {
+      "source": "EN-027/material",
+      "quote": "100% cotton canvas, 10 oz",
+      "ok": true,
+      "note": ""
+     },
+     {
+      "source": "supplier_specs.txt#L14",
+      "quote": "10 oz cotton canvas, not certified organic.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "Heavy 10 oz cotton canvas with long handles.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C036",
+    "sku": "EN-027",
+    "column": "description",
+    "source": "EN-027/description",
+    "quote": "organic canvas",
+    "start": 12,
+    "end": 26,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "spec_conflict"
+    ],
+    "beam_reason": "The supplier spec says the cotton canvas is not certified organic.",
+    "related": [
+     "EN-027/material",
+     "supplier_specs.txt#L14"
+    ],
+    "label": "contradicted",
+    "label_note": "The cotton canvas is not certified organic.",
+    "citations": [
+     {
+      "source": "supplier_specs.txt#L14",
+      "quote": "not certified organic.",
+      "ok": true,
+      "note": ""
+     }
+    ],
+    "rewrite": "Heavy 10 oz cotton canvas with long handles.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C037",
+    "sku": "EN-029",
+    "column": "description",
+    "source": "EN-029/description",
+    "quote": "heals eczema",
+    "start": 24,
+    "end": 36,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "medical",
+    "rule_id": "medical-en",
+    "rule_reason": "This wording promises to treat a health condition. Describe the product’s everyday use instead; treatment claims need appropriate authorization and support.",
+    "rule_reason_ko": "질환을 치료한다고 약속하는 표현입니다. 일상적인 사용법으로 설명하세요. 치료 효능 표현에는 별도의 허가와 근거가 필요합니다.",
+    "rule_replacement": "is designed for everyday care",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No clinical or dermatological evidence supports an eczema-healing claim.",
+    "related": [
+     "EN-029/material"
+    ],
+    "label": "no_evidence",
+    "label_note": "No clinical or dermatological evidence supports an eczema-healing claim.",
+    "citations": [],
+    "rewrite": "Pure mulberry silk.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C038",
+    "sku": "EN-030",
+    "column": "description",
+    "source": "EN-030/description",
+    "quote": "Doctor-recommended",
+    "start": 0,
+    "end": 18,
+    "origin": [
+     "rules",
+     "beam"
+    ],
+    "category": "evidence",
+    "rule_id": "evidence-en",
+    "rule_reason": "This wording suggests expert or research support. Check the actual evidence and its scope, or remove the implied endorsement. This tool does not verify studies.",
+    "rule_reason_ko": "전문가나 연구의 뒷받침을 암시하는 표현입니다. 실제 근거와 범위를 확인하거나 암시된 추천을 빼세요.",
+    "rule_replacement": "Thoughtfully developed",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No medical recommendation or certification is listed for this product.",
+    "related": [
+     "EN-030/material"
+    ],
+    "label": "no_evidence",
+    "label_note": "No medical recommendation or certification is listed.",
+    "citations": [],
+    "rewrite": "Swap for plastic wrap. Rinse in cool water.",
+    "rewrite_from": "beam"
+   },
+   {
+    "id": "C039",
+    "sku": "EN-030",
+    "column": "description",
+    "source": "EN-030/description",
+    "quote": "Lasts a year with care",
+    "start": 42,
+    "end": 64,
+    "origin": [
+     "beam"
+    ],
+    "category": "",
+    "rule_id": "",
+    "rule_reason": "",
+    "rule_reason_ko": "",
+    "rule_replacement": "",
+    "beam_types": [
+     "unsupported"
+    ],
+    "beam_reason": "No durability evidence supports a one-year lifespan claim.",
+    "related": [
+     "EN-030/material"
+    ],
+    "label": "no_evidence",
+    "label_note": "No durability evidence supports a one-year lifespan claim.",
+    "citations": [],
+    "rewrite": "Swap for plastic wrap. Rinse in cool water.",
+    "rewrite_from": "beam"
+   }
+  ],
+  "guard": [
+   {
+    "step": "verify",
+    "item": "C025",
+    "text": "EN-017/care: Hand wash only.",
+    "reason": "quote not found in the catalog or evidence"
+   },
+   {
+    "step": "verify",
+    "item": "C025",
+    "text": "contradicted",
+    "reason": "label lowered: no citation survived the exact-text check"
+   },
+   {
+    "step": "rewrite",
+    "item": "C029",
+    "text": "30-day returns.",
+    "reason": "leaves a fragment ('30-day returns.')"
+   }
+  ],
+  "steps": [
+   {
+    "step": "audit",
+    "ok": true,
+    "detail": "37 issues kept, 0 rejected"
+   },
+   {
+    "step": "verify",
+    "ok": true,
+    "detail": "25 of 26 quotes matched the input exactly"
+   },
+   {
+    "step": "rewrite",
+    "ok": true,
+    "detail": "26 fields in 26 products sent"
+   }
+  ],
+  "messages": [],
+  "quotes_checked": 26,
+  "quotes_accepted": 25,
+  "model": "reflection/Beam-1.0-501B-A23B",
+  "generated_at": "2026-10-29T15:59:07+00:00",
+  "calls_made": 3,
+  "raw_answers": {
+   "audit": "{\n  \"issues\": [\n    {\n      \"source\": \"EN-001/description\",\n      \"quote\": \"100% linen\",\n      \"type\": \"spec_conflict\",\n      \"related\": [\"EN-001/material\"],\n      \"reason\": \"The description says 100% linen, but the material column says 55% linen, 45% cotton.\"\n    },\n    {\n      \"source\": \"EN-002/description\",\n      \"quote\": \"Best seller #1\",\n      \"type\": \"ranking\",\n      \"related\": [\"test_reports.txt#L7\"],\n      \"reason\": \"No third-party sales ranking has been collected for any product.\"\n    },\n    {\n      \"source\": \"EN-003/description\",\n      \"quote\": \"500 GSM\",\n      \"type\": \"spec_conflict\",\n      \"related\": [\"EN-003/material\", \"EN-004/description\"],\n      \"reason\": \"The description says 500 GSM, but the material column and the towel set description say 380 GSM.\"\n    },\n    {\n      \"source\": \"EN-003/description\",\n      \"quote\": \"Never fades, even after hundreds of washes\",\n      \"type\": \"unsupported\",\n      \"related\": [\"EN-003/material\"],\n      \"reason\": \"No spec column or evidence line supports a fade-proof durability claim.\"\n    },\n    {\n      \"source\": \"EN-004/description\",\n      \"quote\": \"#1 best-selling towel set\",\n      \"type\": \"ranking\",\n      \"related\": [\"test_reports.txt#L7\"],\n      \"reason\": \"No third-party sales ranking has been collected for any product.\"\n    },\n    {\n      \"source\": \"EN-005/description\",\n      \"quote\": \"keeps its shape\",\n      \"type\": \"unsupported\",\n      \"related\": [\"supplier_specs.txt#L6\"],\n      \"reason\": \"No spec column or evidence line supports a shape-retention durability claim.\"\n    },\n    {\n      \"source\": \"EN-006/description\",\n      \"quote\": \"Same organic cotton as our Crew Tee\",\n      \"type\": \"contradiction\",\n      \"related\": [\"EN-005/description\", \"EN-005/certifications\", \"EN-006/material\"],\n      \"reason\": \"It claims the same organic cotton as the Crew Tee, but this tee's material is conventional cotton.\"\n    },\n    {\n      \"source\": \"EN-006/description\",\n      \"quote\": \"Made in Portugal\",\n      \"type\": \"spec_conflict\",\n      \"related\": [\"EN-006/origin\", \"supplier_specs.txt#L7\"],\n      \"reason\": \"The description says Made in Portugal, but the origin column and supplier spec say Vietnam.\"\n    },\n    {\n      \"source\": \"EN-007/description\",\n      \"quote\": \"Size M has a 54 cm chest\",\n      \"type\": \"spec_conflict\",\n      \"related\": [\"EN-007/size_chart\", \"supplier_specs.txt#L8\"],\n      \"reason\": \"The description says 54 cm, but the size chart and supplier spec say 58 cm.\"\n    },\n    {\n      \"source\": \"EN-008/description\",\n      \"quote\": \"never shrinks\",\n      \"type\": \"unsupported\",\n      \"related\": [\"EN-008/care\"],\n      \"reason\": \"No spec column or evidence line supports a shrink-proof claim.\"\n    },\n    {\n      \"source\": \"EN-008/description\",\n      \"quote\": \"Soft enough for sensitive skin\",\n      \"type\": \"unsupported\",\n      \"related\": [\"EN-008/material\"],\n      \"reason\": \"No spec column or evidence line supports a sensitive-skin suitability claim.\"\n    },\n    {\n      \"source\": \"EN-009/description\",\n      \"quote\": \"Dermatologist-approved comfort\",\n      \"type\": \"unsupported\",\n      \"related\": [\"EN-009/material\"],\n      \"reason\": \"No dermatological test or certification is listed for this product.\"\n    },\n    {\n      \"source\": \"EN-010/description\",\n      \"quote\": \"cures acne in 7 days\",\n      \"type\": \"unsupported\",\n      \"related\": [\"EN-010/material\", \"test_reports.txt#L6\"],\n      \"reason\": \"No clinical or dermatological test supports an acne-cure claim.\"\n    },\n    {\n      \"source\": \"EN-010/description\",\n      \"quote\": \"100% safe for every skin type\",\n      \"type\": \"unsupported\",\n      \"related\": [\"EN-010/material\", \"test_reports.txt#L6\"],\n      \"reason\": \"No clinical or dermatological test supports a universal skin-safety claim.\"\n    },\n    {\n      \"source\": \"EN-011/description\",\n      \"quote\": \"Clinically proven to reduce redness in 2 weeks\",\n      \"type\": \"spec_conflict\",\n      \"related\": [\"EN-011/certifications\", \"test_reports.txt#L3\"],\n      \"reason\": \"The cited report is a consumer use test, not a clinical trial, and redness was not measured.\"\n    },\n    {\n      \"source\": \"EN-013/description\",\n      \"quote\": \"Same formula as our Sun Fluid\",\n      \"type\": \"spec_conflict\",\n      \"related\": [\"test_reports.txt#L5\"],\n      \"reason\": \"The evidence document says the stick has a different base formula from the Sun Fluid.\"\n    },\n    {\n      \"source\": \"EN-013/description\",\n      \"quote\": \"SPF 50 and water resistant for 80 minutes\",\n      \"type\": \"unsupported\",\n      \"related\": [\"EN-013/material\", \"test_reports.txt#L5\"],\n      \"reason\": \"No SPF or water-resistance test is on file for the sun stick.\"\n    },\n    {\n      \"source\": \"EN-014/description\",\n      \"quote\": \"gentle enough to use all day\",\n      \"type\": \"unsupported\",\n      \"related\": [\"EN-014/material\"],\n      \"reason\": \"No spec column or evidence line supports an all-day skin-safety claim.\"\n    },\n    {\n      \"source\": \"EN-015/description\",\n      \"quote\": \"plant oils only\",\n      \"type\": \"spec_conflict\",\n      \"related\": [\"EN-015/material\"],\n      \"reason\": \"The material column includes beeswax, which is not a plant oil.\"\n    },\n    {\n      \"source\": \"EN-015/description\",\n      \"quote\": \"Zero side effects\",\n      \"type\": \"unsupported\",\n      \"related\": [\"EN-015/material\"],\n      \"reason\": \"No safety test supports a zero-side-effects claim.\"\n    },\n    {\n      \"source\": \"EN-016/description\",\n      \"quote\": \"lasts forever\",\n      \"type\": \"unsupported\",\n      \"related\": [\"EN-016/material\"],\n      \"reason\": \"No durability evidence supports a lasts-forever claim.\"\n    },\n    {\n      \"source\": \"EN-017/description\",\n      \"quote\": \"oven safe to 260°C\",\n      \"type\": \"spec_conflict\",\n      \"related\": [\"supplier_specs.txt#L10\", \"EN-018/description\"],\n      \"reason\": \"The evidence document says both ceramic pans are oven safe only to 220°C.\"\n    },\n    {\n      \"source\": \"EN-017/description\",\n      \"quote\": \"dishwasher safe\",\n      \"type\": \"spec_conflict\",\n      \"related\": [\"EN-017/care\"],\n      \"reason\": \"The description says dishwasher safe, but the care column says hand wash only.\"\n    },\n    {\n      \"source\": \"EN-017/description\",\n      \"quote\": \"PFOA-free\",\n      \"type\": \"unsupported\",\n      \"related\": [\"EN-017/material\"],\n      \"reason\": \"No spec column or evidence line supports a PFOA-free claim.\"\n    },\n    {\n      \"source\": \"EN-018/description\",\n      \"quote\": \"The same pan as our 28 cm in a smaller size\",\n      \"type\": \"contradiction\",\n      \"related\": [\"EN-017/description\", \"supplier_specs.txt#L10\"],\n      \"reason\": \"The 28 cm pan is described as oven safe to 260°C, while this pan is described as oven safe to 220°C.\"\n    },\n    {\n      \"source\": \"EN-019/description\",\n      \"quote\": \"Naturally antibacterial\",\n      \"type\": \"unsupported\",\n      \"related\": [\"EN-019/material\"],\n      \"reason\": \"No antibacterial test or certification is listed for this product.\"\n    },\n    {\n      \"source\": \"EN-019/description\",\n      \"quote\": \"the world's best board for raw meat\",\n      \"type\": \"ranking\",\n      \"related\": [],\n      \"reason\": \"No comparative ranking or test supports a world's-best claim.\"\n    },\n    {\n      \"source\": \"EN-022/description\",\n      \"quote\": \"German steel blade\",\n      \"type\": \"spec_conflict\",\n      \"related\": [\"EN-022/origin\", \"EN-022/material\", \"supplier_specs.txt#L12\"],\n      \"reason\": \"The origin column and supplier spec say the stainless steel blade is made and assembled in China.\"\n    },\n    {\n      \"source\": \"EN-022/description\",\n      \"quote\": \"the No.1 knife for home cooks\",\n      \"type\": \"ranking\",\n      \"related\": [\"test_reports.txt#L7\"],\n      \"reason\": \"No third-party sales ranking has been collected for any product.\"\n    },\n    {\n      \"source\": \"EN-024/description\",\n      \"quote\": \"Made from the same 100% linen\",\n      \"type\": \"contradiction\",\n      \"related\": [\"EN-023/description\", \"EN-023/material\", \"EN-024/material\"],\n      \"reason\": \"It claims the same 100% linen as the napkins, but the tablecloth material is 55% linen, 45% cotton.\"\n    },\n    {\n      \"source\": \"EN-025/description\",\n      \"quote\": \"100% safe for babies and toddlers\",\n      \"type\": \"unsupported\",\n      \"related\": [\"EN-025/material\"],\n      \"reason\": \"No safety test or certification supports a 100%-safe claim for babies and toddlers.\"\n    },\n    {\n      \"source\": \"EN-026/description\",\n      \"quote\": \"130 x 170 cm\",\n      \"type\": \"spec_conflict\",\n      \"related\": [\"EN-026/size_chart\", \"supplier_specs.txt#L13\"],\n      \"reason\": \"The size chart and supplier spec say the finished throw is 130 x 180 cm.\"\n    },\n    {\n      \"source\": \"EN-027/description\",\n      \"quote\": \"12 oz\",\n      \"type\": \"spec_conflict\",\n      \"related\": [\"EN-027/material\", \"supplier_specs.txt#L14\"],\n      \"reason\": \"The material column and supplier spec say the canvas is 10 oz.\"\n    },\n    {\n      \"source\": \"EN-027/description\",\n      \"quote\": \"organic canvas\",\n      \"type\": \"spec_conflict\",\n      \"related\": [\"EN-027/material\", \"supplier_specs.txt#L14\"],\n      \"reason\": \"The supplier spec says the cotton canvas is not certified organic.\"\n    },\n    {\n      \"source\": \"EN-029/description\",\n      \"quote\": \"heals eczema while you sleep\",\n      \"type\": \"unsupported\",\n      \"related\": [\"EN-029/material\"],\n      \"reason\": \"No clinical or dermatological evidence supports an eczema-healing claim.\"\n    },\n    {\n      \"source\": \"EN-030/description\",\n      \"quote\": \"Doctor-recommended\",\n      \"type\": \"unsupported\",\n      \"related\": [\"EN-030/material\"],\n      \"reason\": \"No medical recommendation or certification is listed for this product.\"\n    },\n    {\n      \"source\": \"EN-030/description\",\n      \"quote\": \"Lasts a year with care\",\n      \"type\": \"unsupported\",\n      \"related\": [\"EN-030/material\"],\n      \"reason\": \"No durability evidence supports a one-year lifespan claim.\"\n    }\n  ]\n}",
+   "verify": "{\"results\":[\n{\"id\":\"C001\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"EN-001/material\",\"quote\":\"55% linen, 45% cotton\"}],\"note\":\"The material column lists a linen-cotton blend, not 100% linen.\"},\n{\"id\":\"C002\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No evidence in the input confirms a best-seller ranking.\"},\n{\"id\":\"C003\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"EN-003/material\",\"quote\":\"100% cotton, 380 GSM\"},{\"source\":\"EN-004/description\",\"quote\":\"Three of our Waffle Bath Towels (380 GSM)\"}],\"note\":\"The towel is 380 GSM, not 500 GSM.\"},\n{\"id\":\"C004\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No evidence supports a fade-proof durability claim.\"},\n{\"id\":\"C005\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No evidence in the input confirms a best-selling ranking.\"},\n{\"id\":\"C006\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No evidence supports a shape-retention claim.\"},\n{\"id\":\"C007\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"EN-006/material\",\"quote\":\"100% cotton\"},{\"source\":\"supplier_specs.txt#L7\",\"quote\":\"conventional cotton, sewn in Vietnam.\"}],\"note\":\"This tee is conventional cotton, not the same organic cotton as the Crew Tee.\"},\n{\"id\":\"C008\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"EN-006/origin\",\"quote\":\"Vietnam\"},{\"source\":\"supplier_specs.txt#L7\",\"quote\":\"sewn in Vietnam.\"}],\"note\":\"The origin is Vietnam, not Portugal.\"},\n{\"id\":\"C009\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"EN-007/size_chart\",\"quote\":\"M chest 58 cm, L chest 61 cm\"},{\"source\":\"supplier_specs.txt#L8\",\"quote\":\"chest 58 cm, length 70 cm.\"}],\"note\":\"Size M has a 58 cm chest, not 54 cm.\"},\n{\"id\":\"C010\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No evidence supports a shrink-proof claim.\"},\n{\"id\":\"C011\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No evidence supports a sensitive-skin suitability claim.\"},\n{\"id\":\"C012\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No dermatological test or certification is listed.\"},\n{\"id\":\"C013\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No clinical or dermatological test supports an acne-cure claim.\"},\n{\"id\":\"C014\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No clinical or dermatological test supports a universal skin-safety claim.\"},\n{\"id\":\"C015\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"EN-011/certifications\",\"quote\":\"Consumer use test, report CR-17\"},{\"source\":\"test_reports.txt#L3\",\"quote\":\"Not a clinical trial. Redness was not measured.\"}],\"note\":\"The report is a consumer use test, not a clinical trial measuring redness.\"},\n{\"id\":\"C016\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"test_reports.txt#L5\",\"quote\":\"different base formula from the Sun Fluid.\"}],\"note\":\"The stick has a different base formula from the Sun Fluid.\"},\n{\"id\":\"C017\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No SPF or water-resistance test is on file for the sun stick.\"},\n{\"id\":\"C018\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No ranking or test supports a best-ever claim.\"},\n{\"id\":\"C019\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No evidence supports an all-day skin-safety claim.\"},\n{\"id\":\"C020\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No safety test supports a zero-side-effects claim.\"},\n{\"id\":\"C021\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"EN-015/material\",\"quote\":\"Ingredients: castor oil, beeswax, sunflower oil\"}],\"note\":\"The ingredients include beeswax, which is not a plant oil.\"},\n{\"id\":\"C022\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No durability evidence supports a lasts-forever claim.\"},\n{\"id\":\"C023\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No evidence supports a PFOA-free claim.\"},\n{\"id\":\"C024\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"supplier_specs.txt#L10\",\"quote\":\"oven safe to 220°C (handle limit).\"}],\"note\":\"Both ceramic pans are oven safe only to 220°C.\"},\n{\"id\":\"C025\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"EN-017/care\",\"quote\":\"Hand wash only.\"}],\"note\":\"The care instructions say hand wash only.\"},\n{\"id\":\"C026\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"EN-017/description\",\"quote\":\"oven safe to 260°C\"},{\"source\":\"supplier_specs.txt#L10\",\"quote\":\"oven safe to 220°C (handle limit).\"}],\"note\":\"The oven-safe temperatures given for the two pans conflict.\"},\n{\"id\":\"C027\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No antibacterial test or certification is listed.\"},\n{\"id\":\"C028\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No comparative ranking or test supports a world's-best claim.\"},\n{\"id\":\"C029\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No evidence supports a risk-free promise.\"},\n{\"id\":\"C030\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"EN-022/origin\",\"quote\":\"China\"},{\"source\":\"supplier_specs.txt#L12\",\"quote\":\"stainless steel blade made and assembled in China.\"}],\"note\":\"The blade is made and assembled in China, not Germany.\"},\n{\"id\":\"C031\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No third-party sales ranking has been collected.\"},\n{\"id\":\"C032\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"EN-024/material\",\"quote\":\"55% linen, 45% cotton\"},{\"source\":\"EN-023/material\",\"quote\":\"100% linen\"}],\"note\":\"The tablecloth is a linen-cotton blend, not the same 100% linen as the napkins.\"},\n{\"id\":\"C033\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No safety test or certification supports a 100%-safe claim.\"},\n{\"id\":\"C034\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"EN-026/size_chart\",\"quote\":\"130 x 180 cm\"},{\"source\":\"supplier_specs.txt#L13\",\"quote\":\"finished size 130 x 180 cm.\"}],\"note\":\"The finished throw is 130 x 180 cm, not 130 x 170 cm.\"},\n{\"id\":\"C035\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"EN-027/material\",\"quote\":\"100% cotton canvas, 10 oz\"},{\"source\":\"supplier_specs.txt#L14\",\"quote\":\"10 oz cotton canvas, not certified organic.\"}],\"note\":\"The canvas is 10 oz, not 12 oz.\"},\n{\"id\":\"C036\",\"label\":\"contradicted\",\"citations\":[{\"source\":\"supplier_specs.txt#L14\",\"quote\":\"not certified organic.\"}],\"note\":\"The cotton canvas is not certified organic.\"},\n{\"id\":\"C037\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No clinical or dermatological evidence supports an eczema-healing claim.\"},\n{\"id\":\"C038\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No medical recommendation or certification is listed.\"},\n{\"id\":\"C039\",\"label\":\"no_evidence\",\"citations\":[],\"note\":\"No durability evidence supports a one-year lifespan claim.\"}\n]}",
+   "rewrite": "{\"products\":[{\"sku\":\"EN-001\",\"fields\":[{\"column\":\"description\",\"text\":\"Our everyday apron in 55% linen and 45% cotton. Two deep pockets and an adjustable neck strap.\"}]},{\"sku\":\"EN-002\",\"fields\":[{\"column\":\"description\",\"text\":\"The same soft linen as our Everyday Apron, now with a cross-back.\"}]},{\"sku\":\"EN-003\",\"fields\":[{\"column\":\"description\",\"text\":\"Heavy 380 GSM waffle weave that dries fast. Colors may fade with washing. Tumble dry low.\"}]},{\"sku\":\"EN-004\",\"fields\":[{\"column\":\"description\",\"text\":\"Three of our Waffle Bath Towels (380 GSM) tied with a gift band.\"}]},{\"sku\":\"EN-005\",\"fields\":[{\"column\":\"description\",\"text\":\"Certified organic cotton tee, pre-washed. Machine wash 30°C.\"}]},{\"sku\":\"EN-006\",\"fields\":[{\"column\":\"description\",\"text\":\"Conventional cotton tee with a chest pocket, sewn in Vietnam.\"}]},{\"sku\":\"EN-007\",\"fields\":[{\"column\":\"description\",\"text\":\"Relaxed fit, true to size. Size M has a 58 cm chest.\"}]},{\"sku\":\"EN-008\",\"fields\":[{\"column\":\"description\",\"text\":\"Fine merino wool. Hand wash cold and dry flat.\"}]},{\"sku\":\"EN-009\",\"fields\":[{\"column\":\"description\",\"text\":\"Breathable cotton socks with a soft rib.\"}]},{\"sku\":\"EN-010\",\"fields\":[{\"column\":\"description\",\"text\":\"A lightweight serum with niacinamide 5%, panthenol, and glycerin.\"}]},{\"sku\":\"EN-011\",\"fields\":[{\"column\":\"description\",\"text\":\"A consumer use test was conducted (report CR-17). Redness was not measured. Rich but not greasy.\"}]},{\"sku\":\"EN-013\",\"fields\":[{\"column\":\"description\",\"text\":\"This stick contains zinc oxide 15%.\"}]},{\"sku\":\"EN-014\",\"fields\":[{\"column\":\"description\",\"text\":\"A hand cream with shea butter and glycerin.\"}]},{\"sku\":\"EN-015\",\"fields\":[{\"column\":\"description\",\"text\":\"Made with castor oil, beeswax, and sunflower oil.\"}]},{\"sku\":\"EN-016\",\"fields\":[{\"column\":\"description\",\"text\":\"Pre-seasoned cast iron. Hand wash, dry, and wipe with oil. Oven safe to 260°C.\"}]},{\"sku\":\"EN-017\",\"fields\":[{\"column\":\"description\",\"text\":\"Aluminium body with ceramic coating. Oven safe to 220°C (handle limit). Hand wash only.\"}]},{\"sku\":\"EN-018\",\"fields\":[{\"column\":\"description\",\"text\":\"A 24 cm ceramic-coated pan. Oven safe to 220°C. Hand wash to protect the coating.\"}]},{\"sku\":\"EN-019\",\"fields\":[{\"column\":\"description\",\"text\":\"Olive wood board for raw meat.\"}]},{\"sku\":\"EN-021\",\"fields\":[{\"column\":\"description\",\"text\":\"Borosilicate glass jars with airtight bamboo lids. 30-day returns.\"}]},{\"sku\":\"EN-022\",\"fields\":[{\"column\":\"description\",\"text\":\"Stainless steel blade made and assembled in China.\"}]},{\"sku\":\"EN-024\",\"fields\":[{\"column\":\"description\",\"text\":\"Matches our napkins. Made from 55% linen and 45% cotton.\"}]},{\"sku\":\"EN-025\",\"fields\":[{\"column\":\"description\",\"text\":\"Soft cotton pajamas.\"}]},{\"sku\":\"EN-026\",\"fields\":[{\"column\":\"description\",\"text\":\"Warm recycled wool throw, 130 x 180 cm.\"}]},{\"sku\":\"EN-027\",\"fields\":[{\"column\":\"description\",\"text\":\"Heavy 10 oz cotton canvas with long handles.\"}]},{\"sku\":\"EN-029\",\"fields\":[{\"column\":\"description\",\"text\":\"Pure mulberry silk.\"}]},{\"sku\":\"EN-030\",\"fields\":[{\"column\":\"description\",\"text\":\"Swap for plastic wrap. Rinse in cool water.\"}]}]}"
+  },
+  "field_rewrites": [
+   {
+    "sku": "EN-001",
+    "column": "description",
+    "source": "EN-001/description",
+    "before": "Our everyday apron in 100% linen. Two deep pockets and an adjustable neck strap.",
+    "after": "Our everyday apron in 55% linen and 45% cotton. Two deep pockets and an adjustable neck strap.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C001"
+      ],
+      "before": "Our everyday apron in 100% linen.",
+      "after": "Our everyday apron in 55% linen and 45% cotton.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-002",
+    "column": "description",
+    "source": "EN-002/description",
+    "before": "The same soft linen as our Everyday Apron, now with a cross-back. Best seller #1 in our shop.",
+    "after": "The same soft linen as our Everyday Apron, now with a cross-back.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C002"
+      ],
+      "before": "Best seller #1 in our shop.",
+      "after": "",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-003",
+    "column": "description",
+    "source": "EN-003/description",
+    "before": "Heavy 500 GSM waffle weave that dries fast. Never fades, even after hundreds of washes.",
+    "after": "Heavy 380 GSM waffle weave that dries fast. Colors may fade with washing. Tumble dry low.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C003",
+       "C004"
+      ],
+      "before": "Heavy 500 GSM waffle weave that dries fast. Never fades, even after hundreds of washes.",
+      "after": "Heavy 380 GSM waffle weave that dries fast. Colors may fade with washing. Tumble dry low.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-004",
+    "column": "description",
+    "source": "EN-004/description",
+    "before": "Three of our Waffle Bath Towels (380 GSM) tied with a gift band. Our #1 best-selling towel set.",
+    "after": "Three of our Waffle Bath Towels (380 GSM) tied with a gift band.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C005"
+      ],
+      "before": "Our #1 best-selling towel set.",
+      "after": "",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-005",
+    "column": "description",
+    "source": "EN-005/description",
+    "before": "Certified organic cotton tee, pre-washed so it keeps its shape.",
+    "after": "Certified organic cotton tee, pre-washed. Machine wash 30°C.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C006"
+      ],
+      "before": "Certified organic cotton tee, pre-washed so it keeps its shape.",
+      "after": "Certified organic cotton tee, pre-washed. Machine wash 30°C.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-006",
+    "column": "description",
+    "source": "EN-006/description",
+    "before": "Same organic cotton as our Crew Tee, with a chest pocket. Made in Portugal.",
+    "after": "Conventional cotton tee with a chest pocket, sewn in Vietnam.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C007",
+       "C008"
+      ],
+      "before": "Same organic cotton as our Crew Tee, with a chest pocket. Made in Portugal.",
+      "after": "Conventional cotton tee with a chest pocket, sewn in Vietnam.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-007",
+    "column": "description",
+    "source": "EN-007/description",
+    "before": "Relaxed fit, true to size. Size M has a 54 cm chest.",
+    "after": "Relaxed fit, true to size. Size M has a 58 cm chest.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C009"
+      ],
+      "before": "Size M has a 54 cm chest.",
+      "after": "Size M has a 58 cm chest.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-008",
+    "column": "description",
+    "source": "EN-008/description",
+    "before": "Fine merino wool that never shrinks. Soft enough for sensitive skin.",
+    "after": "Fine merino wool. Hand wash cold and dry flat.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C010",
+       "C011"
+      ],
+      "before": "Fine merino wool that never shrinks. Soft enough for sensitive skin.",
+      "after": "Fine merino wool. Hand wash cold and dry flat.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-009",
+    "column": "description",
+    "source": "EN-009/description",
+    "before": "Breathable cotton socks with a soft rib. Dermatologist-approved comfort.",
+    "after": "Breathable cotton socks with a soft rib.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C012"
+      ],
+      "before": "Dermatologist-approved comfort.",
+      "after": "",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-010",
+    "column": "description",
+    "source": "EN-010/description",
+    "before": "A lightweight serum that cures acne in 7 days and is 100% safe for every skin type.",
+    "after": "A lightweight serum with niacinamide 5%, panthenol, and glycerin.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C013",
+       "C014"
+      ],
+      "before": "A lightweight serum that cures acne in 7 days and is 100% safe for every skin type.",
+      "after": "A lightweight serum with niacinamide 5%, panthenol, and glycerin.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-011",
+    "column": "description",
+    "source": "EN-011/description",
+    "before": "Clinically proven to reduce redness in 2 weeks. Rich but not greasy.",
+    "after": "A consumer use test was conducted (report CR-17). Redness was not measured. Rich but not greasy.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C015"
+      ],
+      "before": "Clinically proven to reduce redness in 2 weeks.",
+      "after": "A consumer use test was conducted (report CR-17). Redness was not measured.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-013",
+    "column": "description",
+    "source": "EN-013/description",
+    "before": "Same formula as our Sun Fluid, in a stick. SPF 50 and water resistant for 80 minutes.",
+    "after": "This stick contains zinc oxide 15%.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C016",
+       "C017"
+      ],
+      "before": "Same formula as our Sun Fluid, in a stick. SPF 50 and water resistant for 80 minutes.",
+      "after": "This stick contains zinc oxide 15%.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-014",
+    "column": "description",
+    "source": "EN-014/description",
+    "before": "Our best ever hand cream, gentle enough to use all day.",
+    "after": "A hand cream with shea butter and glycerin.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C018",
+       "C019"
+      ],
+      "before": "Our best ever hand cream, gentle enough to use all day.",
+      "after": "A hand cream with shea butter and glycerin.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-015",
+    "column": "description",
+    "source": "EN-015/description",
+    "before": "Zero side effects, made with plant oils only.",
+    "after": "Made with castor oil, beeswax, and sunflower oil.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C020",
+       "C021"
+      ],
+      "before": "Zero side effects, made with plant oils only.",
+      "after": "Made with castor oil, beeswax, and sunflower oil.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-016",
+    "column": "description",
+    "source": "EN-016/description",
+    "before": "Pre-seasoned cast iron that lasts forever. Oven safe to 260°C.",
+    "after": "Pre-seasoned cast iron. Hand wash, dry, and wipe with oil. Oven safe to 260°C.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C022"
+      ],
+      "before": "Pre-seasoned cast iron that lasts forever.",
+      "after": "Pre-seasoned cast iron. Hand wash, dry, and wipe with oil.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-017",
+    "column": "description",
+    "source": "EN-017/description",
+    "before": "PFOA-free ceramic coating, oven safe to 260°C and dishwasher safe.",
+    "after": "Aluminium body with ceramic coating. Oven safe to 220°C (handle limit). Hand wash only.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C023",
+       "C024",
+       "C025"
+      ],
+      "before": "PFOA-free ceramic coating, oven safe to 260°C and dishwasher safe.",
+      "after": "Aluminium body with ceramic coating. Oven safe to 220°C (handle limit). Hand wash only.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-018",
+    "column": "description",
+    "source": "EN-018/description",
+    "before": "The same pan as our 28 cm in a smaller size. Oven safe to 220°C. Hand wash to protect the coating.",
+    "after": "A 24 cm ceramic-coated pan. Oven safe to 220°C. Hand wash to protect the coating.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C026"
+      ],
+      "before": "The same pan as our 28 cm in a smaller size.",
+      "after": "A 24 cm ceramic-coated pan.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-019",
+    "column": "description",
+    "source": "EN-019/description",
+    "before": "Naturally antibacterial olive wood, the world's best board for raw meat.",
+    "after": "Olive wood board for raw meat.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C027",
+       "C028"
+      ],
+      "before": "Naturally antibacterial olive wood, the world's best board for raw meat.",
+      "after": "Olive wood board for raw meat.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-021",
+    "column": "description",
+    "source": "EN-021/description",
+    "before": "Borosilicate glass jars with airtight bamboo lids. Risk-free 30-day returns.",
+    "after": "Borosilicate glass jars with airtight bamboo lids.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C029"
+      ],
+      "before": "Risk-free 30-day returns.",
+      "after": "",
+      "source": "cleanup",
+      "note": "leaves a fragment ('30-day returns.')"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-022",
+    "column": "description",
+    "source": "EN-022/description",
+    "before": "German steel blade, the No.1 knife for home cooks.",
+    "after": "Stainless steel blade made and assembled in China.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C030",
+       "C031"
+      ],
+      "before": "German steel blade, the No.1 knife for home cooks.",
+      "after": "Stainless steel blade made and assembled in China.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-024",
+    "column": "description",
+    "source": "EN-024/description",
+    "before": "Matches our napkins. Made from the same 100% linen.",
+    "after": "Matches our napkins. Made from 55% linen and 45% cotton.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C032"
+      ],
+      "before": "Made from the same 100% linen.",
+      "after": "Made from 55% linen and 45% cotton.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-025",
+    "column": "description",
+    "source": "EN-025/description",
+    "before": "Soft cotton pajamas, 100% safe for babies and toddlers.",
+    "after": "Soft cotton pajamas.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C033"
+      ],
+      "before": "Soft cotton pajamas, 100% safe for babies and toddlers.",
+      "after": "Soft cotton pajamas.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-026",
+    "column": "description",
+    "source": "EN-026/description",
+    "before": "Warm recycled wool throw, 130 x 170 cm.",
+    "after": "Warm recycled wool throw, 130 x 180 cm.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C034"
+      ],
+      "before": "Warm recycled wool throw, 130 x 170 cm.",
+      "after": "Warm recycled wool throw, 130 x 180 cm.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-027",
+    "column": "description",
+    "source": "EN-027/description",
+    "before": "Heavy 12 oz organic canvas with long handles.",
+    "after": "Heavy 10 oz cotton canvas with long handles.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C035",
+       "C036"
+      ],
+      "before": "Heavy 12 oz organic canvas with long handles.",
+      "after": "Heavy 10 oz cotton canvas with long handles.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-029",
+    "column": "description",
+    "source": "EN-029/description",
+    "before": "Pure mulberry silk that heals eczema while you sleep.",
+    "after": "Pure mulberry silk.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C037"
+      ],
+      "before": "Pure mulberry silk that heals eczema while you sleep.",
+      "after": "Pure mulberry silk.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   },
+   {
+    "sku": "EN-030",
+    "column": "description",
+    "source": "EN-030/description",
+    "before": "Doctor-recommended swap for plastic wrap. Lasts a year with care.",
+    "after": "Swap for plastic wrap. Rinse in cool water.",
+    "gaps": [
+     {
+      "claim_ids": [
+       "C038",
+       "C039"
+      ],
+      "before": "Doctor-recommended swap for plastic wrap. Lasts a year with care.",
+      "after": "Swap for plastic wrap. Rinse in cool water.",
+      "source": "beam",
+      "note": ""
+     }
+    ],
+    "note": ""
+   }
+  ]
+ },
+ "note": "Produced by scripts/make_cache.py from a live Beam run."
 }
